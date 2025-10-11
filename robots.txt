@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://sellerprint.github.io/sitemap.xml
