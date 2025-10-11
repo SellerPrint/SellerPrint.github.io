@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MonoPrint — T-shirts & cadeaux personnalisés | Impression à la demande</title>
+  <meta name="description" content="MonoPrint — Boutique d'impression à la demande (print-on-demand). T-shirts personnalisés, mugs, posters. Impression rapide avec Gelato. Commandes sécurisées et expédition internationale." />
+  <meta name="keywords" content="print on demand, impression à la demande, t-shirt personnalisé, mug personnalisé, cadeau personnalisé, Gelato, POD, impression française" />
+  <link rel="canonical" href="https://www.monoprint.example/" />
+  <meta name="robots" content="index,follow" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MonoPrint — Impression à la demande (Print-on-Demand)" />
+  <meta property="og:description" content="T-shirts, mugs et posters personnalisés. Production via Gelato. Livraison internationale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.monoprint.example/" />
+  <meta property="og:image" content="https://www.monoprint.example/og-image.jpg" />
+  <meta property="og:site_name" content="MonoPrint" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MonoPrint — Impression à la demande" />
+  <meta name="twitter:description" content="T-shirts, mugs et posters personnalisés. Production via Gelato. Livraison internationale." />
+  <meta name="twitter:image" content="https://www.monoprint.example/og-image.jpg" />
+
+  <!-- hreflang (site francophone) -->
+  <link rel="alternate" href="https://www.monoprint.example/" hreflang="fr" />
+
+  <!-- Minimal CSS (responsive, moderne) -->
+  <style>
+    :root{
+      --accent:#0b84ff; --muted:#6b7280; --bg:#f7f7fb; --card:#fff;
+      font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#111;line-height:1.45}
+    header{background:linear-gradient(90deg,#ffffffcc,#f0f6ff);backdrop-filter:blur(2px);position:sticky;top:0;z-index:20;border-bottom:1px solid #e6e8ee}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:600}
+    .brand .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg,var(--accent),#7cdbff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav a{color:#111;text-decoration:none;margin-right:10px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center;padding:40px 0}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,12,20,0.06)}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .product{border-radius:10px;overflow:hidden;border:1px solid #eee;background:#fff}
+    .product img{width:100%;height:220px;object-fit:cover;display:block}
+    .product .meta{padding:12px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+    .btn-ghost{background:transparent;border:1px solid #ddd;color:var(--accent)}
+    footer{padding:30px 0;color:var(--muted);font-size:14px}
+    .search{display:flex;gap:8px}
+    input[type="search"]{padding:10px;border-radius:8px;border:1px solid #ddd;flex:1}
+    .cart-badge{background:#ff3b30;color:#fff;padding:6px 8px;border-radius:999px;font-weight:700}
+    @media(max-width:900px){.hero{grid-template-columns:1fr} .brand .logo{width:36px;height:36px}}
+  </style>
+
+  <!-- JSON-LD structured data (Organization + sample products). Update products dynamically when you fetch Gelato. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MonoPrint",
+    "url": "https://www.monoprint.example/",
+    "logo": "https://www.monoprint.example/logo.png",
+    "sameAs": [
+      "https://twitter.com/monoprint",
+      "https://www.facebook.com/monoprint"
+    ],
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+221700000000",
+      "contactType": "customer service",
+      "areaServed": "FR"
+    }]
+  }
+  </script>
+
+</head>
+<body>
+  <header>
+    <div class="container nav" role="banner">
+      <div class="brand" aria-label="MonoPrint">
+        <div class="logo" aria-hidden="true">MP</div>
+        <div>
+          <div style="font-size:18px">MonoPrint</div>
+          <div style="font-size:12px;color:var(--muted)">Impression à la demande — Cadeaux personnalisés</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <nav aria-label="Menu principal">
+          <a href="#" data-nav="home">Accueil</a>
+          <a href="#" data-nav="products">Produits</a>
+          <a href="#" data-nav="about">À propos</a>
+        </nav>
+
+        <div class="search" role="search">
+          <input id="q" type="search" placeholder="Rechercher: t-shirt, mug, poster..." />
+          <button id="searchBtn" class="btn-ghost">🔎</button>
+        </div>
+
+        <button id="cartBtn" class="btn" aria-label="Voir le panier">Panier <span id="cartCount" class="cart-badge">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="app" role="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div>
+        <h1 style="margin:0 0 10px">T-shirts et cadeaux personnalisés — Impression à la demande</h1>
+        <p style="color:var(--muted);margin-top:0">
+          Créez, personnalisez et vendez. Production locale, livraison internationale. Prototype intégré pour se connecter à l'API Gelato.
+        </p>
+
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <a class="btn" href="#" data-nav="products">Voir les produits</a>
+          <a class="btn-ghost" href="#" data-nav="about">Comment ça marche</a>
+        </div>
+
+        <article class="card" style="margin-top:18px">
+          <h2 style="margin:0 0 6px">Pourquoi choisir MonoPrint ?</h2>
+          <ul style="margin:0;color:var(--muted)">
+            <li>Production via Gelato (réseau global) — qualité et rapidité</li>
+            <li>Personnalisation sans frontieres — designs uniques</li>
+            <li>Processus optimisé pour SEO & conversion</li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="card" aria-label="Produit en vedette" style="text-align:center">
+        <img src="https://picsum.photos/seed/pod/420/300" alt="T-shirt personnalisé" style="width:100%;border-radius:8px" loading="lazy" />
+        <h3 style="margin:12px 0 6px">T-shirt Premium — Impression intégrale</h3>
+        <p style="margin:0 0 12px;color:var(--muted)">À partir de 19,90 € — Options taille & couleur</p>
+        <button class="btn" onclick="openProduct('p-001')">Personnaliser</button>
+      </aside>
+    </section>
+
+    <!-- Dynamic content (products, product page, cart, checkout) -->
+    <section id="content" style="margin-top:22px">
+      <!-- Default: products grid -->
+      <div id="productsView">
+        <h2>Produits populaires</h2>
+        <div style="margin:8px 0 16px;color:var(--muted)">
+          Impression à la demande : t-shirts, mugs, posters, coques — production à la demande via Gelato.
+        </div>
+
+        <div class="products-grid" id="productsGrid" aria-live="polite">
+          <!-- Products inserted by JS -->
+        </div>
+      </div>
+
+      <!-- Product detail -->
+      <div id="productView" style="display:none">
+        <!-- Filled by JS -->
+      </div>
+
+      <!-- Cart view -->
+      <div id="cartView" style="display:none">
+        <h2>Votre panier</h2>
+        <div id="cartItems"></div>
+        <div style="margin-top:12px">
+          <button id="checkoutBtn" class="btn">Valider la commande</button>
+        </div>
+      </div>
+
+      <!-- Checkout -->
+      <div id="checkoutView" style="display:none">
+        <h2>Checkout — Informations de livraison</h2>
+        <form id="checkoutForm" class="card" style="max-width:680px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <label>Nom complet<input name="name" required /></label>
+            <label>Email<input type="email" name="email" required /></label>
+            <label>Adresse<input name="address" required /></label>
+            <label>Ville<input name="city" required /></label>
+          </div>
+          <div style="margin-top:10px">
+            <label>Pays<select name="country"><option>France</option><option>Sénégal</option><option>Belgique</option></select></label>
+          </div>
+          <div style="margin-top:12px">
+            <button type="submit" class="btn">Soumettre la commande</button>
+            <button type="button" id="backToCart" class="btn-ghost">Retour au panier</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Order confirmation -->
+      <div id="orderView" style="display:none">
+        <h2>Commande confirmée</h2>
+        <div id="orderSummary" class="card"></div>
+      </div>
+
+    </section>
+
+    <hr style="margin:30px 0;border:none;border-top:1px solid #eee" />
+
+    <section class="card" aria-label="SEO content">
+      <h3>Impression à la demande — Guide rapide</h3>
+      <p style="color:var(--muted)">Le print-on-demand (POD) permet de produire un article uniquement après commande. Cette méthode réduit les stocks et permet de tester des designs rapidement. Mots-clés: <strong>t-shirt personnalisé, impression à la demande, cadeau sur mesure, impression écologique</strong>.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap">
+      <div>
+        <strong>MonoPrint</strong><br />
+        <small style="color:var(--muted)">Impression à la demande — Qualité & livraison</small>
+      </div>
+      <div style="color:var(--muted)">
+        <div>Contact: contact@monoprint.example</div>
+        <div style="margin-top:8px">© <span id="year"></span> MonoPrint</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script: product data, cart logic, Gelato simulation -->
+  <script>
+    // ========== CONFIG ==========
+    // NOTE: change this to your real Gelato API key securely (never expose in public client)
+    // Recommended: call Gelato from a backend and never put live keys in client JS.
+    const GELATO_API_KEY = "SIMULATED_GELATO_KEY"; // <-- remplace ici avec ta vraie clé sur le backend
+    const GELATO_API_URL = "https://api.gelato.com/v4"; // exemple d'endpoint (vérifie la doc Gelato)
+
+    // ========== SAMPLE PRODUCTS (simulate Gelato response) ==========
+    const SAMPLE_PRODUCTS = [
+      {
+        id: "p-001",
+        title: "T-shirt Premium — Coupe unisexe",
+        description: "Tissu coton peigné 180gsm. Impression intégrale disponible.",
+        price: 19.90,
+        images: ["https://picsum.photos/seed/t1/600/600"],
+        tags: ["tshirt","vêtement","personnalisé"]
+      },
+      {
+        id: "p-002",
+        title: "Mug céramique 330ml — Blanc",
+        description: "Mug résistant au lave-vaisselle, idéal pour cadeaux.",
+        price: 9.90,
+        images: ["https://picsum.photos/seed/mug/600/600"],
+        tags: ["mug","cuisine","cadeau"]
+      },
+      {
+        id: "p-003",
+        title: "Poster A3 — Papier mat",
+        description: "Poster A3 imprimé haute résolution, prêt à être encadré.",
+        price: 7.50,
+        images: ["https://picsum.photos/seed/poster/600/900"],
+        tags: ["poster","deco","print"]
+      }
+    ];
+
+    // ========== UTILS & RENDER ==========
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const state = { products: [], cart: loadCart() };
+
+    function saveCart(){ localStorage.setItem('mono_cart', JSON.stringify(state.cart)); updateCartCount(); }
+    function loadCart(){ try{ return JSON.parse(localStorage.getItem('mono_cart')||'[]') }catch(e){return []} }
+    function updateCartCount(){ document.getElementById('cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0) }
+
+    function formatPrice(v){ return (v).toLocaleString('fr-FR',{style:'currency',currency:'EUR'}) }
+
+    function renderProducts(list){
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('div');
+        el.className = 'product card';
+        el.innerHTML = `
+          <img src="${p.images[0]}" alt="${escapeHtml(p.title)}" loading="lazy" />
+          <div class="meta">
+            <h3 style="margin:0 0 6px;font-size:16px">${escapeHtml(p.title)}</h3>
+            <p style="margin:0 0 8px;color:var(--muted);font-size:14px">${escapeHtml(p.description)}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700">${formatPrice(p.price)}</div>
+              <div>
+                <button class="btn-ghost" onclick="openProduct('${p.id}')">Voir</button>
+                <button class="btn" onclick="addToCart('${p.id}')">Ajouter</button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])) }
+
+    // ========== NAVIGATION ==========
+    function showView(name){
+      const views = ['productsView','productView','cartView','checkoutView','orderView'];
+      views.forEach(v=>document.getElementById(v).style.display = (v===name? 'block':'none'));
+    }
+
+    document.querySelectorAll('[data-nav]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const target = a.getAttribute('data-nav');
+        if(target==='home') { showView('productsView'); window.history.pushState({},'', '/'); }
+        if(target==='products') { showView('productsView'); window.history.pushState({},'', '/products'); }
+        if(target==='about') { alert('MonoPrint prototype — intégration Gelato prévue.'); }
+      })
+    });
+
+    // ========== PRODUCT PAGE ==========
+    function openProduct(id){
+      const p = state.products.find(x=>x.id===id);
+      if(!p) return alert('Produit introuvable');
+      const view = document.getElementById('productView');
+      view.innerHTML = `
+        <article class="card">
+          <div style="display:flex;gap:18px;flex-wrap:wrap">
+            <img src="${p.images[0]}" alt="${escapeHtml(p.title)}" style="width:360px;height:360px;object-fit:cover;border-radius:8px" />
+            <div style="flex:1">
+              <h2>${escapeHtml(p.title)}</h2>
+              <p style="color:var(--muted)">${escapeHtml(p.description)}</p>
+              <div style="font-size:18px;font-weight:700;margin:12px 0">${formatPrice(p.price)}</div>
+              <div style="display:flex;gap:10px">
+                <label>Quantité <input id="qty" type="number" value="1" min="1" style="width:80px;padding:6px;border-radius:6px;border:1px solid #ddd" /></label>
+                <button class="btn" onclick="addToCart('${p.id}')">Ajouter au panier</button>
+                <button class="btn-ghost" onclick="previewMock('${p.id}')">Aperçu personnalisation</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+      showView('productView');
+      window.history.pushState({},'', '/product/'+id);
+    }
+
+    function previewMock(id){
+      alert('Aperçu mockup (prototype). Sur une vraie intégration, on chargerait un outil de mockup Gelato ou un générateur d’images.');
+    }
+
+    // ========== CART ==========
+    function addToCart(id){
+      const p = state.products.find(x=>x.id===id);
+      if(!p) return;
+      const qtyEl = document.getElementById('qty');
+      const qty = qtyEl ? Math.max(1, parseInt(qtyEl.value||1,10)) : 1;
+      const existing = state.cart.find(i=>i.id===id);
+      if(existing) existing.qty += qty; else state.cart.push({id:p.id,title:p.title,price:p.price,qty});
+      saveCart(); renderCartView(); alert('Ajouté au panier');
+    }
+
+    function renderCartView(){
+      const container = document.getElementById('cartItems');
+      if(!container) return;
+      if(state.cart.length===0){ container.innerHTML = '<div class="card">Panier vide</div>'; return; }
+      const rows = state.cart.map(item=>{
+        return `<div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div><strong>${escapeHtml(item.title)}</strong><div style="color:var(--muted)">${item.qty} × ${formatPrice(item.price)}</div></div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button class="btn-ghost" onclick="decreaseQty('${item.id}')">−</button>
+            <button class="btn-ghost" onclick="increaseQty('${item.id}')">+</button>
+            <button class="btn" onclick="removeItem('${item.id}')">Supprimer</button>
+          </div>
+        </div>`;
+      }).join('');
+      const total = state.cart.reduce((s,i)=>s + i.qty*i.price,0);
+      container.innerHTML = rows + `<div style="text-align:right;font-weight:700">Total: ${formatPrice(total)}</div>`;
+    }
+
+    function decreaseQty(id){ const it = state.cart.find(i=>i.id===id); if(it){ it.qty = Math.max(1,it.qty-1); saveCart(); renderCartView(); } }
+    function increaseQty(id){ const it = state.cart.find(i=>i.id===id); if(it){ it.qty++; saveCart(); renderCartView(); } }
+    function removeItem(id){ state.cart = state.cart.filter(i=>i.id!==id); saveCart(); renderCartView(); }
+
+    // ========== CHECKOUT (simulé) ==========
+    document.getElementById('cartBtn').addEventListener('click', ()=>{ renderCartView(); showView('cartView'); });
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{ showView('checkoutView'); renderCartView(); });
+
+    document.getElementById('backToCart').addEventListener('click', ()=>{ showView('cartView'); });
+
+    document.getElementById('checkoutForm').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const order = {
+        id: 'ORD-'+Date.now(),
+        customer: { name: form.get('name'), email: form.get('email'), address: form.get('address'), city: form.get('city'), country: form.get('country') },
+        items: state.cart,
+        total: state.cart.reduce((s,i)=>s+i.qty*i.price,0),
+        date: new Date().toISOString()
+      };
+      // Ici : APPEL API Gelato pour créer la commande (simulate)
+      try{
+        const r = await createOrderWithGelato(order);
+        // Si succès :
+        state.cart = [];
+        saveCart();
+        document.getElementById('orderSummary').innerHTML = `<div><strong>Numéro:</strong> ${escapeHtml(r.orderId)}<br/><strong>Montant:</strong> ${formatPrice(order.total)}<br/><strong>Livraison:</strong> ${escapeHtml(order.customer.address + ', ' + order.customer.city)}</div>`;
+        showView('orderView');
+      }catch(err){
+        alert('Erreur lors de la création de la commande: ' + err.message);
+      }
+    });
+
+    // ========== SIMULATED GELATO INTERACTION ==========
+    // NOTE IMPORTANT:
+    // - Ne jamais exposer une clé API sensible dans du JS côté client pour les vraies commandes.
+    // - Crée un backend (FastAPI/Express) qui stocke la clé et effectue les requêtes vers Gelato.
+    // - Ici on simule l'appel : tu devras remplacer la fonction createOrderWithGelato par un fetch vers ton backend.
+    async function fetchProductsFromGelatoSimulated(){
+      // Simule délai réseau
+      await new Promise(r=>setTimeout(r,300));
+      // Ici on mapperait la réponse Gelato => notre format produit
+      return SAMPLE_PRODUCTS;
+    }
+
+    async function createOrderWithGelato(order){
+      // Simulation d'appel réseau + "commande créée".
+      await new Promise(r=>setTimeout(r,700));
+      // SIMULATED RESPONSE
+      return { success:true, orderId: 'GEL-'+Math.floor(Math.random()*900000+100000) };
+    }
+
+    // Exemple de fonction qui ferait un appel réel (à placer dans ton BACKEND).
+    async function callGelatoAPI(path, method='GET', body=null){
+      // NE PAS UTILISER DANS LE FRONTEND AVEC LA CLÉ VRAIE.
+      const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GELATO_API_KEY };
+      const res = await fetch(GELATO_API_URL + path, { method, headers, body: body ? JSON.stringify(body) : undefined });
+      if(!res.ok) throw new Error('Gelato API error: '+res.status);
+      return res.json();
+    }
+
+    // ========== INITIALIZATION ==========
+    async function init(){
+      // Récupère les produits (simulate)
+      try{
+        // Remplace par : state.products = await callGelatoAPI('/products') (via backend)
+        state.products = await fetchProductsFromGelatoSimulated();
+      }catch(e){
+        console.error('Erreur chargement produits:', e);
+        state.products = SAMPLE_PRODUCTS;
+      }
+      renderProducts(state.products);
+      updateCartCount();
+    }
+
+    // Search
+    document.getElementById('searchBtn').addEventListener('click', ()=>{
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      if(!q) return renderProducts(state.products);
+      const filtered = state.products.filter(p=> (p.title+p.description+(p.tags||[]).join(' ')).toLowerCase().includes(q));
+      renderProducts(filtered);
+    });
+
+    // Simple URL handling (so back/forward keeps simple views)
+    window.addEventListener('popstate', ()=>{ showView('productsView'); });
+
+    // Kick off
+    init();
+  </script>
+
+  <!-- SEO: sitemap & robots notes (visible to developer only) -->
+  <!--
+    Recommande pour SEO:
+    - Créer un fichier sitemap.xml généré dynamiquement: inclure /, /products, /product/{id}, /about
+    - robots.txt : Allow: /, Sitemap: https://www.monoprint.example/sitemap.xml
+    - Mettre en place des balises rel=canonical sur pages produits si variantes
+    - Serve images via CDN et ajouter srcset pour responsive images
+    - Mettre en place un backend pour servir données produits et la clé Gelato (sécurisé)
+    - Installer Google Search Console, soumettre sitemap, et activer Analytics/GA4
+  -->
+
+</body>
+</html>
