@@ -1,469 +1,982 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta name="google-site-verification" content="Uzjj5NkPIOtRxkz30O1JnhT_7m9Pte8yz2kqUL35M_Q" />
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MonoPrint — T-shirts & cadeaux personnalisés | Impression à la demande</title>
-  <meta name="description" content="MonoPrint — Boutique d'impression à la demande (print-on-demand). T-shirts personnalisés, mugs, posters. Impression rapide avec Gelato. Commandes sécurisées et expédition internationale." />
-  <meta name="keywords" content="print on demand, impression à la demande, t-shirt personnalisé, mug personnalisé, cadeau personnalisé, Gelato, POD, impression française" />
-  <link rel="canonical" href="https://www.monoprint.example/" />
-  <meta name="robots" content="index,follow" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="MonoPrint — Impression à la demande (Print-on-Demand)" />
-  <meta property="og:description" content="T-shirts, mugs et posters personnalisés. Production via Gelato. Livraison internationale." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.monoprint.example/" />
-  <meta property="og:image" content="https://www.monoprint.example/og-image.jpg" />
-  <meta property="og:site_name" content="MonoPrint" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MonoPrint — Impression à la demande" />
-  <meta name="twitter:description" content="T-shirts, mugs et posters personnalisés. Production via Gelato. Livraison internationale." />
-  <meta name="twitter:image" content="https://www.monoprint.example/og-image.jpg" />
-
-  <!-- hreflang (site francophone) -->
-  <link rel="alternate" href="https://www.monoprint.example/" hreflang="fr" />
-
-  <!-- Minimal CSS (responsive, moderne) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SellerPrint — L'impression réinventée 🎨</title>
+  <meta name="description" content="SellerPrint — Créez, imprimez et vendez vos produits personnalisés. Découvrez MagicLight AI, la nouvelle ère de la créativité intelligente.">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1829/1829583.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Script Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+  
   <style>
-    :root{
-      --accent:#0b84ff; --muted:#6b7280; --bg:#f7f7fb; --card:#fff;
-      font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #1a1a2e;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#111;line-height:1.45}
-    header{background:linear-gradient(90deg,#ffffffcc,#f0f6ff);backdrop-filter:blur(2px);position:sticky;top:0;z-index:20;border-bottom:1px solid #e6e8ee}
-    .container{max-width:1100px;margin:0 auto;padding:20px}
-    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center;font-weight:600}
-    .brand .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg,var(--accent),#7cdbff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    nav a{color:#111;text-decoration:none;margin-right:10px}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center;padding:40px 0}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,12,20,0.06)}
-    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-    .product{border-radius:10px;overflow:hidden;border:1px solid #eee;background:#fff}
-    .product img{width:100%;height:220px;object-fit:cover;display:block}
-    .product .meta{padding:12px}
-    .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
-    .btn-ghost{background:transparent;border:1px solid #ddd;color:var(--accent)}
-    footer{padding:30px 0;color:var(--muted);font-size:14px}
-    .search{display:flex;gap:8px}
-    input[type="search"]{padding:10px;border-radius:8px;border:1px solid #ddd;flex:1}
-    .cart-badge{background:#ff3b30;color:#fff;padding:6px 8px;border-radius:999px;font-weight:700}
-    @media(max-width:900px){.hero{grid-template-columns:1fr} .brand .logo{width:36px;height:36px}}
+
+    /* HEADER STICKY */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    header .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    header nav a {
+      margin-left: 2rem;
+      color: #1a1a2e;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s;
+    }
+
+    header nav a:hover::after { width: 100%; }
+
+    /* PROMO BANNER */
+    .promo-banner {
+      background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 1.2rem;
+      text-align: center;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .promo-banner a {
+      background: white;
+      color: #f5576c;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .promo-banner a:hover {
+      transform: scale(1.1) rotate(-2deg);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      top: -100px;
+      left: -100px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, 50px) scale(1.1); }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease-out;
+      z-index: 1;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease-out 0.2s backwards;
+      z-index: 1;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: white;
+      color: #667eea;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+      animation: fadeInUp 1s ease-out 0.4s backwards;
+      z-index: 1;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      background: #fafafa;
+      padding: 4rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* MAGICLIGHT SECTION */
+    .magiclight {
+      background: linear-gradient(135deg, #e0f7ff 0%, #f7fcff 100%);
+      border-radius: 30px;
+      padding: 4rem 2rem;
+      margin: 3rem auto;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .magiclight::before {
+      content: '✨';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.05;
+      top: -2rem;
+      right: -2rem;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .magiclight img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0, 123, 255, 0.3);
+      border: 5px solid white;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .magiclight h2 {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .magiclight p {
+      max-width: 700px;
+      margin: 1rem auto;
+      color: #333;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .magiclight a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+    }
+
+    .magiclight a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 30px rgba(79, 172, 254, 0.6);
+    }
+
+    /* PRODUCTS SECTION */
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 3rem 0 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .card:hover img { transform: scale(1.1); }
+
+    .card-content {
+      padding: 1.5rem;
+      position: relative;
+      z-index: 2;
+      transition: color 0.4s;
+    }
+
+    .card:hover .card-content h3,
+    .card:hover .card-content p {
+      color: white;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      transition: color 0.4s;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.6;
+      transition: color 0.4s;
+    }
+
+    /* BOOST SECTION */
+    .boost-section {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 3rem 2rem;
+      border-radius: 25px;
+      background: white;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .boost-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+
+    .boost-section > p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    #boost-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #boost-form input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      border: 2px solid #e0e0e0;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s;
+    }
+
+    #boost-form input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    #boost-form button {
+      margin-top: 1rem;
+      padding: 1.2rem 2rem;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    #boost-form button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    #boost-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #boost-msg {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      display: none;
+    }
+
+    #boost-msg.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    /* VIDEO AD CONTAINER */
+    .video-ad-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .video-ad-container.active {
+      display: flex;
+    }
+
+    .video-wrapper {
+      position: relative;
+      max-width: 800px;
+      width: 90%;
+      background: black;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .video-ad {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .ad-countdown {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .skip-ad {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+      display: none;
+    }
+
+    .skip-ad.active {
+      display: block;
+    }
+
+    .skip-ad:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .close-ad {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ADSENSE ADS STYLES */
+    .ad-container {
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 250px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    
+    .ad-container.sidebar {
+      min-height: 600px;
+      width: 300px;
+      margin: 1rem;
+    }
+    
+    .ad-label {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .ad-wrapper {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .ad-wrapper.horizontal {
+      max-width: 728px;
+    }
+    
+    .ad-wrapper.vertical {
+      max-width: 300px;
+    }
+    
+    .ad-wrapper.rectangle {
+      max-width: 300px;
+    }
+    
+    /* FOOTER */
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+
+    footer a:hover { color: #764ba2; }
+
+    #user-country {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      header nav a {
+        margin: 0 1rem;
+      }
+
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+      
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title { font-size: 2rem; }
+      
+      .ad-container.sidebar {
+        display: none;
+      }
+
+      .video-wrapper {
+        width: 95%;
+      }
+    }
+
+    /* LOADING ANIMATION */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
-
-  <!-- JSON-LD structured data (Organization + sample products). Update products dynamically when you fetch Gelato. -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MonoPrint",
-    "url": "https://www.monoprint.example/",
-    "logo": "https://www.monoprint.example/logo.png",
-    "sameAs": [
-      "https://twitter.com/monoprint",
-      "https://www.facebook.com/monoprint"
-    ],
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+221700000000",
-      "contactType": "customer service",
-      "areaServed": "FR"
-    }]
-  }
-  </script>
-
 </head>
 <body>
-  <header>
-    <div class="container nav" role="banner">
-      <div class="brand" aria-label="MonoPrint">
-        <div class="logo" aria-hidden="true">MP</div>
-        <div>
-          <div style="font-size:18px">MonoPrint</div>
-          <div style="font-size:12px;color:var(--muted)">Impression à la demande — Cadeaux personnalisés</div>
-        </div>
-      </div>
 
-      <div style="display:flex;gap:12px;align-items:center">
-        <nav aria-label="Menu principal">
-          <a href="#" data-nav="home">Accueil</a>
-          <a href="#" data-nav="products">Produits</a>
-          <a href="#" data-nav="about">À propos</a>
-        </nav>
-
-        <div class="search" role="search">
-          <input id="q" type="search" placeholder="Rechercher: t-shirt, mug, poster..." />
-          <button id="searchBtn" class="btn-ghost">🔎</button>
-        </div>
-
-        <button id="cartBtn" class="btn" aria-label="Voir le panier">Panier <span id="cartCount" class="cart-badge">0</span></button>
-      </div>
+  <!-- VIDEO AD OVERLAY -->
+  <div class="video-ad-container" id="videoAdContainer">
+    <div class="video-wrapper">
+      <button class="close-ad" id="closeAd">×</button>
+      <div class="ad-countdown" id="adCountdown">30s</div>
+      <video class="video-ad" id="videoAd" controls>
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+      <button class="skip-ad" id="skipAd">Passer la pub (5s)</button>
     </div>
+  </div>
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner">
+    🚀 Nouvelle ère de la créativité avec <strong>MagicLight AI</strong>
+    <a href="https://m.magiclight.ai/official-website?code=e845ogk0n" target="_blank">Découvre ici ✨</a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">SellerPrint</div>
+    <nav>
+      <a href="#produits">Produits</a>
+      <a href="#magiclight">MagicLight</a>
+      <a href="#boost">Boost</a>
+    </nav>
   </header>
 
-  <main class="container" id="app" role="main">
-    <!-- Hero -->
-    <section class="hero">
-      <div>
-        <h1 style="margin:0 0 10px">T-shirts et cadeaux personnalisés — Impression à la demande</h1>
-        <p style="color:var(--muted);margin-top:0">
-          Créez, personnalisez et vendez. Production locale, livraison internationale. Prototype intégré pour se connecter à l'API Gelato.
-        </p>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>L'impression réinventée</h1>
+    <p>Créez, imprimez et vendez vos produits personnalisés avec une qualité exceptionnelle</p>
+    <a href="#produits" class="hero-btn">Découvrir nos produits ✨</a>
+  </section>
 
-        <div style="display:flex;gap:10px;margin-top:16px">
-          <a class="btn" href="#" data-nav="products">Voir les produits</a>
-          <a class="btn-ghost" href="#" data-nav="about">Comment ça marche</a>
-        </div>
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="container">
 
-        <article class="card" style="margin-top:18px">
-          <h2 style="margin:0 0 6px">Pourquoi choisir MonoPrint ?</h2>
-          <ul style="margin:0;color:var(--muted)">
-            <li>Production via Gelato (réseau global) — qualité et rapidité</li>
-            <li>Personnalisation sans frontieres — designs uniques</li>
-            <li>Processus optimisé pour SEO & conversion</li>
-          </ul>
-        </article>
-      </div>
-
-      <aside class="card" aria-label="Produit en vedette" style="text-align:center">
-        <img src="https://picsum.photos/seed/pod/420/300" alt="T-shirt personnalisé" style="width:100%;border-radius:8px" loading="lazy" />
-        <h3 style="margin:12px 0 6px">T-shirt Premium — Impression intégrale</h3>
-        <p style="margin:0 0 12px;color:var(--muted)">À partir de 19,90 € — Options taille & couleur</p>
-        <button class="btn" onclick="openProduct('p-001')">Personnaliser</button>
-      </aside>
-    </section>
-
-    <!-- Dynamic content (products, product page, cart, checkout) -->
-    <section id="content" style="margin-top:22px">
-      <!-- Default: products grid -->
-      <div id="productsView">
-        <h2>Produits populaires</h2>
-        <div style="margin:8px 0 16px;color:var(--muted)">
-          Impression à la demande : t-shirts, mugs, posters, coques — production à la demande via Gelato.
-        </div>
-
-        <div class="products-grid" id="productsGrid" aria-live="polite">
-          <!-- Products inserted by JS -->
+      <!-- BANNER AD - AdSense -->
+      <div class="ad-container">
+        <div class="ad-wrapper horizontal">
+          <div class="ad-label">Publicité</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+               data-ad-slot="YOUR_AD_SLOT_1"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
         </div>
       </div>
 
-      <!-- Product detail -->
-      <div id="productView" style="display:none">
-        <!-- Filled by JS -->
-      </div>
+      <!-- MAGICLIGHT SECTION -->
+      <section id="magiclight" class="magiclight">
+        <img src="https://m.magiclight.ai/favicon.ico" alt="MagicLight AI Logo">
+        <h2>MagicLight AI — L'innovation par la lumière ✨</h2>
+        <p><strong>MagicLight AI</strong> révolutionne la création visuelle avec l'intelligence artificielle. Découvrez une nouvelle dimension de la créativité où vos idées prennent vie instantanément.</p>
+        <a href="https://m.magiclight.ai/official-website?code=e845ogk0n" target="_blank">Explorer MagicLight AI 🚀</a>
+      </section>
 
-      <!-- Cart view -->
-      <div id="cartView" style="display:none">
-        <h2>Votre panier</h2>
-        <div id="cartItems"></div>
-        <div style="margin-top:12px">
-          <button id="checkoutBtn" class="btn">Valider la commande</button>
-        </div>
-      </div>
+      <!-- PRODUCTS SECTION -->
+      <section id="produits">
+        <h2 class="section-title">Nos créations phares 🎨</h2>
+        <p class="section-subtitle">Créez vos designs, imprimez-les, et laissez vos idées prendre vie. Chaque produit devient une œuvre d'art personnalisée.</p>
 
-      <!-- Checkout -->
-      <div id="checkoutView" style="display:none">
-        <h2>Checkout — Informations de livraison</h2>
-        <form id="checkoutForm" class="card" style="max-width:680px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <label>Nom complet<input name="name" required /></label>
-            <label>Email<input type="email" name="email" required /></label>
-            <label>Adresse<input name="address" required /></label>
-            <label>Ville<input name="city" required /></label>
+        <div class="products">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="T-shirt personnalisé">
+            <div class="card-content">
+              <h3>T-shirts personnalisés</h3>
+              <p>Vos créations imprimées sur du coton de qualité premium. Confort et style garantis.</p>
+            </div>
           </div>
-          <div style="margin-top:10px">
-            <label>Pays<select name="country"><option>France</option><option>Sénégal</option><option>Belgique</option></select></label>
+
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1585386959984-a41552231693?auto=format&fit=crop&w=800&q=80" alt="Mugs personnalisés">
+            <div class="card-content">
+              <h3>Mugs à ton image</h3>
+              <p>Commence ta journée avec un mug qui te ressemble. Impression haute définition ☕</p>
+            </div>
           </div>
-          <div style="margin-top:12px">
-            <button type="submit" class="btn">Soumettre la commande</button>
-            <button type="button" id="backToCart" class="btn-ghost">Retour au panier</button>
+
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80" alt="Affiches murales">
+            <div class="card-content">
+              <h3>Affiches & décorations</h3>
+              <p>Décore ton espace avec des impressions qui inspirent. Qualité musée 💡</p>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- IN-ARTICLE AD - AdSense -->
+      <div class="ad-container">
+        <div class="ad-wrapper rectangle">
+          <div class="ad-label">Publicité</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+               data-ad-slot="YOUR_AD_SLOT_2"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+
+      <!-- WHY SECTION -->
+      <section style="margin-top: 4rem; text-align: center;">
+        <h2 class="section-title">Pourquoi SellerPrint ? 🧠</h2>
+        <p class="section-subtitle">Nous fusionnons <strong>l'art, la technologie et la personnalisation</strong>. Chaque produit raconte une histoire unique et reflète votre créativité.</p>
+      </section>
+
+      <!-- BOOST SECTION -->
+      <section id="boost" class="boost-section">
+        <h2>Boostez vos vues & likes 🎯</h2>
+        <p>Entrez vos infos, regardez la courte pub (30s) puis recevez la confirmation.</p>
+
+        <form id="boost-form">
+          <input id="userName" name="name" type="text" placeholder="Ton nom" required>
+          <input id="userEmail" name="email" type="email" placeholder="Ton email" required>
+          <input id="videoURL" name="url" type="url" placeholder="URL de la vidéo (YouTube, TikTok...)" required>
+          <input id="hp_field" name="hp_field" type="text" style="display:none !important; position: absolute; left: -9999px;" tabindex="-1" autocomplete="off">
+          <button id="startBtn" type="submit">Envoyer & Regarder la Pub 🚀</button>
         </form>
-      </div>
 
-      <!-- Order confirmation -->
-      <div id="orderView" style="display:none">
-        <h2>Commande confirmée</h2>
-        <div id="orderSummary" class="card"></div>
-      </div>
+        <div id="boost-msg"></div>
+      </section>
 
-    </section>
-
-    <hr style="margin:30px 0;border:none;border-top:1px solid #eee" />
-
-    <section class="card" aria-label="SEO content">
-      <h3>Impression à la demande — Guide rapide</h3>
-      <p style="color:var(--muted)">Le print-on-demand (POD) permet de produire un article uniquement après commande. Cette méthode réduit les stocks et permet de tester des designs rapidement. Mots-clés: <strong>t-shirt personnalisé, impression à la demande, cadeau sur mesure, impression écologique</strong>.</p>
-    </section>
-
+    </div>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap">
-      <div>
-        <strong>MonoPrint</strong><br />
-        <small style="color:var(--muted)">Impression à la demande — Qualité & livraison</small>
-      </div>
-      <div style="color:var(--muted)">
-        <div>Contact: contact@monoprint.example</div>
-        <div style="margin-top:8px">© <span id="year"></span> MonoPrint</div>
-      </div>
-    </div>
+    <p>© 2025 SellerPrint — Créé avec passion 💡</p>
+    <p>Promotion partenaire : <a href="https://m.magiclight.ai/official-website?code=e845ogk0n" target="_blank">MagicLight AI</a></p>
+    <div id="user-country">Pays : Chargement...</div>
   </footer>
 
-  <!-- Script: product data, cart logic, Gelato simulation -->
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    // ========== CONFIG ==========
-    // NOTE: change this to your real Gelato API key securely (never expose in public client)
-    // Recommended: call Gelato from a backend and never put live keys in client JS.
-    const GELATO_API_KEY = "SIMULATED_GELATO_KEY"; // <-- remplace ici avec ta vraie clé sur le backend
-    const GELATO_API_URL = "https://api.gelato.com/v4"; // exemple d'endpoint (vérifie la doc Gelato)
+    // CONFIGURATION EMAILJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // ⚠️ Remplace par ta clé publique EmailJS
 
-    // ========== SAMPLE PRODUCTS (simulate Gelato response) ==========
-    const SAMPLE_PRODUCTS = [
-      {
-        id: "p-001",
-        title: "T-shirt Premium — Coupe unisexe",
-        description: "Tissu coton peigné 180gsm. Impression intégrale disponible.",
-        price: 19.90,
-        images: ["https://picsum.photos/seed/t1/600/600"],
-        tags: ["tshirt","vêtement","personnalisé"]
-      },
-      {
-        id: "p-002",
-        title: "Mug céramique 330ml — Blanc",
-        description: "Mug résistant au lave-vaisselle, idéal pour cadeaux.",
-        price: 9.90,
-        images: ["https://picsum.photos/seed/mug/600/600"],
-        tags: ["mug","cuisine","cadeau"]
-      },
-      {
-        id: "p-003",
-        title: "Poster A3 — Papier mat",
-        description: "Poster A3 imprimé haute résolution, prêt à être encadré.",
-        price: 7.50,
-        images: ["https://picsum.photos/seed/poster/600/900"],
-        tags: ["poster","deco","print"]
-      }
-    ];
-
-    // ========== UTILS & RENDER ==========
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const state = { products: [], cart: loadCart() };
-
-    function saveCart(){ localStorage.setItem('mono_cart', JSON.stringify(state.cart)); updateCartCount(); }
-    function loadCart(){ try{ return JSON.parse(localStorage.getItem('mono_cart')||'[]') }catch(e){return []} }
-    function updateCartCount(){ document.getElementById('cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0) }
-
-    function formatPrice(v){ return (v).toLocaleString('fr-FR',{style:'currency',currency:'EUR'}) }
-
-    function renderProducts(list){
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = '';
-      list.forEach(p=>{
-        const el = document.createElement('div');
-        el.className = 'product card';
-        el.innerHTML = `
-          <img src="${p.images[0]}" alt="${escapeHtml(p.title)}" loading="lazy" />
-          <div class="meta">
-            <h3 style="margin:0 0 6px;font-size:16px">${escapeHtml(p.title)}</h3>
-            <p style="margin:0 0 8px;color:var(--muted);font-size:14px">${escapeHtml(p.description)}</p>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div style="font-weight:700">${formatPrice(p.price)}</div>
-              <div>
-                <button class="btn-ghost" onclick="openProduct('${p.id}')">Voir</button>
-                <button class="btn" onclick="addToCart('${p.id}')">Ajouter</button>
-              </div>
-            </div>
-          </div>
-        `;
-        grid.appendChild(el);
-      });
-    }
-
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])) }
-
-    // ========== NAVIGATION ==========
-    function showView(name){
-      const views = ['productsView','productView','cartView','checkoutView','orderView'];
-      views.forEach(v=>document.getElementById(v).style.display = (v===name? 'block':'none'));
-    }
-
-    document.querySelectorAll('[data-nav]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        const target = a.getAttribute('data-nav');
-        if(target==='home') { showView('productsView'); window.history.pushState({},'', '/'); }
-        if(target==='products') { showView('productsView'); window.history.pushState({},'', '/products'); }
-        if(target==='about') { alert('MonoPrint prototype — intégration Gelato prévue.'); }
+    // DÉTECTION DU PAYS
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        const countryName = data.country_name || 'Inconnu';
+        document.getElementById('user-country').textContent = `Pays : ${countryName} ${data.flag || ''}`;
       })
-    });
+      .catch(err => {
+        console.error('Erreur de géolocalisation:', err);
+        document.getElementById('user-country').textContent = 'Pays : Inconnu';
+      });
 
-    // ========== PRODUCT PAGE ==========
-    function openProduct(id){
-      const p = state.products.find(x=>x.id===id);
-      if(!p) return alert('Produit introuvable');
-      const view = document.getElementById('productView');
-      view.innerHTML = `
-        <article class="card">
-          <div style="display:flex;gap:18px;flex-wrap:wrap">
-            <img src="${p.images[0]}" alt="${escapeHtml(p.title)}" style="width:360px;height:360px;object-fit:cover;border-radius:8px" />
-            <div style="flex:1">
-              <h2>${escapeHtml(p.title)}</h2>
-              <p style="color:var(--muted)">${escapeHtml(p.description)}</p>
-              <div style="font-size:18px;font-weight:700;margin:12px 0">${formatPrice(p.price)}</div>
-              <div style="display:flex;gap:10px">
-                <label>Quantité <input id="qty" type="number" value="1" min="1" style="width:80px;padding:6px;border-radius:6px;border:1px solid #ddd" /></label>
-                <button class="btn" onclick="addToCart('${p.id}')">Ajouter au panier</button>
-                <button class="btn-ghost" onclick="previewMock('${p.id}')">Aperçu personnalisation</button>
-              </div>
-            </div>
-          </div>
-        </article>
-      `;
-      showView('productView');
-      window.history.pushState({},'', '/product/'+id);
-    }
+    // VARIABLES POUR LA PUBLICITÉ VIDÉO
+    const videoAdContainer = document.getElementById('videoAdContainer');
+    const videoAd = document.getElementById('videoAd');
+    const adCountdown = document.getElementById('adCountdown');
+    const skipAd = document.getElementById('skipAd');
+    const closeAd = document.getElementById('closeAd');
+    let adTimer;
+    let remainingTime = 30;
 
-    function previewMock(id){
-      alert('Aperçu mockup (prototype). Sur une vraie intégration, on chargerait un outil de mockup Gelato ou un générateur d’images.');
-    }
+    // FORMULAIRE BOOST
+    const form = document.getElementById('boost-form');
+    const msgEl = document.getElementById('boost-msg');
+    const submitBtn = document.getElementById('startBtn');
 
-    // ========== CART ==========
-    function addToCart(id){
-      const p = state.products.find(x=>x.id===id);
-      if(!p) return;
-      const qtyEl = document.getElementById('qty');
-      const qty = qtyEl ? Math.max(1, parseInt(qtyEl.value||1,10)) : 1;
-      const existing = state.cart.find(i=>i.id===id);
-      if(existing) existing.qty += qty; else state.cart.push({id:p.id,title:p.title,price:p.price,qty});
-      saveCart(); renderCartView(); alert('Ajouté au panier');
-    }
-
-    function renderCartView(){
-      const container = document.getElementById('cartItems');
-      if(!container) return;
-      if(state.cart.length===0){ container.innerHTML = '<div class="card">Panier vide</div>'; return; }
-      const rows = state.cart.map(item=>{
-        return `<div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <div><strong>${escapeHtml(item.title)}</strong><div style="color:var(--muted)">${item.qty} × ${formatPrice(item.price)}</div></div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <button class="btn-ghost" onclick="decreaseQty('${item.id}')">−</button>
-            <button class="btn-ghost" onclick="increaseQty('${item.id}')">+</button>
-            <button class="btn" onclick="removeItem('${item.id}')">Supprimer</button>
-          </div>
-        </div>`;
-      }).join('');
-      const total = state.cart.reduce((s,i)=>s + i.qty*i.price,0);
-      container.innerHTML = rows + `<div style="text-align:right;font-weight:700">Total: ${formatPrice(total)}</div>`;
-    }
-
-    function decreaseQty(id){ const it = state.cart.find(i=>i.id===id); if(it){ it.qty = Math.max(1,it.qty-1); saveCart(); renderCartView(); } }
-    function increaseQty(id){ const it = state.cart.find(i=>i.id===id); if(it){ it.qty++; saveCart(); renderCartView(); } }
-    function removeItem(id){ state.cart = state.cart.filter(i=>i.id!==id); saveCart(); renderCartView(); }
-
-    // ========== CHECKOUT (simulé) ==========
-    document.getElementById('cartBtn').addEventListener('click', ()=>{ renderCartView(); showView('cartView'); });
-    document.getElementById('checkoutBtn').addEventListener('click', ()=>{ showView('checkoutView'); renderCartView(); });
-
-    document.getElementById('backToCart').addEventListener('click', ()=>{ showView('cartView'); });
-
-    document.getElementById('checkoutForm').addEventListener('submit', async function(e){
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const form = new FormData(e.target);
-      const order = {
-        id: 'ORD-'+Date.now(),
-        customer: { name: form.get('name'), email: form.get('email'), address: form.get('address'), city: form.get('city'), country: form.get('country') },
-        items: state.cart,
-        total: state.cart.reduce((s,i)=>s+i.qty*i.price,0),
-        date: new Date().toISOString()
+
+      // Protection honeypot
+      if (document.getElementById('hp_field').value !== '') {
+        console.log('Bot détecté');
+        return;
+      }
+
+      // Désactiver le bouton
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading"></span> Chargement...';
+
+      // Récupérer les données
+      const formData = {
+        name: document.getElementById('userName').value.trim(),
+        email: document.getElementById('userEmail').value.trim(),
+        url: document.getElementById('videoURL').value.trim(),
+        country: document.getElementById('user-country').textContent.replace('Pays : ', '')
       };
-      // Ici : APPEL API Gelato pour créer la commande (simulate)
-      try{
-        const r = await createOrderWithGelato(order);
-        // Si succès :
-        state.cart = [];
-        saveCart();
-        document.getElementById('orderSummary').innerHTML = `<div><strong>Numéro:</strong> ${escapeHtml(r.orderId)}<br/><strong>Montant:</strong> ${formatPrice(order.total)}<br/><strong>Livraison:</strong> ${escapeHtml(order.customer.address + ', ' + order.customer.city)}</div>`;
-        showView('orderView');
-      }catch(err){
-        alert('Erreur lors de la création de la commande: ' + err.message);
+
+      // Validation basique
+      if (!formData.name || !formData.email || !formData.url) {
+        showMessage('Veuillez remplir tous les champs', 'error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Envoyer & Regarder la Pub 🚀';
+        return;
+      }
+
+      // Afficher la publicité vidéo
+      showVideoAd(formData);
+    });
+
+    // FONCTION POUR AFFICHER LA PUBLICITÉ VIDÉO
+    function showVideoAd(formData) {
+      // Réinitialiser le compteur
+      remainingTime = 30;
+      adCountdown.textContent = '30s';
+      skipAd.classList.remove('active');
+      
+      // Afficher le conteneur de pub
+      videoAdContainer.classList.add('active');
+      
+      // Démarrer la vidéo
+      videoAd.play().catch(err => {
+        console.log('Erreur lecture vidéo:', err);
+      });
+      
+      // Démarrer le compte à rebours
+      startAdCountdown(formData);
+    }
+
+    // COMPTE À REBOURS DE LA PUBLICITÉ
+    function startAdCountdown(formData) {
+      clearInterval(adTimer);
+      
+      adTimer = setInterval(() => {
+        remainingTime--;
+        adCountdown.textContent = `${remainingTime}s`;
+        
+        // Activer le bouton "Passer" après 5 secondes
+        if (remainingTime === 25) {
+          skipAd.classList.add('active');
+        }
+        
+        // Fin de la publicité
+        if (remainingTime <= 0) {
+          clearInterval(adTimer);
+          finishAdProcess(formData);
+        }
+      }, 1000);
+    }
+
+    // FIN DU PROCESSUS DE PUBLICITÉ
+    function finishAdProcess(formData) {
+      videoAdContainer.classList.remove('active');
+      videoAd.pause();
+      videoAd.currentTime = 0;
+      
+      // Envoyer les données via EmailJS
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        url: formData.url,
+        country: formData.country
+      };
+
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(response => {
+          console.log('Email envoyé avec succès!', response.status);
+          showMessage('🎉 Félicitations ! Vous recevrez bientôt 1000 vues + 15 likes !', 'success');
+          form.reset();
+        })
+        .catch(err => {
+          console.error('Erreur EmailJS:', err);
+          showMessage('❌ Erreur lors de l\'envoi. Réessayez.', 'error');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Envoyer & Regarder la Pub 🚀';
+        });
+    }
+
+    // BOUTON "PASSER LA PUB"
+    skipAd.addEventListener('click', function() {
+      if (remainingTime <= 25) { // Ne peut passer qu'après 5 secondes
+        clearInterval(adTimer);
+        finishAdProcess(formData);
       }
     });
 
-    // ========== SIMULATED GELATO INTERACTION ==========
-    // NOTE IMPORTANT:
-    // - Ne jamais exposer une clé API sensible dans du JS côté client pour les vraies commandes.
-    // - Crée un backend (FastAPI/Express) qui stocke la clé et effectue les requêtes vers Gelato.
-    // - Ici on simule l'appel : tu devras remplacer la fonction createOrderWithGelato par un fetch vers ton backend.
-    async function fetchProductsFromGelatoSimulated(){
-      // Simule délai réseau
-      await new Promise(r=>setTimeout(r,300));
-      // Ici on mapperait la réponse Gelato => notre format produit
-      return SAMPLE_PRODUCTS;
-    }
-
-    async function createOrderWithGelato(order){
-      // Simulation d'appel réseau + "commande créée".
-      await new Promise(r=>setTimeout(r,700));
-      // SIMULATED RESPONSE
-      return { success:true, orderId: 'GEL-'+Math.floor(Math.random()*900000+100000) };
-    }
-
-    // Exemple de fonction qui ferait un appel réel (à placer dans ton BACKEND).
-    async function callGelatoAPI(path, method='GET', body=null){
-      // NE PAS UTILISER DANS LE FRONTEND AVEC LA CLÉ VRAIE.
-      const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GELATO_API_KEY };
-      const res = await fetch(GELATO_API_URL + path, { method, headers, body: body ? JSON.stringify(body) : undefined });
-      if(!res.ok) throw new Error('Gelato API error: '+res.status);
-      return res.json();
-    }
-
-    // ========== INITIALIZATION ==========
-    async function init(){
-      // Récupère les produits (simulate)
-      try{
-        // Remplace par : state.products = await callGelatoAPI('/products') (via backend)
-        state.products = await fetchProductsFromGelatoSimulated();
-      }catch(e){
-        console.error('Erreur chargement produits:', e);
-        state.products = SAMPLE_PRODUCTS;
-      }
-      renderProducts(state.products);
-      updateCartCount();
-    }
-
-    // Search
-    document.getElementById('searchBtn').addEventListener('click', ()=>{
-      const q = document.getElementById('q').value.trim().toLowerCase();
-      if(!q) return renderProducts(state.products);
-      const filtered = state.products.filter(p=> (p.title+p.description+(p.tags||[]).join(' ')).toLowerCase().includes(q));
-      renderProducts(filtered);
+    // BOUTON FERMER (annulation)
+    closeAd.addEventListener('click', function() {
+      clearInterval(adTimer);
+      videoAdContainer.classList.remove('active');
+      videoAd.pause();
+      videoAd.currentTime = 0;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Envoyer & Regarder la Pub 🚀';
+      showMessage('❌ Publicité annulée. Réessayez pour obtenir votre boost.', 'error');
     });
 
-    // Simple URL handling (so back/forward keeps simple views)
-    window.addEventListener('popstate', ()=>{ showView('productsView'); });
+    function showMessage(text, type) {
+      msgEl.textContent = text;
+      msgEl.className = 'show';
+      
+      // Couleurs selon le type
+      if (type === 'success') {
+        msgEl.style.color = '#10b981';
+        msgEl.style.background = '#d1fae5';
+      } else if (type === 'warning') {
+        msgEl.style.color = '#f59e0b';
+        msgEl.style.background = '#fef3c7';
+      } else if (type === 'error') {
+        msgEl.style.color = '#ef4444';
+        msgEl.style.background = '#fee2e2';
+      }
+    }
 
-    // Kick off
-    init();
+    // Smooth scroll pour les liens d'ancrage
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
-
-  <!-- SEO: sitemap & robots notes (visible to developer only) -->
-  <!--
-    Recommande pour SEO:
-    - Créer un fichier sitemap.xml généré dynamiquement: inclure /, /products, /product/{id}, /about
-    - robots.txt : Allow: /, Sitemap: https://www.monoprint.example/sitemap.xml
-    - Mettre en place des balises rel=canonical sur pages produits si variantes
-    - Serve images via CDN et ajouter srcset pour responsive images
-    - Mettre en place un backend pour servir données produits et la clé Gelato (sécurisé)
-    - Installer Google Search Console, soumettre sitemap, et activer Analytics/GA4
-  -->
 
 </body>
 </html>
