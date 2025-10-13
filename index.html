@@ -784,7 +784,7 @@
         <form id="boost-form">
           <input id="userName" name="name" type="text" placeholder="Ton nom" required>
           <input id="userEmail" name="email" type="email" placeholder="Ton email" required>
-          <input id="videoURL" name="url" type="url" placeholder="URL de la vidéo (YouTube, TikTok...)" required>
+          <input id="videoURL" name="url" type="url" placeholder="URL de la vidéo (Url TikTok seulement)" required>
           <input id="hp_field" name="hp_field" type="text" style="display:none !important; position: absolute; left: -9999px;" tabindex="-1" autocomplete="off">
           <button id="startBtn" type="submit">Envoyer & Regarder la Pub 🚀</button>
         </form>
@@ -806,7 +806,7 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     // CONFIGURATION EMAILJS
-    emailjs.init("YOUR_PUBLIC_KEY"); // ⚠️ Remplace par ta clé publique EmailJS
+    emailjs.init("ZV8_e5cRULOLRdUIK"); // ⚠️ Remplace par ta clé publique EmailJS
 
     // DÉTECTION DU PAYS
     fetch('https://ipapi.co/json/')
@@ -921,7 +921,7 @@
         country: formData.country
       };
 
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+      emailjs.send('service_zguljkv', 'template_4ouweaf', templateParams)
         .then(response => {
           console.log('Email envoyé avec succès!', response.status);
           showMessage('🎉 Félicitations ! Vous recevrez bientôt 1000 vues + 15 likes !', 'success');
