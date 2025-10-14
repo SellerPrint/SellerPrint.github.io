@@ -680,7 +680,17 @@
   </style>
 </head>
 <body>
+<!-- Dans le formulaire -->
+<div class="recaptcha-container">
+  <div class="g-recaptcha" 
+       data-sitekey="TA_SITE_KEY_ICI" 
+       data-callback="onRecaptchaSuccess" 
+       data-expired-callback="onRecaptchaExpired">
+  </div>
+</div>
 
+<!-- Dans le <head> -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <!-- VIDEO AD OVERLAY -->
   <div class="video-ad-container" id="videoAdContainer">
     <div class="video-wrapper">
