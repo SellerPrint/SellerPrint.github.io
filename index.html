@@ -22,7 +22,7 @@
 
   <script type="text/javascript" data-cfasync="false">
   /*<![CDATA[/* */
-  (function(){var m=window,t="cb54028fc37affda775301c29cfc6d36",c=[["siteId",893+524*507-804+4981882],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],[...]
+  (function(){var m=window,t="cb54028fc37affda775301c29cfc6d36",c=[["siteId",893+524*507-804+4981882],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0]]})();
   /*]]>/* */
   </script>
 
@@ -42,7 +42,6 @@
     (function(){
       function injectFallback(){
         try{
-          // If Monetag doesn't set an expected global flag, try to inject a fallback script
           var hasMonetag = !!window.__monetagInitialized || !!window.monetag || !!document.querySelector('script[src*="al5sm"],script[src*="forfrogadiertor"],script[src*="3nbf4"],script[src*="fpyf8"]');
           if(!hasMonetag){
             var s=document.createElement('script');
@@ -53,7 +52,6 @@
           }
         }catch(e){ console.warn('Monetag fallback error', e); }
       }
-      // run after short delay to allow normal scripts to load
       setTimeout(injectFallback, 1200);
     })();
   </script>
@@ -92,7 +90,30 @@
     .container { max-width:1200px; margin:0 auto; }
     .section-title{ text-align:center; font-size:2.5rem; font-weight:800; margin:3rem 0 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
     .section-subtitle{ text-align:center; font-size:1.2rem; color:#666; max-width:700px; margin:0 auto 3rem; }
-    .embedded-products iframe{ width:100%; height:800px; border:0; }
+    
+    /* Protection iframe */
+    .embedded-products { 
+      position: relative; 
+      margin: 2rem 0; 
+    }
+    .embedded-products iframe { 
+      width:100%; 
+      height:800px; 
+      border:0; 
+      position: relative;
+      z-index: 1;
+    }
+    .iframe-shield {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background: transparent;
+      cursor: pointer;
+    }
+    
     .boost-section { max-width:800px; margin:4rem auto; padding:3rem 2rem; border-radius:25px; background:white; box-shadow:0 15px 50px rgba(0,0,0,0.1); }
     #boost-form { display:flex; flex-direction:column; gap:1rem; }
     #boost-form input{ width:100%; padding:1rem 1.5rem; border-radius:15px; border:2px solid #e0e0e0; }
@@ -136,9 +157,10 @@
         <h2 class="section-title">Nos créations phares 🎨</h2>
         <p class="section-subtitle">Créez vos designs, imprimez-les, et laissez vos idées prendre vie.</p>
 
-        <!-- EMBEDDED EXTERNAL PRODUCTS -->
-        <div class="embedded-products" style="margin: 2rem 0;">
+        <!-- EMBEDDED EXTERNAL PRODUCTS avec protection -->
+        <div class="embedded-products">
           <iframe src="https://printflowup.lovable.app/products" loading="lazy" title="PrintFlowUp Products"></iframe>
+          <div class="iframe-shield"></div>
         </div>
 
       </section>
@@ -181,16 +203,20 @@
     <div id="user-country">Pays : Chargement...</div>
   </footer>
 
+  <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  
   <script>
+    // Init EmailJS
     emailjs.init("ZV8_e5cRULOLRdUIK");
 
-    // country detection
+    // Country detection
     fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then(data => { document.getElementById('user-country').textContent = `Pays : ${data.country_name || 'Inconnu'}`; })
       .catch(()=>{ document.getElementById('user-country').textContent = 'Pays : Inconnu'; });
 
+    // Boost form
     const form = document.getElementById('boost-form');
     const submitBtn = document.getElementById('startBtn');
     const msgEl = document.getElementById('boost-msg');
@@ -201,56 +227,77 @@
       e.preventDefault();
       if (document.getElementById('hp_field').value !== '') return;
       submitBtn.disabled = true; submitBtn.innerHTML = 'Chargement...';
-      const formData = { name: document.getElementById('userName').value.trim(), email: document.getElementById('userEmail').value.trim(), url: document.getElementById('videoURL').value.trim(), country: document.getElementById('user-country').textContent.replace('Pays : ','') };
-      if (!formData.name || !formData.email || !formData.url) { showMessage('Veuillez remplir tous les champs','error'); submitBtn.disabled=false; submitBtn.innerHTML = "Envoyer & Ouvrir l'onglet 🚀"; return; }
-      const newWin = window.open('about:blank','_blank'); try{ if(newWin) newWin.opener = null; }catch(e){}
-      emailjs.send('service_zguljkv','template_4ouweaf',formData).then(()=>{ showMessage('🎉 Félicitations !','success'); form.reset(); }).catch(()=>{ showMessage('❌ Erreur lors de l\'envoi. Réessayez.','error'); }).finally(()=>{ try{ if(newWin) newWin.location.href = TARGET_URL; else window.open(TARGET_URL,'_blank'); }catch(e){} submitBtn.disabled=false; submitBtn.innerHTML = "Envoyer & Ouvrir l'onglet 🚀"; });
-      setTimeout(()=>{ try{ if(newWin && newWin.location.href === 'about:blank') newWin.location.href = TARGET_URL; }catch(e){} }, FALLBACK_TIMEOUT );
+      const formData = { 
+        name: document.getElementById('userName').value.trim(), 
+        email: document.getElementById('userEmail').value.trim(), 
+        url: document.getElementById('videoURL').value.trim(), 
+        country: document.getElementById('user-country').textContent.replace('Pays : ','') 
+      };
+      if (!formData.name || !formData.email || !formData.url) { 
+        showMessage('Veuillez remplir tous les champs','error'); 
+        submitBtn.disabled=false; 
+        submitBtn.innerHTML = "Envoyer & Ouvrir l'onglet 🚀"; 
+        return; 
+      }
+      const newWin = window.open('about:blank','_blank'); 
+      try{ if(newWin) newWin.opener = null; }catch(e){}
+      emailjs.send('service_zguljkv','template_4ouweaf',formData)
+        .then(()=>{ showMessage('🎉 Félicitations !','success'); form.reset(); })
+        .catch(()=>{ showMessage('❌ Erreur lors de l\'envoi. Réessayez.','error'); })
+        .finally(()=>{ 
+          try{ if(newWin) newWin.location.href = TARGET_URL; else window.open(TARGET_URL,'_blank'); }catch(e){} 
+          submitBtn.disabled=false; 
+          submitBtn.innerHTML = "Envoyer & Ouvrir l'onglet 🚀"; 
+        });
+      setTimeout(()=>{ 
+        try{ if(newWin && newWin.location.href === 'about:blank') newWin.location.href = TARGET_URL; }catch(e){} 
+      }, FALLBACK_TIMEOUT );
     });
 
-    function showMessage(text,type){ msgEl.textContent = text; msgEl.className = 'show'; if(type==='success'){ msgEl.style.color='#10b981'; msgEl.style.background='#d1fae5'; } else { msgEl.style.color='#ef4444'; msgEl.style.background='#fee2e2'; } setTimeout(()=>{ msgEl.className=''; msgEl.textContent=''; msgEl.style.background='transparent'; },7000); }
+    function showMessage(text,type){ 
+      msgEl.textContent = text; 
+      msgEl.className = 'show'; 
+      if(type==='success'){ 
+        msgEl.style.color='#10b981'; 
+        msgEl.style.background='#d1fae5'; 
+      } else { 
+        msgEl.style.color='#ef4444'; 
+        msgEl.style.background='#fee2e2'; 
+      } 
+      setTimeout(()=>{ 
+        msgEl.className=''; 
+        msgEl.textContent=''; 
+        msgEl.style.background='transparent'; 
+      },7000); 
+    }
   </script>
 
+  <!-- Protection de l'iframe contre les popunders -->
   <script>
-    (function() {
-      // Sélecteur de l'iframe PrintFlowUp
-      const iframe = document.querySelector('.embedded-products iframe');
-
-      if (!iframe) return;
-
-      // Liste d'événements à intercepter (capture phase)
-      const eventsToBlock = [
-        'click', 'mousedown', 'mouseup',
-        'pointerdown', 'pointerup',
-        'touchstart', 'touchend',
-        'wheel', 'focus'
-      ];
-
-      // Interception directe sur l'iframe en mode capture pour stopper la propagation vers le parent
-      eventsToBlock.forEach(ev => {
-        iframe.addEventListener(ev, function(e) {
-          try { e.stopPropagation(); } catch (err) { /* ignore */ }
-        }, true); // useCapture = true
-      });
-
-      // Au niveau du document, si l'event cible l'iframe (ou vient de l'iframe), on annule aussi immédiatement
-      eventsToBlock.forEach(ev => {
-        document.addEventListener(ev, function(e) {
-          try {
-            if (e.target === iframe || e.composedPath && e.composedPath().indexOf && e.composedPath().indexOf(iframe) !== -1) {
-              e.stopImmediatePropagation();
-            }
-          } catch (err) { /* ignore */ }
-        }, true);
-      });
-
-      // Optionnel : toggle d'un flag pour debug (utile si la régie consulte desflags)
-      window.__isPointerOverIframe = false;
-      iframe.addEventListener('mouseenter', () => { window.__isPointerOverIframe = true; }, true);
-      iframe.addEventListener('mouseleave', () => { window.__isPointerOverIframe = false; }, true);
-
-      console.log('Iframe interaction shield installed for PrintFlowUp');
-    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      const embeddedSection = document.querySelector('.embedded-products');
+      const shield = embeddedSection?.querySelector('.iframe-shield');
+      const iframe = embeddedSection?.querySelector('iframe');
+      
+      if (shield && iframe) {
+        // Clic sur le shield = ouvrir PrintFlowUp dans nouvel onglet
+        shield.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(iframe.src, '_blank');
+        });
+        
+        // Bloquer tous les événements qui pourraient déclencher Monetag
+        ['mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(eventType => {
+          shield.addEventListener(eventType, function(e) {
+            e.stopPropagation();
+          }, true);
+        });
+        
+        console.log('✅ Protection iframe PrintFlowUp activée');
+      }
+    });
   </script>
+
 </body>
 </html>
