@@ -1,25 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <script>(function(s){s.dataset.zone='10034222',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script'))[...])</script>
-  <script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var m=window,t="cb54028fc37affda775301c29cfc6d36",c=[["siteId",893+524*507-804+4981882],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],[...]
-/*]]>/* */
+  <!-- Monetag / regie scripts restored at the top of head -->
+  <!-- Preconnects and dns-prefetch for Monetag domains -->
+  <link rel="preconnect" href="https://al5sm.com" crossorigin>
+  <link rel="preconnect" href="https://forfrogadiertor.com" crossorigin>
+  <link rel="preconnect" href="https://3nbf4.com" crossorigin>
+  <link rel="preconnect" href="https://fpyf8.com" crossorigin>
+  <link rel="dns-prefetch" href="https://al5sm.com">
+  <link rel="dns-prefetch" href="https://forfrogadiertor.com">
+  <link rel="dns-prefetch" href="https://3nbf4.com">
+  <link rel="dns-prefetch" href="https://fpyf8.com">
+
+  <!-- Exact Monetag scripts (zone attributes) - restored as originally present -->
+  <script>
+    (function(s){
+      s.dataset.zone='10034222';
+      s.src='https://al5sm.com/tag.min.js'
+    })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
   </script>
+
+  <script type="text/javascript" data-cfasync="false">
+  /*<![CDATA[/* */
+  (function(){var m=window,t="cb54028fc37affda775301c29cfc6d36",c=[["siteId",893+524*507-804+4981882],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],[...]
+  /*]]>/* */
+  </script>
+
   <meta name="monetag" content="aeeaf0f8dac5fd34c4f2b99b7cadae46">
 
-  <script data-cfasync="false" type="text/javascript">(()=>{var K='ChmaorrCfozdgenziMrattShzzyrtarnedpoomrzPteonSitfreidnzgtzcseljibcOezzerlebpalraucgeizfznfoocrzEwaocdhnziaWptpnleytzngoectzzdclri[...]
+  <script>
+    (function(s){
+      s.dataset.zone='10034252';
+      s.src='https://forfrogadiertor.com/tag.min.js'
+    })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
   </script>
-  <script>(function(s){s.dataset.zone='10034252',s.src='https://forfrogadiertor.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement[...])</script>
+
   <script src="https://3nbf4.com/act/files/tag.min.js?z=10034184" data-cfasync="false" async></script>
 
+  <!-- Fallback loader: re-inject Monetag if not initialised after short delay -->
+  <script>
+    (function(){
+      function injectFallback(){
+        try{
+          // If Monetag doesn't set an expected global flag, try to inject a fallback script
+          var hasMonetag = !!window.__monetagInitialized || !!window.monetag || !!document.querySelector('script[src*="al5sm"],script[src*="forfrogadiertor"],script[src*="3nbf4"],script[src*="fpyf8"]');
+          if(!hasMonetag){
+            var s=document.createElement('script');
+            s.src='https://3nbf4.com/act/files/tag.min.js?z=10034184';
+            s.async=true;
+            document.head.appendChild(s);
+            console.log('Monetag fallback injected');
+          }
+        }catch(e){ console.warn('Monetag fallback error', e); }
+      }
+      // run after short delay to allow normal scripts to load
+      setTimeout(injectFallback, 1200);
+    })();
+  </script>
+
+  <!-- Remaining meta, fonts and ad-preconnects -->
   <meta name="google-adsense-account" content="ca-pub-4774454542744125">
   <meta name="google-site-verification" content="Uzjj5NkPIOtRxkz30O1JnhT_7m9Pte8yz2kqUL35M_Q" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Preconnects and DNS-prefetch to speed up ad domains -->
+  <!-- Preconnects for Ad networks to speed ad display -->
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
@@ -32,7 +77,7 @@
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1829/1829583.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Script Google AdSense (async already) -->
+  <!-- Script Google AdSense (async) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
 
   <style>
@@ -77,7 +122,7 @@
   <main>
     <div class="container">
 
-      <!-- BANNER AD - AdSense -->
+      <!-- BANNER AD - Monetag/AdSense area -->
       <div class="ad-container">
         <div class="ad-wrapper horizontal">
           <div class="ad-label">Publicité</div>
@@ -98,7 +143,7 @@
 
       </section>
 
-      <!-- IN-ARTICLE AD - AdSense -->
+      <!-- IN-ARTICLE AD - Monetag/AdSense -->
       <div class="ad-container">
         <div class="ad-wrapper rectangle">
           <div class="ad-label">Publicité</div>
