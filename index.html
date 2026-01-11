@@ -210,5 +210,47 @@
 
     function showMessage(text,type){ msgEl.textContent = text; msgEl.className = 'show'; if(type==='success'){ msgEl.style.color='#10b981'; msgEl.style.background='#d1fae5'; } else { msgEl.style.color='#ef4444'; msgEl.style.background='#fee2e2'; } setTimeout(()=>{ msgEl.className=''; msgEl.textContent=''; msgEl.style.background='transparent'; },7000); }
   </script>
+
+  <script>
+    (function() {
+      // Sélecteur de l'iframe PrintFlowUp
+      const iframe = document.querySelector('.embedded-products iframe');
+
+      if (!iframe) return;
+
+      // Liste d'événements à intercepter (capture phase)
+      const eventsToBlock = [
+        'click', 'mousedown', 'mouseup',
+        'pointerdown', 'pointerup',
+        'touchstart', 'touchend',
+        'wheel', 'focus'
+      ];
+
+      // Interception directe sur l'iframe en mode capture pour stopper la propagation vers le parent
+      eventsToBlock.forEach(ev => {
+        iframe.addEventListener(ev, function(e) {
+          try { e.stopPropagation(); } catch (err) { /* ignore */ }
+        }, true); // useCapture = true
+      });
+
+      // Au niveau du document, si l'event cible l'iframe (ou vient de l'iframe), on annule aussi immédiatement
+      eventsToBlock.forEach(ev => {
+        document.addEventListener(ev, function(e) {
+          try {
+            if (e.target === iframe || e.composedPath && e.composedPath().indexOf && e.composedPath().indexOf(iframe) !== -1) {
+              e.stopImmediatePropagation();
+            }
+          } catch (err) { /* ignore */ }
+        }, true);
+      });
+
+      // Optionnel : toggle d'un flag pour debug (utile si la régie consulte desflags)
+      window.__isPointerOverIframe = false;
+      iframe.addEventListener('mouseenter', () => { window.__isPointerOverIframe = true; }, true);
+      iframe.addEventListener('mouseleave', () => { window.__isPointerOverIframe = false; }, true);
+
+      console.log('Iframe interaction shield installed for PrintFlowUp');
+    })();
+  </script>
 </body>
 </html>
