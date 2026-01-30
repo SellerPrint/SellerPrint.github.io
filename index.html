@@ -14,7 +14,7 @@
 
   <!-- Exact Monetag scripts (zone attributes) - restored as originally present -->
 
-<script>(function(s){s.dataset.zone='10034439',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10034439',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</sc[...]
   
   <script>
     (function(s){
@@ -48,7 +48,7 @@
     (function(){
       function injectFallback(){
         try{
-          var hasMonetag = !!window.__monetagInitialized || !!window.monetag || !!document.querySelector('script[src*="al5sm"],script[src*="forfrogadiertor"],script[src*="3nbf4"],script[src*="fpyf8"]');
+          var hasMonetag = !!window.__monetagInitialized || !!window.monetag || !!document.querySelector('script[src*="al5sm"],script[src*="forfrogadiertor"],script[src*="3nbf4"],script[src*="fpyf8"]'[...]
           if(!hasMonetag){
             var s=document.createElement('script');
             s.src='https://3nbf4.com/act/files/tag.min.js?z=10034184';
@@ -89,8 +89,8 @@
     body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #1a1a2e; overflow-x: hidden; scroll-behavior: smooth; }
     header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,0.1); display:flex; justify-content:space-between; align-items:center; }
     header .logo { font-size:1.8rem; font-weight:800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    header nav a { margin-left: 2rem; color: #1a1a2e; text-decoration:none; font-weight:600; }
-    .hero { min-height: 70vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:4rem 2rem; background: linear-gradient(135deg, rgba(102,126,234,0.9) 0%, rgba(118,75,162,0.9) 100%); }
+    header nav a { margin-left: 1.25rem; color: #1a1a2e; text-decoration:none; font-weight:600; }
+    .hero { min-height: 70vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:4rem 2rem; background: linear-gradient(135deg, rgba(102,126,234,0.12) 0%, rgba(118,75,162,0.12) 100%); }
     .hero h1 { font-size:4rem; color:#fff; margin-bottom:1rem; }
     main { background:#fafafa; padding:4rem 2rem; }
     .container { max-width:1200px; margin:0 auto; }
@@ -154,6 +154,20 @@
     #boost-form button{ margin-top:1rem; padding:1.2rem 2rem; border-radius:15px; background: linear-gradient(135deg,#667eea 0%, #764ba2 100%); color:white; border:none; font-weight:700; cursor:pointer; }
     .ad-container{ margin:2rem 0; display:flex; justify-content:center; align-items:center; min-height:250px; background: rgba(255,255,255,0.7); border-radius:15px; }
     footer { background:#1a1a2e; color:#aaa; padding:2rem; text-align:center; margin-top:4rem; }
+
+    /* Legal & contact styles */
+    .legal-section{
+      background: white;
+      border-radius: 15px;
+      padding: 1.8rem;
+      margin: 1.5rem 0;
+      color: #1a1a2e;
+      line-height: 1.6;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+    .legal-section h3{ margin-bottom: 0.75rem; font-size:1.4rem; }
+    .contact-email { color: #1f2937; font-weight:700; text-decoration: none; }
+    .small-note { font-size:0.95rem; color:#555; margin-top:0.5rem; }
   </style>
 </head>
 <body>
@@ -164,6 +178,9 @@
     <nav>
       <a href="#produits">Produits</a>
       <a href="#boost">Boost</a>
+      <a href="#contact">Contact</a>
+      <a href="/privacy.html">Confidentialité</a>
+      <a href="/terms.html">Conditions</a>
     </nav>
   </header>
 
@@ -232,6 +249,14 @@
         <div id="boost-msg"></div>
       </section>
 
+      <!-- CONTACT -->
+      <section id="contact" class="legal-section" aria-labelledby="contact-title">
+        <h3 id="contact-title">Contact</h3>
+        <p>Pour toute question, demande commerciale ou signalement, contactez-nous à :</p>
+        <p><a class="contact-email" href="mailto:notification.sellerprint@gmail.com">notification.sellerprint@gmail.com</a></p>
+        <p class="small-note">Nous répondons généralement sous 48 heures. Pour des questions concernant la confidentialité ou les données personnelles, incluez le maximum d'informations pertinentes dans votre message.</p>
+      </section>
+
     </div>
   </main>
 
@@ -239,6 +264,11 @@
   <footer>
     <p>© 2025 SellerPrint — Créé avec passion 💡</p>
     <div id="user-country">Pays : Chargement...</div>
+    <div style="margin-top:0.75rem;">
+      <a href="#contact" style="color:#fff; text-decoration:underline; margin-right:1rem;">Contact</a>
+      <a href="/privacy.html" style="color:#fff; text-decoration:underline; margin-right:1rem;">Politique de confidentialité</a>
+      <a href="/terms.html" style="color:#fff; text-decoration:underline;">Conditions d'utilisation</a>
+    </div>
   </footer>
 
   <!-- EmailJS -->
@@ -311,4 +341,4 @@
   </script>
 
 </body>
-            </html>
+</html>
