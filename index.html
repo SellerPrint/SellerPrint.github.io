@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Monetag / regie scripts restored at the top of head -->
-  <!-- Preconnects and dns-prefetch for Monetag domains -->
+  <!-- MONETAG zones — optimisées : chargées après window.load -->
   <link rel="preconnect" href="https://al5sm.com" crossorigin>
   <link rel="preconnect" href="https://forfrogadiertor.com" crossorigin>
   <link rel="preconnect" href="https://3nbf4.com" crossorigin>
@@ -11,345 +10,502 @@
   <link rel="dns-prefetch" href="https://forfrogadiertor.com">
   <link rel="dns-prefetch" href="https://3nbf4.com">
   <link rel="dns-prefetch" href="https://fpyf8.com">
+  <meta name="monetag" content="aeeaf0f8dac5fd34c4f2b99b7cadae46">
 
-  <!-- Exact Monetag scripts (zone attributes) - restored as originally present -->
-<meta name="monetag" content="aeeaf0f8dac5fd34c4f2b99b7cadae46">
-
-<script>
-    (function(s){
-      s.dataset.zone='10034222';
-      s.src='https://al5sm.com/tag.min.js'
-    })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+  <!-- Zones Monetag push/interstitiel : injectées après chargement de la page -->
+  <script>
+  window.addEventListener('load', function() {
+    [
+      {z:'10034222', d:'al5sm.com'},
+      {z:'10034706', d:'al5sm.com'},
+      {z:'10034439', d:'al5sm.com'},
+      {z:'10034252', d:'forfrogadiertor.com'}
+    ].forEach(function(zone) {
+      var s = document.createElement('script');
+      s.dataset.zone = zone.z;
+      s.src = 'https://' + zone.d + '/tag.min.js';
+      s.async = true;
+      document.head.appendChild(s);
+    });
+    var sq = document.createElement('script');
+    sq.src = 'https://quge5.com/88/tag.min.js';
+    sq.dataset.zone = '178771'; sq.async = true; sq.dataset.cfasync = 'false';
+    document.head.appendChild(sq);
+    var sp = document.createElement('script');
+    sp.src = 'https://3nbf4.com/act/files/tag.min.js?z=10034184';
+    sp.dataset.cfasync = 'false'; sp.async = true;
+    document.head.appendChild(sp);
+  });
   </script>
-  
-<script>(function(s){s.dataset.zone='10034706',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  
-<script>(function(s){s.dataset.zone='10034439',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</sc[...]
-  
-  <script src="https://quge5.com/88/tag.min.js" data-zone="178771" async data-cfasync="false"></script>
-
-
   <script type="text/javascript" data-cfasync="false">
-  /*<![CDATA[/* */
   (function(){var m=window,t="cb54028fc37affda775301c29cfc6d36",c=[["siteId",893+524*507-804+4981882],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0]]})();
-  /*]]>/* */
   </script>
-
-  
-
   <script>
-    (function(s){
-      s.dataset.zone='10034252';
-      s.src='https://forfrogadiertor.com/tag.min.js'
-    })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-  </script>
-  
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4774454542744125"
-     crossorigin="anonymous"></script>
-  
-  <script src="https://3nbf4.com/act/files/tag.min.js?z=10034184" data-cfasync="false" defer></script>
-
-  <!-- Fallback loader: re-inject Monetag if not initialised after short delay -->
-  <script>
-    (function(){
-      function injectFallback(){
-        try{
-          var hasMonetag = !!window.__monetagInitialized || !!window.monetag || !!document.querySelector('script[src*="al5sm"],script[src*="forfrogadiertor"],script[src*="3nbf4"],script[src*="fpyf8"]'[...]
-          if(!hasMonetag){
-            var s=document.createElement('script');
-            s.src='https://3nbf4.com/act/files/tag.min.js?z=10034184';
-            s.async=true;
-            document.head.appendChild(s);
-            console.log('Monetag fallback injected');
-          }
-        }catch(e){ console.warn('Monetag fallback error', e); }
+    setTimeout(function(){
+      if(!document.querySelector('script[src*="al5sm"],script[src*="forfrogadiertor"],script[src*="3nbf4"]')){
+        var s=document.createElement('script'); s.src='https://3nbf4.com/act/files/tag.min.js?z=10034184'; s.async=true; document.head.appendChild(s);
       }
-      setTimeout(injectFallback, 1200);
-    })();
+    }, 2000);
   </script>
 
-  <!-- Remaining meta, fonts and ad-preconnects -->
-  <meta name="google-adsense-account" content="ca-pub-4774454542744125">
-  <meta name="google-site-verification" content="Uzjj5NkPIOtRxkz30O1JnhT_7m9Pte8yz2kqUL35M_Q" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Preconnects for Ad networks to speed ad display -->
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
-
-  <title>SellerPrint — L'impression réinventée 🎨</title>
-  <meta name="description" content="SellerPrint — Créez, imprimez et vendez vos produits personnalisés. Impression et personnalisation simple et rapide.">
+  <meta name="description" content="SellerPrint — Creez, imprimez et vendez vos produits personnalises. Impression et personnalisation simple et rapide.">
+  <meta name="google-adsense-account" content="ca-pub-4774454542744125">
+  <meta name="google-site-verification" content="Uzjj5NkPIOtRxkz30O1JnhT_7m9Pte8yz2kqUL35M_Q">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sellerprint.github.io/">
+  <meta property="og:title" content="SellerPrint — L'impression reinventee">
+  <meta property="og:description" content="Creez, imprimez et vendez vos produits personnalises.">
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/1829/1829583.png">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="SellerPrint">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SellerPrint — L'impression reinventee">
+  <meta name="twitter:description" content="Creez, imprimez et vendez vos produits personnalises.">
+  <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/1829/1829583.png">
+  <title>SellerPrint — L'impression reinventee</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1829/1829583.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Script Google AdSense (async) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <!-- AdSense : un seul script, vrai ID -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4774454542744125" crossorigin="anonymous"></script>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #1a1a2e; overflow-x: hidden; scroll-behavior: smooth; }
-    header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,0.1); display:flex; justify-content:space-between; align-items:center; }
-    header .logo { font-size:1.8rem; font-weight:800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    header nav a { margin-left: 1.25rem; color: #1a1a2e; text-decoration:none; font-weight:600; }
-    .hero { min-height: 70vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:4rem 2rem; background: linear-gradient(135deg, rgba(102,126,234,0.12) 0%, rgba(118,75,162,0.12) 100%); }
-    .hero h1 { font-size:4rem; color:#fff; margin-bottom:1rem; }
-    main { background:#fafafa; padding:4rem 2rem; }
-    .container { max-width:1200px; margin:0 auto; }
-    .section-title{ text-align:center; font-size:2.5rem; font-weight:800; margin:3rem 0 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .section-subtitle{ text-align:center; font-size:1.2rem; color:#666; max-width:700px; margin:0 auto 3rem; }
-    
-    /* Protection iframe - DÉSACTIVER pointer-events complètement */
-    .embedded-products { 
-      position: relative; 
-      margin: 2rem 0; 
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-    .embedded-products iframe { 
-      width:100%; 
-      height:800px; 
-      border:0; 
-      display: block;
-      pointer-events: none; /* DÉSACTIVE TOUS LES CLICS */
-    }
-    .iframe-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .embedded-products:hover .iframe-overlay {
-      opacity: 1;
-      background: rgba(0,0,0,0.5);
-    }
-    .open-iframe-btn {
-      padding: 1.2rem 2.5rem;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(102,126,234,0.4);
-      transform: translateY(0);
-      transition: all 0.3s ease;
-    }
-    .open-iframe-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(102,126,234,0.6);
-    }
-    
-    .boost-section { max-width:800px; margin:4rem auto; padding:3rem 2rem; border-radius:25px; background:white; box-shadow:0 15px 50px rgba(0,0,0,0.1); }
-    #boost-form { display:flex; flex-direction:column; gap:1rem; }
-    #boost-form input{ width:100%; padding:1rem 1.5rem; border-radius:15px; border:2px solid #e0e0e0; }
-    #boost-form button{ margin-top:1rem; padding:1.2rem 2rem; border-radius:15px; background: linear-gradient(135deg,#667eea 0%, #764ba2 100%); color:white; border:none; font-weight:700; cursor:pointer; }
-    .ad-container{ margin:2rem 0; display:flex; justify-content:center; align-items:center; min-height:250px; background: rgba(255,255,255,0.7); border-radius:15px; }
-    footer { background:#1a1a2e; color:#aaa; padding:2rem; text-align:center; margin-top:4rem; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary:#667eea;--secondary:#764ba2;--gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);--dark:#1a1a2e;--bg:#f8f9ff;--shadow:0 8px 30px rgba(102,126,234,.1);--r:16px}
+    html{scroll-behavior:smooth}
+    body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
 
-    /* Legal & contact styles */
-    .legal-section{
-      background: white;
-      border-radius: 15px;
-      padding: 1.8rem;
-      margin: 1.5rem 0;
-      color: #1a1a2e;
-      line-height: 1.6;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    /* HEADER */
+    header{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);padding:.85rem 2rem;position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(102,126,234,.12);display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.75rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    header nav{display:flex;align-items:center;gap:.1rem}
+    header nav a{padding:.4rem .85rem;color:var(--dark);text-decoration:none;font-weight:600;font-size:.9rem;border-radius:10px;transition:background .2s,color .2s}
+    header nav a:hover{background:rgba(102,126,234,.1);color:var(--primary)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:none;border-radius:8px}
+    .hamburger span{width:24px;height:2px;background:var(--dark);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    @media(max-width:768px){
+      .hamburger{display:flex}
+      header nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.99);flex-direction:column;padding:1rem 2rem 1.5rem;gap:.2rem;box-shadow:0 12px 40px rgba(0,0,0,.1)}
+      header nav.open{display:flex}
+      header nav a{padding:.75rem 1rem;font-size:1rem;border-radius:12px}
     }
-    .legal-section h3{ margin-bottom: 0.75rem; font-size:1.4rem; }
-    .contact-email { color: #1f2937; font-weight:700; text-decoration: none; }
-    .small-note { font-size:0.95rem; color:#555; margin-top:0.5rem; }
+
+    /* HERO */
+    .hero{background:var(--gradient);min-height:68vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 1.5rem;position:relative;overflow:hidden}
+    .hero h1{font-size:clamp(2rem,6vw,4rem);color:#fff;margin-bottom:1rem;line-height:1.15;position:relative}
+    .hero p{color:rgba(255,255,255,.88);font-size:1.15rem;max-width:580px;margin-bottom:2rem;position:relative}
+    .hero-btn{display:inline-block;padding:1rem 2.5rem;background:#fff;color:var(--primary);font-weight:700;font-size:1.05rem;border-radius:50px;text-decoration:none;box-shadow:0 8px 30px rgba(0,0,0,.2);transition:transform .2s,box-shadow .2s;position:relative}
+    .hero-btn:hover{transform:translateY(-3px);box-shadow:0 16px 45px rgba(0,0,0,.25)}
+
+    /* MAIN */
+    main{padding:3rem 1.5rem 4rem}
+    .container{max-width:1200px;margin:0 auto}
+    .section-title{text-align:center;font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;margin:3rem 0 .75rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section-subtitle{text-align:center;font-size:1.05rem;color:#666;max-width:650px;margin:0 auto 2.5rem;line-height:1.6}
+
+    /* ADS */
+    .ad-container{margin:2.5rem 0;display:flex;justify-content:center;align-items:center;min-height:90px;background:rgba(255,255,255,.6);border-radius:var(--r);overflow:hidden}
+    .ad-container .ad-wrapper{width:100%;padding:4px 0}
+    .ad-label{font-size:.68rem;color:#bbb;text-align:center;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+
+    /* SKELETON */
+    .products-skeleton{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:2rem 0}
+    .skeleton-card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+    .skeleton-img,.skeleton-line{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+    .skeleton-img{height:220px;border-radius:0}
+    .skeleton-body{padding:1rem 1.2rem 1.4rem}
+    .skeleton-line{height:14px;margin:8px 0}
+    .skeleton-line.short{width:55%}
+    .skeleton-line.med{width:75%}
+    @keyframes shimmer{to{background-position:-200% 0}}
+
+    /* PRODUITS GRID */
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:2rem 0}
+    .product-card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+    .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(102,126,234,.18)}
+    .product-card-img-wrap{position:relative;overflow:hidden}
+    .product-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .4s}
+    .product-card:hover img{transform:scale(1.05)}
+    .product-badge{position:absolute;top:10px;left:10px;background:var(--gradient);color:#fff;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:20px}
+    .product-info{padding:1rem 1.2rem 1.4rem;flex:1;display:flex;flex-direction:column}
+    .product-info h3{font-size:.97rem;font-weight:700;margin-bottom:.3rem;color:var(--dark);line-height:1.4}
+    .product-info p{font-size:.82rem;color:#888;margin-bottom:auto;line-height:1.5}
+    .product-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;gap:.5rem}
+    .product-price{font-weight:800;font-size:1.05rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .product-btn{padding:.55rem 1.1rem;background:var(--gradient);color:#fff;border:none;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;text-decoration:none;font-family:'Poppins',sans-serif;transition:opacity .2s,transform .2s;white-space:nowrap}
+    .product-btn:hover{opacity:.88;transform:translateY(-1px)}
+    .products-error{text-align:center;padding:3rem 2rem;background:#fff;border-radius:var(--r);box-shadow:var(--shadow);margin:2rem 0;grid-column:1/-1}
+    .products-error .err-icon{font-size:3rem;margin-bottom:1rem}
+    .products-error p{color:#666;font-size:.95rem;line-height:1.6}
+    .products-error a{color:var(--primary);font-weight:700;text-decoration:none}
+
+    /* PAGINATION */
+    .pagination{display:flex;justify-content:center;gap:.5rem;margin:2rem 0 1rem;flex-wrap:wrap}
+    .page-btn{padding:.55rem 1rem;border-radius:10px;border:2px solid #e5e7eb;background:#fff;color:var(--dark);font-weight:600;font-size:.88rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
+    .page-btn:hover,.page-btn.active{background:var(--gradient);color:#fff;border-color:transparent}
+
+    /* POURQUOI */
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.4rem;margin:2rem 0 3rem}
+    .why-card{background:#fff;border-radius:var(--r);padding:1.8rem 1.4rem;text-align:center;box-shadow:var(--shadow);transition:transform .25s}
+    .why-card:hover{transform:translateY(-4px)}
+    .why-icon{font-size:2.4rem;margin-bottom:.8rem}
+    .why-card h3{font-size:.97rem;font-weight:700;margin-bottom:.4rem}
+    .why-card p{font-size:.85rem;color:#777;line-height:1.55}
+
+    /* BOOST */
+    .boost-section{max-width:760px;margin:4rem auto;padding:2.5rem 2rem;border-radius:24px;background:#fff;box-shadow:0 15px 60px rgba(102,126,234,.12)}
+    .boost-badge{display:inline-block;background:#fef3c7;color:#92400e;font-size:.78rem;font-weight:700;padding:.25rem .8rem;border-radius:20px;margin-bottom:.8rem}
+    .boost-section h2{font-size:1.65rem;font-weight:800;margin-bottom:.4rem}
+    .boost-notice{background:#fff8e1;border-left:4px solid #f59e0b;padding:.9rem 1.2rem;border-radius:0 10px 10px 0;margin:1rem 0 1.5rem;font-size:.88rem;color:#78350f;line-height:1.6}
+    #boost-form{display:flex;flex-direction:column;gap:.9rem}
+    #boost-form input{padding:.9rem 1.3rem;border-radius:12px;border:2px solid #e5e7eb;font-family:'Poppins',sans-serif;font-size:.93rem;outline:none;transition:border-color .2s}
+    #boost-form input:focus{border-color:var(--primary)}
+    #boost-form button{margin-top:.4rem;padding:1.05rem;border-radius:12px;background:var(--gradient);color:#fff;border:none;font-weight:700;font-size:.97rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity .2s,transform .2s}
+    #boost-form button:hover:not(:disabled){opacity:.91;transform:translateY(-1px)}
+    #boost-form button:disabled{opacity:.6;cursor:not-allowed}
+    #boost-msg{margin-top:.8rem;padding:.8rem 1.2rem;border-radius:10px;font-weight:600;font-size:.93rem;display:none}
+    #boost-msg.show{display:block}
+
+    /* CONTACT */
+    .legal-section{background:#fff;border-radius:var(--r);padding:1.8rem;margin:1.5rem 0;box-shadow:var(--shadow);line-height:1.65}
+    .legal-section h3{margin-bottom:.75rem;font-size:1.35rem}
+    .contact-email{color:var(--primary);font-weight:700;text-decoration:none}
+    .contact-email:hover{text-decoration:underline}
+    .small-note{font-size:.87rem;color:#777;margin-top:.5rem}
+
+    /* FOOTER */
+    footer{background:var(--dark);color:#9ca3af;padding:2.5rem 2rem;text-align:center;margin-top:4rem}
+    footer p{margin-bottom:.4rem;font-size:.92rem}
+    footer a{color:#d1d5db;text-decoration:underline;margin:0 .5rem;font-size:.88rem}
+    footer a:hover{color:#fff}
+    #user-country{font-size:.82rem;margin-top:.6rem;opacity:.65}
+
+    /* BANDIERE RGPD */
+    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,40,.97);color:#e5e7eb;padding:1.2rem 2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;backdrop-filter:blur(10px);box-shadow:0 -4px 30px rgba(0,0,0,.3);transform:translateY(0);transition:transform .4s ease}
+    #cookie-banner.hidden{transform:translateY(115%)}
+    .cookie-text{flex:1 1 280px;font-size:.86rem;line-height:1.55}
+    .cookie-text a{color:#a78bfa}
+    .cookie-buttons{display:flex;gap:.65rem;flex-shrink:0;flex-wrap:wrap}
+    .cookie-btn{padding:.58rem 1.3rem;border-radius:50px;border:none;font-weight:700;font-size:.85rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:transform .2s,opacity .2s}
+    .cookie-btn:hover{transform:translateY(-1px);opacity:.9}
+    .cookie-btn-accept{background:var(--gradient);color:#fff}
+    .cookie-btn-refuse{background:transparent;color:#9ca3af;border:1.5px solid #4b5563}
+    .cookie-btn-settings{background:transparent;color:#9ca3af;border:none;text-decoration:underline;font-size:.8rem;cursor:pointer;font-family:'Poppins',sans-serif}
+    #cookie-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;align-items:center;justify-content:center;padding:1rem}
+    #cookie-modal.open{display:flex}
+    .modal-box{background:#fff;border-radius:20px;padding:2rem;max-width:500px;width:100%;box-shadow:0 25px 80px rgba(0,0,0,.25)}
+    .modal-box h3{font-size:1.25rem;margin-bottom:.5rem}
+    .modal-box>p{font-size:.86rem;color:#555;margin-bottom:1.2rem;line-height:1.55}
+    .pref-row{display:flex;justify-content:space-between;align-items:center;padding:.8rem 0;border-top:1px solid #f3f4f6}
+    .pref-label{font-size:.88rem;font-weight:600}
+    .pref-sub{font-size:.75rem;color:#999}
+    .toggle{position:relative;width:44px;height:24px}
+    .toggle input{opacity:0;width:0;height:0}
+    .toggle-slider{position:absolute;inset:0;background:#d1d5db;border-radius:24px;cursor:pointer;transition:background .3s}
+    .toggle-slider::before{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+    .toggle input:checked+.toggle-slider{background:var(--primary)}
+    .toggle input:checked+.toggle-slider::before{transform:translateX(20px)}
+    .toggle input:disabled+.toggle-slider{background:var(--primary);opacity:.65;cursor:not-allowed}
+    .modal-actions{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+    .modal-btn{flex:1;padding:.75rem;border-radius:12px;border:none;font-weight:700;font-size:.9rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity .2s}
+    .modal-btn-save{background:var(--gradient);color:#fff}
+    .modal-btn-all{background:#f3f4f6;color:var(--dark)}
+    .modal-btn:hover{opacity:.87}
+    @media(max-width:600px){main{padding:2.5rem 1rem 3.5rem}.boost-section{padding:1.8rem 1.1rem}#cookie-banner{padding:1rem 1.2rem}}
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">SellerPrint</div>
-    <nav>
-      <a href="#produits">Produits</a>
-      <a href="#boost">Boost</a>
-      <a href="#contact">Contact</a>
-      <a href="/privacy.html">Confidentialité</a>
-      <a href="/terms.html">Conditions</a>
-    </nav>
-  </header>
+<div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
+  <div class="cookie-text">
+    <strong>SellerPrint utilise des cookies</strong> pour afficher des publicites (Google AdSense, Monetag), mesurer l'audience et ameliorer votre experience.
+    <a href="/privacy.html">En savoir plus</a>
+  </div>
+  <div class="cookie-buttons">
+    <button class="cookie-btn cookie-btn-settings" onclick="openCookieModal()">Personnaliser</button>
+    <button class="cookie-btn cookie-btn-refuse" onclick="refuseCookies()">Refuser</button>
+    <button class="cookie-btn cookie-btn-accept" onclick="acceptAllCookies()">Tout accepter</button>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>L'impression réinventée</h1>
-    <p>Créez, imprimez et vendez vos produits personnalisés avec une qualité exceptionnelle</p>
-    <a href="#produits" class="hero-btn">Découvrir nos produits ✨</a>
+<div id="cookie-modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <h3>Preferences cookies</h3>
+    <p>Les cookies essentiels ne peuvent pas etre desactives car ils sont necessaires au bon fonctionnement du site.</p>
+    <div class="pref-row"><div><div class="pref-label">Essentiels</div><div class="pref-sub">Fonctionnement du site</div></div><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-slider"></span></label></div>
+    <div class="pref-row"><div><div class="pref-label">Publicites (AdSense &amp; Monetag)</div><div class="pref-sub">Affichage de publicites adaptees</div></div><label class="toggle"><input type="checkbox" id="pref-ads" checked><span class="toggle-slider"></span></label></div>
+    <div class="pref-row"><div><div class="pref-label">Analyse &amp; Performance</div><div class="pref-sub">Mesure d'audience anonymisee</div></div><label class="toggle"><input type="checkbox" id="pref-analytics" checked><span class="toggle-slider"></span></label></div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-all" onclick="acceptAllCookies()">Tout accepter</button>
+      <button class="modal-btn modal-btn-save" onclick="savePreferences()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="logo">SellerPrint</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav id="main-nav">
+    <a href="#produits">Produits</a>
+    <a href="#boost">Boost</a>
+    <a href="#contact">Contact</a>
+    <a href="/privacy.html">Confidentialite</a>
+    <a href="/terms.html">Conditions</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>L'impression reinventee</h1>
+  <p>Creez, imprimez et vendez vos produits personnalises avec une qualite exceptionnelle</p>
+  <a href="#produits" class="hero-btn">Decouvrir nos produits</a>
+</section>
+
+<main>
+<div class="container">
+
+  <div class="ad-container">
+    <div class="ad-wrapper">
+      <div class="ad-label">Publicite</div>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4774454542744125" data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <section id="produits">
+    <h2 class="section-title">Nos creations</h2>
+    <p class="section-subtitle" id="products-subtitle">Chargement de vos produits...</p>
+    <div class="products-skeleton" id="products-skeleton">
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line med"></div><div class="skeleton-line short"></div><div class="skeleton-line med"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line med"></div><div class="skeleton-line short"></div><div class="skeleton-line med"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line med"></div><div class="skeleton-line short"></div><div class="skeleton-line med"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line med"></div><div class="skeleton-line short"></div><div class="skeleton-line med"></div></div></div>
+    </div>
+    <div class="products-grid" id="products-grid" style="display:none;"></div>
+    <div class="pagination" id="pagination" style="display:none;"></div>
   </section>
 
-  <main>
-    <div class="container">
-
-      <!-- BANNER AD - Monetag/AdSense area -->
-      <div class="ad-container">
-        <div class="ad-wrapper horizontal">
-          <div class="ad-label">Publicité</div>
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_AD_CLIENT_ID" data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-      </div>
-
-      <!-- PRODUCTS -->
-      <section id="produits">
-        <h2 class="section-title">Nos créations phares 🎨</h2>
-        <p class="section-subtitle">Créez vos designs, imprimez-les, et laissez vos idées prendre vie.</p>
-
-        <!-- EMBEDDED EXTERNAL PRODUCTS avec protection TOTALE -->
-        <div class="embedded-products">
-          <iframe src="https://printflowup.lovable.app/products" loading="lazy" title="PrintFlowUp Products"></iframe>
-          <div class="iframe-overlay">
-            <button class="open-iframe-btn" onclick="window.open('https://printflowup.lovable.app/products', '_blank'); return false;">
-              🎨 Voir tous les produits
-            </button>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- IN-ARTICLE AD - Monetag/AdSense -->
-      <div class="ad-container">
-        <div class="ad-wrapper rectangle">
-          <div class="ad-label">Publicité</div>
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_AD_CLIENT_ID" data-ad-slot="YOUR_AD_SLOT_2" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-      </div>
-
-      <!-- WHY -->
-      <section style="margin-top:4rem; text-align:center;">
-        <h2 class="section-title">Pourquoi SellerPrint ? 🧠</h2>
-        <p class="section-subtitle">Nous fusionnons l'art, la technologie et la personnalisation pour créer des produits uniques.</p>
-      </section>
-
-      <!-- BOOST -->
-      <section id="boost" class="boost-section">
-        <h2>Boostez vos vues & likes 🎯</h2>
-        <p>Entrez vos infos puis cliquez pour recevoir votre confirmation et ouvrir la page partenaire.</p>
-        <form id="boost-form">
-          <input id="userName" name="name" type="text" placeholder="Ton nom" required>
-          <input id="userEmail" name="email" type="email" placeholder="Ton email" required>
-          <input id="videoURL" name="url" type="url" placeholder="URL de la vidéo (Url TikTok seulement)" required>
-          <input id="hp_field" name="hp_field" type="text" style="display:none !important; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off">
-          <button id="startBtn" type="submit" data-target-url="https://shortox.com/8znYguB">Envoyer & Ouvrir l'onglet 🚀 & <strong>🚨⚠️Suivre les instructions.</strong></button>
-        </form>
-        <div id="boost-msg"></div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact" class="legal-section" aria-labelledby="contact-title">
-        <h3 id="contact-title">Contact</h3>
-        <p>Pour toute question, demande commerciale ou signalement, contactez-nous à :</p>
-        <p><a class="contact-email" href="mailto:notification.sellerprint@gmail.com">notification.sellerprint@gmail.com</a></p>
-        <p class="small-note">Nous répondons généralement sous 48 heures. Pour des questions concernant la confidentialité ou les données personnelles, incluez le maximum d'informations pertinentes dans votre message.</p>
-      </section>
-
+  <div class="ad-container">
+    <div class="ad-wrapper">
+      <div class="ad-label">Publicite</div>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4774454542744125" data-ad-slot="YOUR_AD_SLOT_2" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-  </main>
+  </div>
 
-  <p>Dernièrement les systèmes (Génération de vue et de j'aime) sont momentanément indisponible.</p>
-  <p>Nous ferons notre possible pour y remédier dans les plus brefs délais.</p>
-  <p>Ce Blocage n'est absolument pas une erreur de notre part,</p>
-  <p>mais celle de l'entité avec qui nous collaborons pour ces systèmes générateurs.</p>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 SellerPrint — Créé avec passion 💡</p>
-    <div id="user-country">Pays : Chargement...</div>
-    <div style="margin-top:0.75rem;">
-      <a href="#contact" style="color:#fff; text-decoration:underline; margin-right:1rem;">Contact</a>
-      <a href="/privacy.html" style="color:#fff; text-decoration:underline; margin-right:1rem;">Politique de confidentialité</a>
-      <a href="/terms.html" style="color:#fff; text-decoration:underline;">Conditions d'utilisation</a>
+  <section>
+    <h2 class="section-title">Pourquoi SellerPrint ?</h2>
+    <p class="section-subtitle">Nous fusionnons l'art, la technologie et la personnalisation pour creer des produits uniques.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">&#x26A1;</div><h3>Livraison rapide</h3><p>Production en 2-3 jours ouvres, expedition vers toute l'Europe.</p></div>
+      <div class="why-card"><div class="why-icon">&#x1F3A8;</div><h3>Qualite premium</h3><p>Impression haute definition sur des materiaux soigneusement selectionnes.</p></div>
+      <div class="why-card"><div class="why-icon">&#x267B;</div><h3>Eco-responsable</h3><p>Produits fabriques a la demande, zero stock inutile, zero gaspillage.</p></div>
+      <div class="why-card"><div class="why-icon">&#x1F6E1;</div><h3>Paiement securise</h3><p>Transactions protegees. Satisfait ou rembourse garanti.</p></div>
     </div>
-  </footer>
+  </section>
 
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  
-  <script>
-    // Init EmailJS
-    emailjs.init("ZV8_e5cRULOLRdUIK");
+  <div class="ad-container">
+    <div class="ad-wrapper">
+      <div class="ad-label">Publicite</div>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4774454542744125" data-ad-slot="YOUR_AD_SLOT_3" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
 
-    // Country detection
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => { document.getElementById('user-country').textContent = `Pays : ${data.country_name || 'Inconnu'}`; })
-      .catch(()=>{ document.getElementById('user-country').textContent = 'Pays : Inconnu'; });
+  <section id="boost" class="boost-section">
+    <span class="boost-badge">Service Partenaire</span>
+    <h2>Boostez vos vues &amp; likes TikTok</h2>
+    <p style="color:#666;margin-bottom:.4rem">Augmentez la visibilite de vos videos TikTok grace a notre service partenaire.</p>
+    <div class="boost-notice">
+      <strong>Information :</strong> Ce service est momentanement <strong>indisponible</strong> chez notre prestataire partenaire. Soumettez votre demande, nous vous contactons des la reprise. Vos donnees sont utilisees <em>uniquement</em> pour traiter votre demande.
+    </div>
+    <form id="boost-form">
+      <input id="userName" name="name" type="text" placeholder="Votre nom" required>
+      <input id="userEmail" name="email" type="email" placeholder="Votre email" required>
+      <input id="videoURL" name="url" type="url" placeholder="URL de votre video TikTok" required>
+      <input id="hp_field" name="hp_field" type="text" style="display:none !important;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
+      <button id="startBtn" type="submit" data-target-url="https://shortox.com/8znYguB">
+        Envoyer ma demande &#x1F680; &mdash; <strong>Suivez les instructions a l'ecran</strong>
+      </button>
+    </form>
+    <div id="boost-msg"></div>
+  </section>
 
-    // Boost form
-    const form = document.getElementById('boost-form');
-    const submitBtn = document.getElementById('startBtn');
-    const msgEl = document.getElementById('boost-msg');
-    const TARGET_URL = submitBtn.dataset.targetUrl || 'https://hopeful-border.com/Df1qvC';
-    const FALLBACK_TIMEOUT = 3000;
+  <section id="contact" class="legal-section" aria-labelledby="contact-title">
+    <h3 id="contact-title">Contact</h3>
+    <p>Pour toute question, demande commerciale ou signalement, contactez-nous :</p>
+    <p><a class="contact-email" href="mailto:notification.sellerprint@gmail.com">notification.sellerprint@gmail.com</a></p>
+    <p class="small-note">Nous repondons generalement sous 48 heures.</p>
+  </section>
 
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      if (document.getElementById('hp_field').value !== '') return;
-      submitBtn.disabled = true; submitBtn.innerHTML = 'Chargement...';
-      const formData = { 
-        name: document.getElementById('userName').value.trim(), 
-        email: document.getElementById('userEmail').value.trim(), 
-        url: document.getElementById('videoURL').value.trim(), 
-        country: document.getElementById('user-country').textContent.replace('Pays : ','') 
-      };
-      if (!formData.name || !formData.email || !formData.url) { 
-        showMessage('Veuillez remplir tous les champs','error'); 
-        submitBtn.disabled=false; 
-        submitBtn.innerHTML = "Envoyer & Ouvrir l'onglet 🚀"; 
-        return; 
-      }
-      const newWin = window.open('about:blank','_blank'); 
-      try{ if(newWin) newWin.opener = null; }catch(e){}
-      emailjs.send('service_zguljkv','template_4ouweaf',formData)
-        .then(()=>{ showMessage('🎉 Félicitations !','success'); form.reset(); })
-        .catch(()=>{ showMessage('❌ Erreur lors de l\'envoi. Réessayez.','error'); })
-        .finally(()=>{ 
-          try{ if(newWin) newWin.location.href = TARGET_URL; else window.open(TARGET_URL,'_blank'); }catch(e){} 
-          submitBtn.disabled=false; 
-          submitBtn.innerHTML = "Envoyer & Ouvrir l'onglet 🚀"; 
-        });
-      setTimeout(()=>{ 
-        try{ if(newWin && newWin.location.href === 'about:blank') newWin.location.href = TARGET_URL; }catch(e){} 
-      }, FALLBACK_TIMEOUT );
-    });
+</div>
+</main>
 
-    function showMessage(text,type){ 
-      msgEl.textContent = text; 
-      msgEl.className = 'show'; 
-      if(type==='success'){ 
-        msgEl.style.color='#10b981'; 
-        msgEl.style.background='#d1fae5'; 
-      } else { 
-        msgEl.style.color='#ef4444'; 
-        msgEl.style.background='#fee2e2'; 
-      } 
-      setTimeout(()=>{ 
-        msgEl.className=''; 
-        msgEl.textContent=''; 
-        msgEl.style.background='transparent'; 
-      },7000); 
+<footer>
+  <p>&copy; 2025 SellerPrint &mdash; Cree avec passion</p>
+  <div id="user-country">Pays : Chargement...</div>
+  <div style="margin-top:1rem">
+    <a href="#contact">Contact</a>
+    <a href="/privacy.html">Politique de confidentialite</a>
+    <a href="/terms.html">Conditions d'utilisation</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+const PRINTIFY_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzN2Q0YmQzMDM1ZmUxMWU5YTgwM2FiN2VlYjNjY2M5NyIsImp0aSI6Ijc3NzRiODI4MjY5Yjc5MWU2OWY2YmM1YTg5Y2YxZTBhZTI2ZDU0ZTFhYjk3MmMzZDU0YzkxNDhhZmMyNmJhNjZiZmNiNmE3ZjE5MzQxMjQ4IiwiaWF0IjoxNzcxNzc2NTAxLjYwMTY2OSwibmJmIjoxNzcxNzc2NTAxLjYwMTY3MywiZXhwIjoxODAzMzEyNTAxLjU5Mzg5OSwic3ViIjoiMjU3NjM0OTkiLCJzY29wZXMiOlsic2hvcHMubWFuYWdlIiwic2hvcHMucmVhZCIsImNhdGFsb2cucmVhZCIsIm9yZGVycy5yZWFkIiwib3JkZXJzLndyaXRlIiwicHJvZHVjdHMucmVhZCIsInByb2R1Y3RzLndyaXRlIiwid2ViaG9va3MucmVhZCIsIndlYmhvb2tzLndyaXRlIiwidXBsb2Fkcy5yZWFkIiwidXBsb2Fkcy53cml0ZSIsInByaW50X3Byb3ZpZGVycy5yZWFkIiwidXNlci5pbmZvIl19.fzZtIPHB5I_6N0DwyFICe5Lms3GPlLrfHclk1u3p8H_-CwwgzzUsgw1lrxdZtKGJAjvkzMt1gi8OmJiMzzarsHHxAWZuQUA_yj476pB6OeXWUYr8q98CU0sE97g4C1WKGPxfHFFP57udJK7Ajj4Gyi2PH7C8reVkTKAueR3ddXrneNyM6hevxR155altFcMAlJWXL4UUe08-s43YHoGeTe_XCXgguxiyneBFHjoW9vSYwr1e8R8D-hMoeiW1eaqlWJRBZP9ma7ZkfOyTclf4w-zMzX8GLQ13HfCwAHrsOPFuSIIzqSCP4GU4aoWwgsA4U_H_WckuqfprG9-Ow-Hk85s1wvw9oevbtOeLRyrJQg26h08yh6potnTKpjNUNSVGpt1Ye2LqQG5KqbMiVlJc02XyPnMvRWFsottGmWS0JNY7heoK9WkhkCwA9E_U1iirlqvY_JfW_Sfn-MFqOhVgSajzRcn-u1ZWd7yX46YfZCoQJaxDImrKc_tm9qTcvci0fmnn_TrzyU1m6Z7OVXWILI63mt3pPUbRaHOH0MBtPLDRo5lPKWlU0bxiyZz80-ldHKoXnfJDqChxzyPbyTxV9Zso3U0Q51diFWlu13v1bR0dYTljvB6iSsZNIEo3rP4n0rGRxrK5wUxQbt2qnMZykGgFYi1O9U7qkeiCLfAsRFE';
+const PRINTIFY_API = 'https://api.printify.com/v1';
+const PER_PAGE = 8;
+let allProducts = [], currentPage = 1;
+
+emailjs.init('ZV8_e5cRULOLRdUIK');
+
+fetch('https://ipapi.co/json/').then(r=>r.ok?r.json():Promise.reject()).then(d=>{document.getElementById('user-country').textContent='Pays : '+(d.country_name||'Inconnu')}).catch(()=>{document.getElementById('user-country').textContent='Pays : Inconnu'});
+
+const hamburger=document.getElementById('hamburger'),nav=document.getElementById('main-nav');
+hamburger.addEventListener('click',()=>{const o=nav.classList.toggle('open');hamburger.classList.toggle('open',o);hamburger.setAttribute('aria-expanded',o)});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false')}));
+
+const banner=document.getElementById('cookie-banner'),modal=document.getElementById('cookie-modal');
+function hideBanner(){banner.classList.add('hidden');setTimeout(()=>banner.style.display='none',450)}
+function acceptAllCookies(){localStorage.setItem('sp_cookie_consent',JSON.stringify({ads:true,analytics:true,ts:Date.now()}));hideBanner();modal.classList.remove('open')}
+function refuseCookies(){localStorage.setItem('sp_cookie_consent',JSON.stringify({ads:false,analytics:false,ts:Date.now()}));hideBanner()}
+function openCookieModal(){modal.classList.add('open')}
+function savePreferences(){localStorage.setItem('sp_cookie_consent',JSON.stringify({ads:document.getElementById('pref-ads').checked,analytics:document.getElementById('pref-analytics').checked,ts:Date.now()}));hideBanner();modal.classList.remove('open')}
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
+if(localStorage.getItem('sp_cookie_consent'))banner.style.display='none';
+
+function esc(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function stripHtml(s){return s.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim()}
+
+function formatPrice(variants){
+  if(!variants||!variants.length)return'';
+  const prices=variants.map(v=>v.price).filter(p=>p>0);
+  if(!prices.length)return'';
+  return'A partir de '+(Math.min(...prices)/100).toFixed(2).replace('.',',')+'&nbsp;EUR';
+}
+function getImg(product){
+  if(product.images&&product.images.length>0){
+    const p=product.images.find(i=>i.is_default)||product.images[0];
+    return p.src;
+  }
+  return'https://cdn-icons-png.flaticon.com/512/1829/1829583.png';
+}
+function renderProducts(products){
+  const grid=document.getElementById('products-grid');
+  const sub=document.getElementById('products-subtitle');
+  grid.innerHTML='';
+  if(!products.length){
+    grid.innerHTML='<div class="products-error"><div class="err-icon">&#x1F4E6;</div><p>Aucun produit trouve dans cette boutique.<br>Ajoutez des produits depuis votre <a href="https://printify.com/app/products" target="_blank" rel="noopener">espace Printify</a>.</p></div>';
+    sub.textContent='';return;
+  }
+  sub.textContent=allProducts.length+' produit'+(allProducts.length>1?'s':'')+' disponible'+(allProducts.length>1?'s':'');
+  products.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className='product-card';
+    const desc=p.description?stripHtml(p.description):'';
+    card.innerHTML='<div class="product-card-img-wrap"><img src="'+esc(getImg(p))+'" alt="'+esc(p.title)+'" loading="lazy">'+(i<3?'<span class="product-badge">Nouveau</span>':'')+'</div><div class="product-info"><h3>'+esc(p.title)+'</h3><p>'+esc(desc.substring(0,80))+(desc.length>80?'...':'')+'</p><div class="product-footer"><span class="product-price">'+formatPrice(p.variants)+'</span><a href="https://printify.com/app/products/'+esc(p.id)+'" target="_blank" rel="noopener" class="product-btn">Voir</a></div></div>';
+    grid.appendChild(card);
+  });
+}
+function renderPagination(total){
+  const pag=document.getElementById('pagination');
+  const tp=Math.ceil(total/PER_PAGE);
+  if(tp<=1){pag.style.display='none';return}
+  pag.style.display='flex';pag.innerHTML='';
+  const add=(label,page,active)=>{
+    const btn=document.createElement('button');
+    btn.className='page-btn'+(active?' active':'');
+    btn.textContent=label;
+    if(!active)btn.addEventListener('click',()=>{currentPage=page;showPage(page);window.scrollTo({top:document.getElementById('produits').offsetTop-80,behavior:'smooth'})});
+    pag.appendChild(btn);
+  };
+  if(currentPage>1)add('Prec.',currentPage-1,false);
+  for(let i=1;i<=tp;i++)add(String(i),i,i===currentPage);
+  if(currentPage<tp)add('Suiv.',currentPage+1,false);
+}
+function showPage(page){
+  currentPage=page;
+  const start=(page-1)*PER_PAGE;
+  renderProducts(allProducts.slice(start,start+PER_PAGE));
+  renderPagination(allProducts.length);
+}
+function showSkeleton(v){
+  document.getElementById('products-skeleton').style.display=v?'grid':'none';
+  document.getElementById('products-grid').style.display=v?'none':'grid';
+}
+function showError(msg){
+  showSkeleton(false);
+  document.getElementById('products-subtitle').textContent='';
+  document.getElementById('products-grid').innerHTML='<div class="products-error"><div class="err-icon">&#x26A0;</div><p>'+msg+'</p></div>';
+}
+
+async function loadProducts(){
+  try{
+    const shopsRes=await fetch(PRINTIFY_API+'/shops.json',{headers:{'Authorization':'Bearer '+PRINTIFY_TOKEN,'Content-Type':'application/json'}});
+    if(!shopsRes.ok)throw new Error('HTTP '+shopsRes.status);
+    const shopsData=await shopsRes.json();
+    const shops=Array.isArray(shopsData)?shopsData:(shopsData.data||[]);
+    if(!shops.length){showError('Aucune boutique Printify trouvee. <a href="https://printify.com/app/dashboard" target="_blank" rel="noopener">Creez votre boutique</a>.');return}
+    const shopId=shops[0].id;
+    let page=1,hasMore=true;
+    allProducts=[];
+    while(hasMore){
+      const r=await fetch(PRINTIFY_API+'/shops/'+shopId+'/products.json?limit=100&page='+page,{headers:{'Authorization':'Bearer '+PRINTIFY_TOKEN}});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      const d=await r.json();
+      const items=d.data||d||[];
+      allProducts=allProducts.concat(items);
+      hasMore=items.length===100;
+      page++;
+      if(page>10)break;
     }
-  </script>
+    showSkeleton(false);
+    if(!allProducts.length){showError('Aucun produit publie. Ajoutez des produits dans votre <a href="https://printify.com/app/products" target="_blank" rel="noopener">espace Printify</a>.');return}
+    showPage(1);
+    document.getElementById('pagination').style.display='flex';
+  }catch(err){
+    console.error(err);
+    if(err.message&&(err.message.includes('Failed to fetch')||err.message.includes('NetworkError')||err.message.includes('CORS'))){
+      showError('L\'API Printify ne peut pas etre appelee directement depuis ce navigateur (restriction CORS).<br><br>Solution : deployez un proxy serverless (Netlify Functions ou Vercel) devant l\'API Printify, ou consultez la <a href="https://developers.printify.com" target="_blank" rel="noopener">documentation Printify</a>.');
+    }else{
+      showError('Erreur lors du chargement des produits ('+esc(err.message)+').');
+    }
+  }
+}
 
+const form=document.getElementById('boost-form'),startBtn=document.getElementById('startBtn'),msgEl=document.getElementById('boost-msg');
+const TARGET_URL=startBtn.dataset.targetUrl||'https://shortox.com/8znYguB';
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(document.getElementById('hp_field').value!=='')return;
+  startBtn.disabled=true;startBtn.textContent='Envoi en cours...';
+  const fd={name:document.getElementById('userName').value.trim(),email:document.getElementById('userEmail').value.trim(),url:document.getElementById('videoURL').value.trim(),country:document.getElementById('user-country').textContent.replace('Pays : ','')};
+  const nw=window.open('about:blank','_blank');
+  try{if(nw)nw.opener=null}catch(e){}
+  emailjs.send('service_zguljkv','template_4ouweaf',fd)
+    .then(()=>{showBoostMsg('Demande envoyee ! Nous vous recontactons des la reprise du service.','success');form.reset()})
+    .catch(()=>{showBoostMsg('Erreur lors de l\'envoi. Veuillez reessayer.','error')})
+    .finally(()=>{
+      try{if(nw)nw.location.href=TARGET_URL;else window.open(TARGET_URL,'_blank')}catch(e){}
+      startBtn.disabled=false;
+      startBtn.innerHTML='Envoyer ma demande &mdash; <strong>Suivez les instructions</strong>';
+    });
+  setTimeout(()=>{try{if(nw&&nw.location.href==='about:blank')nw.location.href=TARGET_URL}catch(e){}},3000);
+});
+function showBoostMsg(text,type){
+  msgEl.textContent=text;msgEl.className='show';
+  msgEl.style.color=type==='success'?'#065f46':'#991b1b';
+  msgEl.style.background=type==='success'?'#d1fae5':'#fee2e2';
+  setTimeout(()=>{msgEl.className='';msgEl.textContent='';msgEl.style.background='transparent'},8000);
+}
+
+loadProducts();
+</script>
 </body>
 </html>
