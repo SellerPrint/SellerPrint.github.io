@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const path = req.query.path || "/v1/shops.json";
   const url = `https://api.printify.com${path}`;
 
@@ -13,4 +13,4 @@ export default async function handler(req, res) {
 
   const data = await response.json();
   res.status(response.status).json(data);
-}
+};
