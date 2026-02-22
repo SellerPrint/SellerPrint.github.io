@@ -358,8 +358,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-const PRINTIFY_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzN2Q0YmQzMDM1ZmUxMWU5YTgwM2FiN2VlYjNjY2M5NyIsImp0aSI6Ijc3NzRiODI4MjY5Yjc5MWU2OWY2YmM1YTg5Y2YxZTBhZTI2ZDU0ZTFhYjk3MmMzZDU0YzkxNDhhZmMyNmJhNjZiZmNiNmE3ZjE5MzQxMjQ4IiwiaWF0IjoxNzcxNzc2NTAxLjYwMTY2OSwibmJmIjoxNzcxNzc2NTAxLjYwMTY3MywiZXhwIjoxODAzMzEyNTAxLjU5Mzg5OSwic3ViIjoiMjU3NjM0OTkiLCJzY29wZXMiOlsic2hvcHMubWFuYWdlIiwic2hvcHMucmVhZCIsImNhdGFsb2cucmVhZCIsIm9yZGVycy5yZWFkIiwib3JkZXJzLndyaXRlIiwicHJvZHVjdHMucmVhZCIsInByb2R1Y3RzLndyaXRlIiwid2ViaG9va3MucmVhZCIsIndlYmhvb2tzLndyaXRlIiwidXBsb2Fkcy5yZWFkIiwidXBsb2Fkcy53cml0ZSIsInByaW50X3Byb3ZpZGVycy5yZWFkIiwidXNlci5pbmZvIl19.fzZtIPHB5I_6N0DwyFICe5Lms3GPlLrfHclk1u3p8H_-CwwgzzUsgw1lrxdZtKGJAjvkzMt1gi8OmJiMzzarsHHxAWZuQUA_yj476pB6OeXWUYr8q98CU0sE97g4C1WKGPxfHFFP57udJK7Ajj4Gyi2PH7C8reVkTKAueR3ddXrneNyM6hevxR155altFcMAlJWXL4UUe08-s43YHoGeTe_XCXgguxiyneBFHjoW9vSYwr1e8R8D-hMoeiW1eaqlWJRBZP9ma7ZkfOyTclf4w-zMzX8GLQ13HfCwAHrsOPFuSIIzqSCP4GU4aoWwgsA4U_H_WckuqfprG9-Ow-Hk85s1wvw9oevbtOeLRyrJQg26h08yh6potnTKpjNUNSVGpt1Ye2LqQG5KqbMiVlJc02XyPnMvRWFsottGmWS0JNY7heoK9WkhkCwA9E_U1iirlqvY_JfW_Sfn-MFqOhVgSajzRcn-u1ZWd7yX46YfZCoQJaxDImrKc_tm9qTcvci0fmnn_TrzyU1m6Z7OVXWILI63mt3pPUbRaHOH0MBtPLDRo5lPKWlU0bxiyZz80-ldHKoXnfJDqChxzyPbyTxV9Zso3U0Q51diFWlu13v1bR0dYTljvB6iSsZNIEo3rP4n0rGRxrK5wUxQbt2qnMZykGgFYi1O9U7qkeiCLfAsRFE';
-const PRINTIFY_API = 'https://api.printify.com/v1';
+const PRINTIFY_API = '/api/printify';
 const PER_PAGE = 8;
 let allProducts = [], currentPage = 1;
 
@@ -447,7 +446,7 @@ function showError(msg){
 
 async function loadProducts(){
   try{
-    const shopsRes=await fetch(PRINTIFY_API+'/shops.json',{headers:{'Authorization':'Bearer '+PRINTIFY_TOKEN,'Content-Type':'application/json'}});
+    const shopsRes=await fetch(PRINTIFY_API+'?path=/v1/shops.json');
     if(!shopsRes.ok)throw new Error('HTTP '+shopsRes.status);
     const shopsData=await shopsRes.json();
     const shops=Array.isArray(shopsData)?shopsData:(shopsData.data||[]);
@@ -456,7 +455,7 @@ async function loadProducts(){
     let page=1,hasMore=true;
     allProducts=[];
     while(hasMore){
-      const r=await fetch(PRINTIFY_API+'/shops/'+shopId+'/products.json?limit=100&page='+page,{headers:{'Authorization':'Bearer '+PRINTIFY_TOKEN}});
+      const r=await fetch(PRINTIFY_API+'?path=/v1/shops/'+shopId+'/products.json%3Flimit%3D100%26page%3D'+page);
       if(!r.ok)throw new Error('HTTP '+r.status);
       const d=await r.json();
       const items=d.data||d||[];
