@@ -165,13 +165,18 @@
     .boost-section h2{font-size:1.65rem;font-weight:800;margin-bottom:.4rem}
     .boost-notice{background:#fff8e1;border-left:4px solid #f59e0b;padding:.9rem 1.2rem;border-radius:0 10px 10px 0;margin:1rem 0 1.5rem;font-size:.88rem;color:#78350f;line-height:1.6}
     #boost-form{display:flex;flex-direction:column;gap:.9rem}
+    #boost-form.blocked{pointer-events:none;opacity:.6}
     #boost-form input{padding:.9rem 1.3rem;border-radius:12px;border:2px solid #e5e7eb;font-family:'Poppins',sans-serif;font-size:.93rem;outline:none;transition:border-color .2s}
     #boost-form input:focus{border-color:var(--primary)}
+    #boost-form input:disabled{background:#f5f5f5;color:#999;border-color:#d1d5db;cursor:not-allowed}
     #boost-form button{margin-top:.4rem;padding:1.05rem;border-radius:12px;background:var(--gradient);color:#fff;border:none;font-weight:700;font-size:.97rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity .2s,transform .2s}
     #boost-form button:hover:not(:disabled){opacity:.91;transform:translateY(-1px)}
-    #boost-form button:disabled{opacity:.6;cursor:not-allowed}
+    #boost-form button:disabled{opacity:.6;cursor:not-allowed;background:#ccc}
     #boost-msg{margin-top:.8rem;padding:.8rem 1.2rem;border-radius:10px;font-weight:600;font-size:.93rem;display:none}
     #boost-msg.show{display:block}
+    .security-warning{background:#fee2e2;border:2px solid #f87171;border-radius:12px;padding:1.2rem;margin:1rem 0;text-align:center;font-weight:600;color:#991b1b}
+    .security-warning::before{content:"⚠️ ";font-size:1.2em}
+    .security-warning button{background:#ef4444;color:#fff;border:none;padding:.5rem 1rem;border-radius:8px;cursor:pointer;margin-top:.5rem;font-weight:600}
 
     /* CONTACT */
     .legal-section{background:#fff;border-radius:var(--r);padding:1.8rem;margin:1.5rem 0;box-shadow:var(--shadow);line-height:1.65}
@@ -304,10 +309,10 @@
     <h2 class="section-title">Pourquoi SellerPrint ?</h2>
     <p class="section-subtitle">Nous fusionnons l'art, la technologie et la personnalisation pour creer des produits uniques.</p>
     <div class="why-grid">
-      <div class="why-card"><div class="why-icon">&#x26A1;</div><h3>Livraison rapide</h3><p>Production en 2-3 jours ouvres, expedition vers toute l'Europe.</p></div>
-      <div class="why-card"><div class="why-icon">&#x1F3A8;</div><h3>Qualite premium</h3><p>Impression haute definition sur des materiaux soigneusement selectionnes.</p></div>
-      <div class="why-card"><div class="why-icon">&#x267B;</div><h3>Eco-responsable</h3><p>Produits fabriques a la demande, zero stock inutile, zero gaspillage.</p></div>
-      <div class="why-card"><div class="why-icon">&#x1F6E1;</div><h3>Paiement securise</h3><p>Transactions protegees. Satisfait ou rembourse garanti.</p></div>
+      <div class="why-card"><div class="why-icon">⚡</div><h3>Livraison rapide</h3><p>Production en 2-3 jours ouvres, expedition vers toute l'Europe.</p></div>
+      <div class="why-card"><div class="why-icon">🎨</div><h3>Qualite premium</h3><p>Impression haute definition sur des materiaux soigneusement selectionnes.</p></div>
+      <div class="why-card"><div class="why-icon">♻️</div><h3>Eco-responsable</h3><p>Produits fabriques a la demande, zero stock inutile, zero gaspillage.</p></div>
+      <div class="why-card"><div class="why-icon">🛡️</div><h3>Paiement securise</h3><p>Transactions protegees. Satisfait ou rembourse garanti.</p></div>
     </div>
   </section>
 
@@ -321,10 +326,15 @@
 
   <section id="boost" class="boost-section">
     <span class="boost-badge">Service Partenaire</span>
-    <h2>Boostez vos vues &amp; likes TikTok</h2>
+    <h2>Boostez vos vues & likes TikTok</h2>
     <p style="color:#666;margin-bottom:.4rem">Augmentez la visibilite de vos videos TikTok grace a notre service partenaire.</p>
     <div class="boost-notice">
       <strong>Information :</strong> Ce service est momentanement <strong>indisponible</strong> chez notre prestataire partenaire. Soumettez votre demande, nous vous contactons des la reprise. Vos donnees sont utilisees <em>uniquement</em> pour traiter votre demande.
+    </div>
+    <div id="security-warning" class="security-warning" style="display:none;">
+      <div>⚠️ <strong>Accès restreint détecté !</strong></div>
+      <div>Veuillez <strong>désactiver votre VPN, bloqueur de publicités et/ou robot</strong> pour utiliser ce formulaire.</div>
+      <button onclick="checkSecurity()">Vérifier à nouveau</button>
     </div>
     <form id="boost-form">
       <input id="userName" name="name" type="text" placeholder="Votre nom" required>
@@ -332,7 +342,7 @@
       <input id="videoURL" name="url" type="url" placeholder="URL de votre video TikTok" required>
       <input id="hp_field" name="hp_field" type="text" style="display:none !important;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
       <button id="startBtn" type="submit" data-target-url="https://omg10.com/4/10427937">
-        Envoyer ma demande &#x1F680; &mdash; <strong>Suivez les instructions a l'ecran</strong>
+        Envoyer ma demande 🚀 — <strong>Suivez les instructions a l'ecran</strong>
       </button>
     </form>
     <div id="boost-msg"></div>
@@ -349,7 +359,7 @@
 </main>
 
 <footer>
-  <p>&copy; 2025 SellerPrint &mdash; Cree avec passion</p>
+  <p>&copy; 2025 SellerPrint — Cree avec passion</p>
   <div id="user-country">Pays : Chargement...</div>
   <div style="margin-top:1rem">
     <a href="#contact">Contact</a>
@@ -363,6 +373,179 @@
 const PRINTIFY_API = '/api/printify';
 const PER_PAGE = 8;
 let allProducts = [], currentPage = 1;
+
+// Système de détection de sécurité
+let securityCheckPassed = false;
+let securityChecks = {
+  vpn: false,
+  adblock: false,
+  bot: false
+};
+
+function detectVPN() {
+  return new Promise((resolve) => {
+    // Détection VPN par User-Agent + WebRTC + Canvas fingerprinting
+    const ua = navigator.userAgent.toLowerCase();
+    const vpnIndicators = [
+      'vpn', 'proxy', 'tor', 'hide', 'shadowsocks', 'outline', 'wireguard',
+      'nordvpn', 'expressvpn', 'surfshark', 'cyberghost', 'privatevpn'
+    ];
+    
+    // WebRTC leak detection
+    const webrtcTest = () => {
+      return new Promise((res) => {
+        const pc = new RTCPeerConnection({iceServers:[]});
+        pc.createDataChannel('');
+        pc.createOffer().then(offer => pc.setLocalDescription(offer));
+        pc.onicecandidate = (ice) => {
+          if (!ice.candidate) {
+            const ipPattern = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g;
+            const ips = pc.localDescription.sdp.match(ipPattern) || [];
+            const privateIPs = ips.filter(ip => 
+              ip.startsWith('10.') || ip.startsWith('172.') || ip.startsWith('192.168.')
+            );
+            res(privateIPs.length === 0 && ips.length > 0);
+            pc.close();
+          }
+        };
+      });
+    };
+
+    // Canvas fingerprinting pour VPN connus
+    const canvasTest = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.textBaseline = 'top';
+      ctx.font = '14px Arial';
+      ctx.fillText('VPN Test', 2, 2);
+      return canvas.toDataURL() === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...'; // Hash simplifié
+    };
+
+    Promise.all([webrtcTest(), canvasTest()]).then(([webrtcLeak, canvasHash]) => {
+      const uaMatch = vpnIndicators.some(ind => ua.includes(ind));
+      resolve(uaMatch || webrtcLeak || !canvasHash);
+    }).catch(() => resolve(false));
+  });
+}
+
+function detectAdblock() {
+  return new Promise((resolve) => {
+    // Test 1: AdSense
+    const adsenseTest = document.createElement('div');
+    adsenseTest.innerHTML = '<ins class="adsbygoogle" style="display:inline-block;width:1px;height:1px"></ins>';
+    document.body.appendChild(adsenseTest);
+    
+    setTimeout(() => {
+      const blocked = adsenseTest.children[0].style.display === 'none' || 
+                     !adsenseTest.children[0].offsetHeight;
+      document.body.removeChild(adsenseTest);
+      
+      // Test 2: Google fonts + Monetag
+      const testScripts = ['pagead2.googlesyndication.com', 'al5sm.com', '3nbf4.com'];
+      const blockedScripts = testScripts.some(domain => {
+        const img = new Image();
+        img.src = `https://${domain}/test.png?${Date.now()}`;
+        return new Promise(res => {
+          img.onerror = () => res(true);
+          img.onload = () => res(false);
+          setTimeout(() => res(false), 1000);
+        });
+      });
+      
+      resolve(blocked || blockedScripts);
+    }, 500);
+  });
+}
+
+function detectBot() {
+  // Détection robot sans API key
+  const tests = [];
+  
+  // Test 1: Timing de chargement anormal
+  tests.push(performance.now() < 1000); // Chargé trop vite
+  
+  // Test 2: Absence de mouvements de souris
+  let mouseMoves = 0;
+  document.addEventListener('mousemove', () => mouseMoves++, {once: true});
+  setTimeout(() => tests.push(mouseMoves === 0), 2000);
+  
+  // Test 3: Taille d'écran suspecte
+  tests.push(screen.width < 300 || screen.height < 300);
+  
+  // Test 4: Plugins manquants
+  tests.push((navigator.plugins || []).length === 0 && (navigator.languages || []).length === 0);
+  
+  // Test 5: Automatisation (WebDriver)
+  tests.push(!!navigator.webdriver || window.outerHeight === 0);
+  
+  // Test 6: Canvas fingerprinting basique
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#f60';
+  ctx.fillRect(125, 1, 62, 20);
+  tests.push(canvas.toDataURL() === 'data:image/png;base64,iVBORw0KGgo...'); // Bot canvas
+  
+  return Promise.all(tests).then(results => results.some(Boolean));
+}
+
+async function checkSecurity() {
+  const warning = document.getElementById('security-warning');
+  const form = document.getElementById('boost-form');
+  
+  try {
+    document.body.style.cursor = 'wait';
+    
+    // Réinitialiser
+    Object.keys(securityChecks).forEach(key => securityChecks[key] = false);
+    securityCheckPassed = false;
+    warning.style.display = 'none';
+    form.classList.remove('blocked');
+    document.querySelectorAll('#boost-form input, #boost-form button').forEach(el => {
+      el.disabled = false;
+    });
+    
+    // Tests parallèles
+    const [vpnDetected, adblockDetected, botDetected] = await Promise.all([
+      detectVPN(),
+      detectAdblock(),
+      detectBot()
+    ]);
+    
+    securityChecks.vpn = vpnDetected;
+    securityChecks.adblock = adblockDetected;
+    securityChecks.bot = botDetected;
+    
+    if (vpnDetected || adblockDetected || botDetected) {
+      securityCheckPassed = false;
+      form.classList.add('blocked');
+      warning.innerHTML = `
+        <div>⚠️ <strong>Accès restreint détecté !</strong></div>
+        <div>${vpnDetected ? 'VPN détecté, ' : ''}${adblockDetected ? 'Bloqueur de pub détecté, ' : ''}${botDetected ? 'Activité robot détectée' : ''}</div>
+        <div>Veuillez <strong>désactiver</strong> pour utiliser le formulaire.</div>
+        <button onclick="checkSecurity()">Vérifier à nouveau</button>
+      `;
+      warning.style.display = 'block';
+      
+      // Bloquer tous les inputs
+      document.querySelectorAll('#boost-form input, #boost-form button').forEach(el => {
+        el.disabled = true;
+      });
+    } else {
+      securityCheckPassed = true;
+      form.classList.remove('blocked');
+    }
+  } catch (e) {
+    console.error('Security check failed:', e);
+    securityCheckPassed = false;
+  } finally {
+    document.body.style.cursor = 'default';
+  }
+}
+
+// Lancer la vérification au chargement
+window.addEventListener('load', () => {
+  setTimeout(checkSecurity, 1000);
+});
 
 emailjs.init('ZV8_e5cRULOLRdUIK');
 
@@ -382,7 +565,7 @@ modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('o
 if(localStorage.getItem('sp_cookie_consent'))banner.style.display='none';
 
 function esc(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function stripHtml(s){return s.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim()}
+function stripHtml(s){return s.replace(/<[^>]*>/g,'').replace(/\\s+/g,' ').trim()}
 
 function formatPrice(variants){
   if(!variants||!variants.length)return'';
@@ -402,7 +585,7 @@ function renderProducts(products){
   const sub=document.getElementById('products-subtitle');
   grid.innerHTML='';
   if(!products.length){
-    grid.innerHTML='<div class="products-error"><div class="err-icon">&#x1F4E6;</div><p>Aucun produit trouve dans cette boutique.<br>Ajoutez des produits depuis votre <a href="https://printify.com/app/products" target="_blank" rel="noopener">espace Printify</a>.</p></div>';
+    grid.innerHTML='<div class="products-error"><div class="err-icon">📦</div><p>Aucun produit trouve dans cette boutique.<br>Ajoutez des produits depuis votre <a href="https://printify.com/app/products" target="_blank" rel="noopener">espace Printify</a>.</p></div>';
     sub.textContent='';return;
   }
   sub.textContent=allProducts.length+' produit'+(allProducts.length>1?'s':'')+' disponible'+(allProducts.length>1?'s':'');
@@ -443,7 +626,7 @@ function showSkeleton(v){
 function showError(msg){
   showSkeleton(false);
   document.getElementById('products-subtitle').textContent='';
-  document.getElementById('products-grid').innerHTML='<div class="products-error"><div class="err-icon">&#x26A0;</div><p>'+msg+'</p></div>';
+  document.getElementById('products-grid').innerHTML='<div class="products-error"><div class="err-icon">⚠️</div><p>'+msg+'</p></div>';
 }
 
 async function loadProducts(){
@@ -473,7 +656,7 @@ async function loadProducts(){
   }catch(err){
     console.error(err);
     if(err.message&&(err.message.includes('Failed to fetch')||err.message.includes('NetworkError')||err.message.includes('CORS'))){
-      showError('L\'API Printify ne peut pas etre appelee directement depuis ce navigateur (restriction CORS).<br><br>Solution : deployez un proxy serverless (Netlify Functions ou Vercel) devant l\'API Printify, ou consultez la <a href="https://developers.printify.com" target="_blank" rel="noopener">documentation Printify</a>.');
+      showError('L\\'API Printify ne peut pas etre appelee directement depuis ce navigateur (restriction CORS).<br><br>Solution : deployez un proxy serverless (Netlify Functions ou Vercel) devant l\\'API Printify, ou consultez la <a href="https://developers.printify.com" target="_blank" rel="noopener">documentation Printify</a>.');
     }else{
       showError('Erreur lors du chargement des produits ('+esc(err.message)+').');
     }
@@ -482,16 +665,24 @@ async function loadProducts(){
 
 const form=document.getElementById('boost-form'),startBtn=document.getElementById('startBtn'),msgEl=document.getElementById('boost-msg');
 const TARGET_URL=startBtn.dataset.targetUrl||'https://shortox.com/8znYguB';
+
 form.addEventListener('submit',function(e){
   e.preventDefault();
-  if(document.getElementById('hp_field').value!=='')return;
+  
+  // Vérification sécurité avant soumission
+  if (!securityCheckPassed || document.getElementById('hp_field').value !== '') {
+    e.stopPropagation();
+    checkSecurity();
+    return false;
+  }
+  
   startBtn.disabled=true;startBtn.textContent='Envoi en cours...';
   const fd={name:document.getElementById('userName').value.trim(),email:document.getElementById('userEmail').value.trim(),url:document.getElementById('videoURL').value.trim(),country:document.getElementById('user-country').textContent.replace('Pays : ','')};
   const nw=window.open('about:blank','_blank');
   try{if(nw)nw.opener=null}catch(e){}
   emailjs.send('service_zguljkv','template_4ouweaf',fd)
     .then(()=>{showBoostMsg('Demande envoyee ! Nous vous recontactons des la reprise du service.','success');form.reset()})
-    .catch(()=>{showBoostMsg('Erreur lors de l\'envoi. Veuillez reessayer.','error')})
+    .catch(()=>{showBoostMsg('Erreur lors de l\\'envoi. Veuillez reessayer.','error')})
     .finally(()=>{
       try{if(nw)nw.location.href=TARGET_URL;else window.open(TARGET_URL,'_blank')}catch(e){}
       startBtn.disabled=false;
