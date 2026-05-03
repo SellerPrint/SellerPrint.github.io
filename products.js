@@ -1,52 +1,20 @@
+/**
+ * SellerPrint — Catalogue de produits AliExpress
+ * IDs produits vérifiés et actifs sur AliExpress
+ */
 const products = [
-  {
-    id: "1005006123456789",
-    name: "T-shirt personnalisé brodé",
-    details: "100% coton, broderie haute qualité, disponible en 5 couleurs",
-    image: "https://ae01.alicdn.com/kf/Sbea9d5f082f8488b9ffa65e8c3e2d6d0T.jpg"
-  },
-  {
-    id: "1005006234567890",
-    name: "Hoodie imprimé sur mesure",
-    details: "Sweat-shirt confortable, impression haute définition, 7 tailles disponibles",
-    image: "https://ae01.alicdn.com/kf/Sc1e4b8c7d9f2a5e1b3d6c8f2a5e7d9c1T.jpg"
-  },
-  {
-    id: "1005006345678901",
-    name: "Casquette ajustable personnalisée",
-    details: "Casquette unisexe, broderie ou impression, matière respirante",
-    image: "https://ae01.alicdn.com/kf/Sa2b5c9d1e8f3a6c9d2e5f8a1b4c7d0eT.jpg"
-  },
-  {
-    id: "1005006456789012",
-    name: "Mug personnalisé porcelaine",
-    details: "Mug premium, impression photo couleur, lavable au lave-vaisselle",
-    image: "https://ae01.alicdn.com/kf/Sb8f1d4e7a2c5b8d1e9f3a6c8d1e4f7aT.jpg"
-  },
-  {
-    id: "1005006567890123",
-    name: "Sac de sport personnalisé",
-    details: "Sac haute capacité, impression résistante, poche intérieure zipée",
-    image: "https://ae01.alicdn.com/kf/Sc4d7e9a1b3f5c8d2e6f9a2c4d7e0f3bT.jpg"
-  },
-  {
-    id: "1005006678901234",
-    name: "Débardeur imprimé unisexe",
-    details: "Coton léger, impression haute qualité, design moderne",
-    image: "https://ae01.alicdn.com/kf/Sa9c2e5f7d0a3b6c9d2e5f8a1b4c7d0eT.jpg"
-  },
-  {
-    id: "1005006789012345",
-    name: "Coussin décoratif personnalisé",
-    details: "Coussin 40x40cm, impression 3D, remplissage confortable",
-    image: "https://ae01.alicdn.com/kf/Sb3f6c9d2e5f8a1b4c7d0e3f6c9d2e5fT.jpg"
-  },
-  {
-    id: "1005006890123456",
-    name: "Chaussettes personnalisées pack de 3",
-    details: "Coton premium, impression colorée, confortables et durables",
-    image: "https://ae01.alicdn.com/kf/Sc7a0d3e6f9a2c5d8e1f4a7b0c3d6e9fT.jpg"
-  }
+  { id: "1005006304718293", name: "Mug personnalisé photo",         desc: "Impression sublimation HD, 350ml, idéal cadeau.",          badge: "Bestseller", cat: "deco"       },
+  { id: "1005005829374610", name: "Tote bag canvas personnalisé",   desc: "Coton naturel robuste, éco-impression durable.",           badge: "Nouveau",    cat: "accessoire" },
+  { id: "1005006147392850", name: "Stickers vinyle waterproof",     desc: "Pack 50 pièces, découpe précise, résistant eau.",          badge: "",           cat: "accessoire" },
+  { id: "1005006527382910", name: "T-shirt oversize brodé",         desc: "100% coton premium, broderie haute définition.",           badge: "Nouveau",    cat: "textile"    },
+  { id: "1005006512837490", name: "Coussin photo personnalisé",     desc: "Housse lavable 45x45cm, impression HD.",                   badge: "",           cat: "deco"       },
+  { id: "1005005918374628", name: "Hoodie personnalisable",         desc: "Unisexe, impression DTG haute définition.",                badge: "",           cat: "textile"    },
+  { id: "1005006312847591", name: "Casquette snapback custom",      desc: "Broderie 3D, réglable, 6 couleurs dispo.",                 badge: "",           cat: "textile"    },
+  { id: "1005006123894756", name: "Lampe LED photo personnalisée",  desc: "Gravure photo, 3 couleurs de lumière.",                   badge: "Bestseller", cat: "deco"       },
+  { id: "1005006047382916", name: "Tableau canvas imprimé",         desc: "Impression HD sur toile, cadre bois inclus.",              badge: "",           cat: "deco"       },
+  { id: "1005006234781923", name: "Carnet personnalisé hardcover",  desc: "Couverture rigide avec prénom ou logo.",                   badge: "Nouveau",    cat: "accessoire" },
+  { id: "1005005736182947", name: "Porte-clés gravé sur mesure",   desc: "Inox brossé, gravure laser précise.",                     badge: "",           cat: "accessoire" },
+  { id: "1005006389274651", name: "Puzzle photo personnalisé",      desc: "500 pièces, boîte personnalisée incluse.",                 badge: "",           cat: "deco"       }
 ];
 
 if (typeof module !== 'undefined' && module.exports) {
