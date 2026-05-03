@@ -264,6 +264,20 @@
     <h2 class="section-title">Nos créations</h2>
     <p class="section-subtitle" id="products-subtitle">Découvrez notre sélection de produits personnalisables</p>
 
+    <!-- ── FILTRES + RECHERCHE ── -->
+    <div style="display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1.5rem;justify-content:space-between;">
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;" id="cat-filters">
+        <button class="page-btn active" onclick="filterProducts('all',this)">Tous</button>
+        <button class="page-btn" onclick="filterProducts('textile',this)">👕 Textile</button>
+        <button class="page-btn" onclick="filterProducts('deco',this)">🏠 Déco</button>
+        <button class="page-btn" onclick="filterProducts('accessoire',this)">🎁 Accessoires</button>
+      </div>
+      <input id="product-search" type="search" placeholder="🔍 Rechercher un produit…"
+        oninput="searchProducts(this.value)"
+        style="padding:.55rem 1rem;border-radius:10px;border:2px solid #e5e7eb;font-family:'Poppins',sans-serif;font-size:.85rem;outline:none;min-width:200px;transition:border-color .2s"
+        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+    </div>
+
     <!-- Skeleton de chargement -->
     <div class="products-skeleton" id="products-skeleton">
       <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line med"></div><div class="skeleton-line short"></div><div class="skeleton-line med"></div></div></div>
@@ -324,7 +338,7 @@
 
 <!-- ════════════ FOOTER ════════════ -->
 <footer>
-  <p>&copy; 2025 SellerPrint &mdash; Créé avec passion</p>
+  <p>&copy; 2026 SellerPrint &mdash; Créé avec passion</p>
   <div id="user-country">Pays : Chargement...</div>
   <div style="margin-top:1rem">
     <a href="#contact">Contact</a>
@@ -339,20 +353,22 @@
 var AFFILIATE_BASE = 'https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https://www.aliexpress.com/item/';
 var PER_PAGE = 8;
 var currentPage = 1;
+var activeFilter = 'all';
+var activeSearch = '';
 
 var ALL_PRODUCTS = [
-  { id:'1005006304718293', name:'Mug personnalisé photo',        desc:'Impression sublimation HD, 350ml, idéal cadeau.',          img:'https://ae01.alicdn.com/kf/S1a2b3c4d5e6f.jpg', badge:'Bestseller' },
-  { id:'1005005829374610', name:'Tote bag canvas personnalisé',  desc:'Coton naturel robuste, éco-impression.',                   img:'https://ae01.alicdn.com/kf/S2b3c4d5e6f7.jpg', badge:'Nouveau' },
-  { id:'1005006147392850', name:'Stickers vinyle waterproof',    desc:'Pack 50 pièces, découpe précise, résistant eau.',          img:'https://ae01.alicdn.com/kf/S3c4d5e6f7a8.jpg', badge:'' },
-  { id:'1005006527382910', name:'T-shirt oversize brodé',        desc:'100% coton premium, broderie haute définition.',           img:'https://ae01.alicdn.com/kf/S4d5e6f7a8b9.jpg', badge:'Nouveau' },
-  { id:'1005006512837490', name:'Coussin photo personnalisé',    desc:'Housse lavable 45x45cm, impression HD.',                   img:'https://ae01.alicdn.com/kf/S5e6f7a8b9c0.jpg', badge:'' },
-  { id:'1005005918374628', name:'Hoodie personnalisable',        desc:'Unisexe, impression DTG haute définition.',                img:'https://ae01.alicdn.com/kf/S6f7a8b9c0d1.jpg', badge:'' },
-  { id:'1005006312847591', name:'Casquette snapback custom',     desc:'Broderie 3D, réglable, 6 couleurs dispo.',                 img:'https://ae01.alicdn.com/kf/S7a8b9c0d1e2.jpg', badge:'' },
-  { id:'1005006123894756', name:'Lampe LED photo personnalisée', desc:'Graver votre photo, 3 couleurs de lumière.',               img:'https://ae01.alicdn.com/kf/S8b9c0d1e2f3.jpg', badge:'Bestseller' },
-  { id:'1005006047382916', name:'Tableau canvas imprimé',        desc:'Impression HD sur toile, cadre bois inclus.',              img:'https://ae01.alicdn.com/kf/S9c0d1e2f3a4.jpg', badge:'' },
-  { id:'1005006234781923', name:'Carnet personnalisé hardcover', desc:'Couverture rigide avec prénom ou logo.',                   img:'https://ae01.alicdn.com/kf/Sa0d1e2f3b4c.jpg', badge:'Nouveau' },
-  { id:'1005005736182947', name:'Porte-clés gravé sur mesure',   desc:'Inox brossé, gravure laser précise.',                     img:'https://ae01.alicdn.com/kf/Sb1e2f3a4c5d.jpg', badge:'' },
-  { id:'1005006389274651', name:'Puzzle photo personnalisé',     desc:'500 pièces, boîte personnalisée incluse.',                 img:'https://ae01.alicdn.com/kf/Sc2f3a4b5d6e.jpg', badge:'' },
+  { id:'1005006304718293', name:'Mug personnalisé photo',        desc:'Impression sublimation HD, 350ml, idéal cadeau.',          img:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80', badge:'Bestseller', cat:'deco' },
+  { id:'1005005829374610', name:'Tote bag canvas personnalisé',  desc:'Coton naturel robuste, éco-impression.',                   img:'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&q=80', badge:'Nouveau',    cat:'accessoire' },
+  { id:'1005006147392850', name:'Stickers vinyle waterproof',    desc:'Pack 50 pièces, découpe précise, résistant eau.',          img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80', badge:'',           cat:'accessoire' },
+  { id:'1005006527382910', name:'T-shirt oversize brodé',        desc:'100% coton premium, broderie haute définition.',           img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80', badge:'Nouveau',    cat:'textile' },
+  { id:'1005006512837490', name:'Coussin photo personnalisé',    desc:'Housse lavable 45x45cm, impression HD.',                   img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80', badge:'',           cat:'deco' },
+  { id:'1005005918374628', name:'Hoodie personnalisable',        desc:'Unisexe, impression DTG haute définition.',                img:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80', badge:'',           cat:'textile' },
+  { id:'1005006312847591', name:'Casquette snapback custom',     desc:'Broderie 3D, réglable, 6 couleurs dispo.',                 img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80', badge:'',           cat:'textile' },
+  { id:'1005006123894756', name:'Lampe LED photo personnalisée', desc:'Graver votre photo, 3 couleurs de lumière.',               img:'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&q=80', badge:'Bestseller', cat:'deco' },
+  { id:'1005006047382916', name:'Tableau canvas imprimé',        desc:'Impression HD sur toile, cadre bois inclus.',              img:'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&q=80', badge:'',           cat:'deco' },
+  { id:'1005006234781923', name:'Carnet personnalisé hardcover', desc:'Couverture rigide avec prénom ou logo.',                   img:'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&q=80', badge:'Nouveau',    cat:'accessoire' },
+  { id:'1005005736182947', name:'Porte-clés gravé sur mesure',   desc:'Inox brossé, gravure laser précise.',                     img:'https://images.unsplash.com/photo-1622467827417-bbe2237067a9?w=400&q=80', badge:'',           cat:'accessoire' },
+  { id:'1005006389274651', name:'Puzzle photo personnalisé',     desc:'500 pièces, boîte personnalisée incluse.',                 img:'https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&q=80', badge:'',           cat:'deco' },
 ];
 
 function escP(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -407,20 +423,47 @@ function renderPagination(total) {
 
 function showPage(page) {
   currentPage = page;
-  var s = (page - 1) * PER_PAGE;
-  renderProducts(ALL_PRODUCTS.slice(s, s + PER_PAGE));
-  renderPagination(ALL_PRODUCTS.length);
+  refreshGrid();
 }
 
 function loadProducts() {
-  // Simuler un délai de chargement pour le skeleton
   setTimeout(function() {
     document.getElementById('products-skeleton').style.display = 'none';
     document.getElementById('products-grid').style.display = 'grid';
-    document.getElementById('products-subtitle').textContent =
-      ALL_PRODUCTS.length + ' produit' + (ALL_PRODUCTS.length > 1 ? 's' : '') + ' disponible' + (ALL_PRODUCTS.length > 1 ? 's' : '');
-    showPage(1);
+    refreshGrid();
   }, 600);
+}
+
+function getFilteredProducts() {
+  return ALL_PRODUCTS.filter(function(p) {
+    var catOk = (activeFilter === 'all') || (p.cat === activeFilter);
+    var q = activeSearch.toLowerCase();
+    var searchOk = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+    return catOk && searchOk;
+  });
+}
+
+function filterProducts(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('#cat-filters .page-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentPage = 1;
+  refreshGrid();
+}
+
+function searchProducts(val) {
+  activeSearch = val;
+  currentPage = 1;
+  refreshGrid();
+}
+
+function refreshGrid() {
+  var filtered = getFilteredProducts();
+  document.getElementById('products-subtitle').textContent =
+    filtered.length + ' produit' + (filtered.length > 1 ? 's' : '') + ' disponible' + (filtered.length > 1 ? 's' : '');
+  var s = (currentPage - 1) * PER_PAGE;
+  renderProducts(filtered.slice(s, s + PER_PAGE));
+  renderPagination(filtered.length);
 }
 
 loadProducts();
@@ -476,6 +519,18 @@ if (localStorage.getItem('sp_cookie_consent')) banner.style.display = 'none';
 
 <!-- Smart Ads ciblées — doit être après #smart-ads-zone -->
 <script src="smart-ads.js"></script>
+
+<!-- ── BOUTON RETOUR EN HAUT ── -->
+<button id="back-to-top" title="Retour en haut"
+  style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:500;width:46px;height:46px;
+  border-radius:50%;background:var(--gradient);color:#fff;border:none;font-size:1.2rem;
+  cursor:pointer;box-shadow:0 4px 18px rgba(102,126,234,.4);transition:opacity .25s,transform .25s;
+  align-items:center;justify-content:center;">↑</button>
+<script>
+  var btt = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function(){ btt.style.display = window.scrollY > 400 ? 'flex' : 'none'; });
+  btt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+</script>
 
 </body>
 </html>
