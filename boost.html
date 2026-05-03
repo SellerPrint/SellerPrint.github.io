@@ -3,132 +3,597 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Boost Service</title>
+    <title>TikTok Boost Service – SellerPrint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111;
+            --card: #181818;
+            --border: #2a2a2a;
+            --tiktok: #fe2c55;
+            --tiktok2: #25f4ee;
+            --gold: #f5c518;
+            --text: #f0f0f0;
+            --muted: #888;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
+
+        /* ── NAVBAR ── */
         .navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 1em;
-            text-align: center;
+            background: var(--dark);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+        .navbar-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--tiktok), var(--tiktok2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .navbar-tag {
+            font-size: 0.75rem;
+            background: var(--border);
+            color: var(--muted);
+            padding: 4px 10px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ── HERO ── */
         .hero {
-            background-image: url('hero.jpg');
-            height: 300px;
-            background-size: cover;
+            background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(254,44,85,0.18) 0%, transparent 70%),
+                        radial-gradient(ellipse 50% 40% at 90% 60%, rgba(37,244,238,0.1) 0%, transparent 60%),
+                        var(--black);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 40px,
+                rgba(255,255,255,0.015) 40px,
+                rgba(255,255,255,0.015) 41px
+            );
+        }
+        .hero-eyebrow {
+            display: inline-block;
+            background: linear-gradient(90deg, rgba(254,44,85,0.2), rgba(37,244,238,0.2));
+            border: 1px solid rgba(254,44,85,0.3);
+            color: var(--tiktok2);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--tiktok), var(--tiktok2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-sub {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            gap: 0;
+        }
+        .stat {
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            padding: 1.2rem;
+            border-right: 1px solid var(--border);
+        }
+        .stat:last-child { border-right: none; }
+        .stat-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--tiktok), var(--tiktok2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.5px; }
+
+        /* ── MAIN SECTION ── */
+        .main {
+            flex: 1;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            background: linear-gradient(135deg, rgba(254,44,85,0.3), transparent 50%, rgba(37,244,238,0.2));
+            z-index: -1;
+        }
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ── ALERTS ── */
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            font-size: 0.82rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+        .alert-warning {
+            background: rgba(245,197,24,0.1);
+            border: 1px solid rgba(245,197,24,0.25);
+            color: #f5c518;
+        }
+        .alert-info {
+            background: rgba(37,244,238,0.08);
+            border: 1px solid rgba(37,244,238,0.2);
+            color: var(--tiktok2);
+        }
+
+        /* ── FORM ── */
+        .form-group { margin-bottom: 1.2rem; }
+        .form-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            background: #0f0f0f;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 0.92rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        .form-input::placeholder { color: #444; }
+        .form-input:focus {
+            border-color: rgba(254,44,85,0.5);
+            box-shadow: 0 0 0 3px rgba(254,44,85,0.08);
+        }
+        .form-input.error { border-color: var(--tiktok); }
+        .form-hint { font-size: 0.75rem; color: #555; margin-top: 5px; }
+
+        /* Honeypot – hidden from users */
+        .honeypot { display: none !important; }
+
+        /* ── SUBMIT BUTTON ── */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--tiktok), #c9233f);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s;
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            gap: 8px;
         }
-        .boost-section {
-            padding: 2em;
+        .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-submit:active { transform: translateY(0); }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* Spinner */
+        .spinner {
+            width: 18px; height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
         }
-        .boost-badge {
-            background-color: #f39c12;
-            padding: 10px;
-            border-radius: 5px;
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── TOAST ── */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            padding: 14px 24px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        #toast.success { background: #1a3a2a; border: 1px solid #2ecc71; color: #2ecc71; }
+        #toast.error   { background: #3a1a1a; border: 1px solid var(--tiktok); color: var(--tiktok); }
+        #toast.warn    { background: #3a2e10; border: 1px solid var(--gold); color: var(--gold); }
+
+        /* ── ADBLOCK OVERLAY ── */
+        #adblock-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(8px);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+        #adblock-overlay.active { display: flex; }
+        .adblock-box {
+            background: var(--card);
+            border: 1px solid var(--tiktok);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 420px;
             text-align: center;
-            font-size: 1.2em;
         }
-        .boost-notice {
-            background-color: #e74c3c;
-            color: white;
-            padding: 15px;
-            margin: 1em 0;
-            border-radius: 5px;
-        }
-        .security-warning {
-            background-color: #f1c40f;
-            padding: 10px;
-            margin: 1em 0;
-            border-radius: 5px;
-        }
-        .boost-form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        .boost-form input {
-            margin: 0.5em 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .boost-form button {
-            padding: 10px;
-            background-color: #3498db;
-            color: white;
+        .adblock-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .adblock-box h2 { font-family: 'Syne', sans-serif; margin-bottom: 0.8rem; }
+        .adblock-box p  { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .btn-retry {
+            padding: 12px 28px;
+            background: var(--tiktok);
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--radius);
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
             cursor: pointer;
         }
+
+        /* ── FOOTER ── */
         .footer {
-            background-color: #333;
-            color: #fff;
+            background: var(--dark);
+            border-top: 1px solid var(--border);
             text-align: center;
-            padding: 1em;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            padding: 1.2rem;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 520px) {
+            .stats-bar { flex-wrap: wrap; }
+            .stat { min-width: 50%; }
+            .card { padding: 1.8rem 1.4rem; }
         }
     </style>
 </head>
 <body>
-    <div class="navbar">SellerPrint</div>
-    <div class="hero">
-        <h1>Boost Your TikTok Presence</h1>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <span class="navbar-brand">SellerPrint</span>
+    <span class="navbar-tag">TikTok Boost</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-eyebrow">✦ Growth Service</div>
+    <h1>Boost Your<br><span>TikTok</span> Presence</h1>
+    <p class="hero-sub">Submit your profile link and get your account reviewed for a targeted growth boost.</p>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+    <div class="stat">
+        <div class="stat-value">10K+</div>
+        <div class="stat-label">Accounts boosted</div>
     </div>
-    <div class="boost-section">
-        <div class="boost-badge">Boost Your Account Today!</div>
-        <div class="boost-notice">Notice: Please ensure you follow TikTok's guidelines.</div>
-        <div class="security-warning">Warning: Ensure you are not using ad-blockers for proper functionality.</div>
-        <form class="boost-form" id="boostForm">
-            <input type="text" name="username" placeholder="TikTok Username" required />
-            <input type="text" name="email" placeholder="Email Address" required />
-            <input type="text" name="country" placeholder="Country" required />
-            <textarea name="message" placeholder="Boost Message" required></textarea>
-            <button type="submit">Submit</button>
+    <div class="stat">
+        <div class="stat-value">48h</div>
+        <div class="stat-label">Response time</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">98%</div>
+        <div class="stat-label">Satisfaction rate</div>
+    </div>
+</div>
+
+<!-- FORM CARD -->
+<div class="main">
+    <div class="card">
+        <div class="card-title">Submit a Boost Request</div>
+        <div class="card-subtitle">Fill in your details below – we'll get back to you within 48 hours.</div>
+
+        <div class="alert alert-info">
+            <span class="alert-icon">ℹ️</span>
+            Please make sure your TikTok profile is public before submitting.
+        </div>
+        <div class="alert alert-warning">
+            <span class="alert-icon">⚠️</span>
+            Disable your ad-blocker for this page to ensure the form works correctly.
+        </div>
+
+        <form id="boostForm" novalidate>
+            <!-- Honeypot anti-bot field -->
+            <div class="honeypot">
+                <input type="text" name="hp_field" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="name">Full Name</label>
+                <input class="form-input" type="text" id="name" name="name"
+                       placeholder="ex: Matto Rian" autocomplete="name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input class="form-input" type="email" id="email" name="email"
+                       placeholder="ex: matto@example.com" autocomplete="email" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="url">TikTok Profile URL</label>
+                <input class="form-input" type="url" id="url" name="url"
+                       placeholder="ex: https://vm.tiktok.com/ZGdHANW4G/" required>
+                <p class="form-hint">Share your profile or a specific video link.</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="country">Country</label>
+                <input class="form-input" type="text" id="country" name="country"
+                       placeholder="ex: Nigeria" autocomplete="country-name" required>
+            </div>
+
+            <button class="btn-submit" type="submit" id="submitBtn">
+                <span id="btnText">🚀 Submit Boost Request</span>
+                <div class="spinner" id="spinner"></div>
+            </button>
         </form>
     </div>
-    <div class="footer">&copy; 2026 SellerPrint. All rights reserved.</div>
-    <script>
-        function detectAdblock() {
-            // Adblock detection logic here.
-        }
+</div>
 
-        function detectBot() {
-            // Bot detection logic here.
-        }
+<!-- ADBLOCK OVERLAY -->
+<div id="adblock-overlay">
+    <div class="adblock-box">
+        <div class="adblock-icon">🚫</div>
+        <h2>Ad-Blocker Detected</h2>
+        <p>Our service requires ad-blockers to be disabled to function correctly. Please disable it for this page and try again.</p>
+        <button class="btn-retry" onclick="retryAfterAdblock()">I've Disabled It – Retry</button>
+    </div>
+</div>
 
-        function checkSecurity() {
-            // Check security logic here.
-        }
+<!-- TOAST -->
+<div id="toast"></div>
 
-        document.getElementById('boostForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            // EmailJS integration logic here.
-            fetch('YOUR_EMAILJS_ENDPOINT', {
-                method: 'POST',
-                body: formData,
-            }).then(response => {
-                if (response.ok) {
-                    alert('Boost request submitted!');
-                } else {
-                    alert('Error submitting request.');
-                }
-            });
+<!-- FOOTER -->
+<div class="footer">&copy; 2026 SellerPrint. All rights reserved.</div>
+
+<script>
+    // ─────────────────────────────────────────────
+    //  ⚠️  CONFIGURATION – FILL THESE IN
+    // ─────────────────────────────────────────────
+    const EMAILJS_PUBLIC_KEY  = 'ZV8_e5cRULOLRdUIK';   // EmailJS > Account > Public Key
+    const EMAILJS_SERVICE_ID  = 'service_zguljkv';   // EmailJS > Email Services
+    const EMAILJS_TEMPLATE_ID = 'template_4ouweaf';  // EmailJS > Email Templates
+    // ─────────────────────────────────────────────
+
+    // Init EmailJS
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    // ── FORM LOAD TIME (bot detection) ──
+    const formLoadTime = Date.now();
+
+    // ── ADBLOCK DETECTION ──
+    function detectAdblock() {
+        return new Promise((resolve) => {
+            const bait = document.createElement('div');
+            bait.className = 'ad ads adsbox doubleclick ad-placement';
+            bait.style.cssText = 'position:absolute;width:1px;height:1px;top:-9999px;';
+            document.body.appendChild(bait);
+            setTimeout(() => {
+                const blocked = !bait.offsetParent || bait.offsetHeight === 0 || bait.offsetWidth === 0;
+                bait.remove();
+                resolve(blocked);
+            }, 150);
         });
-    </script>
+    }
+
+    // ── BOT DETECTION ──
+    function detectBot(honeypotValue) {
+        const timeTaken = Date.now() - formLoadTime;
+        if (honeypotValue && honeypotValue.trim() !== '') return true;  // filled honeypot
+        if (timeTaken < 1800) return true;                               // too fast (< 1.8s)
+        return false;
+    }
+
+    // ── TOAST HELPER ──
+    function showToast(msg, type = 'success', duration = 4000) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.className = `show ${type}`;
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => { toast.className = ''; }, duration);
+    }
+
+    // ── FORM VALIDATION ──
+    function validateForm(data) {
+        const urlPattern = /^https?:\/\/.+\..+/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!data.name.trim())               return 'Please enter your name.';
+        if (!emailPattern.test(data.email))  return 'Please enter a valid email address.';
+        if (!urlPattern.test(data.url))      return 'Please enter a valid TikTok URL (https://...).';
+        if (!data.country.trim())            return 'Please enter your country.';
+        return null;
+    }
+
+    // ── SUBMIT HANDLER ──
+    document.getElementById('boostForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const btn     = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const spinner = document.getElementById('spinner');
+
+        // Clear previous errors
+        document.querySelectorAll('.form-input').forEach(i => i.classList.remove('error'));
+
+        const formData = {
+            name:     document.getElementById('name').value,
+            email:    document.getElementById('email').value,
+            url:      document.getElementById('url').value,
+            country:  document.getElementById('country').value,
+            hp_field: document.querySelector('[name="hp_field"]').value,
+        };
+
+        // 1. Validate inputs
+        const validationError = validateForm(formData);
+        if (validationError) {
+            showToast('⚠️ ' + validationError, 'warn', 4000);
+            return;
+        }
+
+        // 2. Bot detection
+        if (detectBot(formData.hp_field)) {
+            showToast('⛔ Request blocked – suspicious activity detected.', 'error');
+            return;
+        }
+
+        // 3. Adblock detection
+        const adblocked = await detectAdblock();
+        if (adblocked) {
+            document.getElementById('adblock-overlay').classList.add('active');
+            return;
+        }
+
+        // 4. Loading state
+        btn.disabled = true;
+        btnText.textContent = 'Sending…';
+        spinner.style.display = 'block';
+
+        // 5. Send via EmailJS
+        // Template variables: {{name}}, {{email}}, {{url}}, {{country2}}
+        const templateParams = {
+            name:    formData.name,
+            email:   formData.email,
+            url:     formData.url,
+            country2: formData.country,
+        };
+
+        try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+            showToast('✅ Boost request submitted! We\'ll be in touch soon.', 'success', 5000);
+            document.getElementById('boostForm').reset();
+        } catch (err) {
+            console.error('EmailJS error:', err);
+            showToast('❌ Submission failed. Please try again.', 'error', 5000);
+        } finally {
+            btn.disabled = false;
+            btnText.textContent = '🚀 Submit Boost Request';
+            spinner.style.display = 'none';
+        }
+    });
+
+    // ── RETRY AFTER ADBLOCK ──
+    function retryAfterAdblock() {
+        detectAdblock().then(blocked => {
+            if (!blocked) {
+                document.getElementById('adblock-overlay').classList.remove('active');
+                showToast('✅ Ad-blocker disabled. You can now submit!', 'success');
+            } else {
+                showToast('⚠️ Ad-blocker still active. Please check your browser.', 'warn');
+            }
+        });
+    }
+
+    // ── CHECK ADBLOCK ON PAGE LOAD ──
+    window.addEventListener('load', async () => {
+        const blocked = await detectAdblock();
+        if (blocked) {
+            document.getElementById('adblock-overlay').classList.add('active');
+        }
+    });
+</script>
 </body>
 </html>
