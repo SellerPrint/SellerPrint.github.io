@@ -305,7 +305,7 @@
   <div id="user-country"></div>
   <div style="margin-top:1rem">
     <a href="#contact">Contact</a>
-    <a href="privacy.html">Confidentialité</a>
+    <a href="privacy-policy-updated.html">Confidentialité</a>
     <a href="terms.html">Conditions</a>
   </div>
 </footer>
@@ -437,5 +437,37 @@ function savePreferences(){ localStorage.setItem('sp_consent',JSON.stringify({ad
 modal.addEventListener('click',function(e){ if(e.target===modal) modal.classList.remove('open'); });
 if(localStorage.getItem('sp_consent')) banner.style.display='none';
 </script>
+  <!-- Validation des URLs affiliées (AVANT le loader) -->
+<script src="affiliate-validator.js"></script>
+
+<!-- Chargement optimisé des liens affiliés -->
+<script src="affiliate-loader.js"></script>
+
+  <script>
+// Charger la config centralisée
+fetch('affiliate-config.json')
+  .then(r => r.json())
+  .then(config => {
+    // Initialiser le loader avec la config
+    AffiliateLoader.init({
+      ADMITAD_BASE: config.admitad.baseUrl,
+      VALIDATE_ON_LOAD: config.validation.format,
+      CACHE_TTL: config.admitad.cacheTTL
+    });
+    
+    // Initialiser SEO optimizer
+    SEOOptimizer.init({
+      siteName: "SellerPrint",
+      siteUrl: "https://sellerprint.github.io"
+    });
+  })
+  .catch(err => console.error("Config load error:", err));
+</script>
+
+<!-- Optimisations SEO + hiérarchie des annonces -->
+<script src="seo-optimizer.js"></script>
+
+<!-- Existing scripts (products.js, etc.) -->
+<script src="products.js"></script>
 </body>
 </html>
