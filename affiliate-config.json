@@ -1,0 +1,118 @@
+{
+  "admitad": {
+    "enabled": true,
+    "baseUrl": "https://ad.admitad.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=",
+    "verification_id": "ffc29cecab",
+    "targetingMode": "personalized",
+    "lazyLoad": true,
+    "validateOnLoad": true,
+    "cacheTTL": 86400000
+  },
+  "adsense": {
+    "enabled": true,
+    "clientId": "ca-pub-4774454542744125",
+    "slots": [
+      {
+        "id": "YOUR_AD_SLOT_1",
+        "type": "display",
+        "position": "after-hero",
+        "priority": "high"
+      },
+      {
+        "id": "YOUR_AD_SLOT_2",
+        "type": "display",
+        "position": "after-products",
+        "priority": "high"
+      }
+    ],
+    "formatting": {
+      "width": "auto",
+      "height": "auto",
+      "responsive": true
+    }
+  },
+  "monetag": {
+    "enabled": true,
+    "zones": [
+      {
+        "id": "10034222",
+        "domain": "al5sm.com",
+        "priority": "medium"
+      },
+      {
+        "id": "10034706",
+        "domain": "al5sm.com",
+        "priority": "medium"
+      },
+      {
+        "id": "10034439",
+        "domain": "al5sm.com",
+        "priority": "medium"
+      },
+      {
+        "id": "10034252",
+        "domain": "forfrogadiertor.com",
+        "priority": "medium"
+      }
+    ]
+  },
+  "hierarchy": {
+    "order": ["adsense", "admitad", "monetag"],
+    "separation": {
+      "admitad_adsense": "visual",
+      "admitad_monetag": "color_coded",
+      "disclosure": "prominent"
+    },
+    "cssClass": {
+      "primary": "sp-ad-primary",
+      "secondary": "sp-ad-secondary",
+      "tertiary": "sp-ad-tertiary"
+    }
+  },
+  "targeting": {
+    "personalized": true,
+    "contextual": true,
+    "userBehavior": true,
+    "sources": [
+      "referrer",
+      "time_of_day",
+      "device_type",
+      "language",
+      "click_history",
+      "page_content"
+    ]
+  },
+  "validation": {
+    "format": true,
+    "existence": true,
+    "timeout": 5000,
+    "batchSize": 10,
+    "retryCount": 2,
+    "fallbackBehavior": "hide"
+  },
+  "performance": {
+    "lazyLoadingThreshold": "50px",
+    "compressionEnabled": true,
+    "cachingEnabled": true,
+    "preloadCritical": true,
+    "deferNonCritical": true
+  },
+  "privacy": {
+    "gdpr_compliant": true,
+    "ccpa_compliant": true,
+    "cookieConsent_required": true,
+    "disclosed_providers": [
+      "Google AdSense",
+      "Admitad",
+      "Monetag"
+    ]
+  },
+  "seo": {
+    "structuredData": true,
+    "breadcrumbs": true,
+    "openGraph": true,
+    "twitterCard": true,
+    "canonical": true,
+    "preloadResources": true
+  }
+}
