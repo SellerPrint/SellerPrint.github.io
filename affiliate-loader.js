@@ -14,7 +14,7 @@
 
   var LOADER = {
     config: {
-      ADMITAD_BASE: "https://ad.admitad.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=",
+      ADMITAD_BASE: "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=",
       ALIEXPRESS_BASE: "https://www.aliexpress.com/item/",
       VALIDATE_ON_LOAD: true,
       CACHE_TTL: 3600000, // 1h
