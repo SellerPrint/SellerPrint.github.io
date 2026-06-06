@@ -239,7 +239,14 @@
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4774454542744125" data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
   </div>
-
+<!-- Lien affilié demandé -->
+<div style="margin:1rem 0;text-align:center">
+  <a href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005010087531749.html"
+     target="_blank" rel="noopener noreferrer sponsored"
+     style="display:inline-block;padding:.6rem 1rem;border-radius:10px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-weight:700;text-decoration:none">
+    Voir l'article recommandé ↗
+  </a>
+</div>
   <!-- PRODUITS -->
   <section id="produits">
     <h2 class="section-title">Nos créations</h2>
@@ -317,7 +324,7 @@
 /* ═══════════════════════════════════════
    CONFIG
 ═══════════════════════════════════════ */
-var AFFILIATE = 'https://ad.admitad.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=';
+var AFFILIATE = 'https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=';
 var PER_PAGE = 8;
 var currentPage = 1;
 var activeFilter = 'all';
@@ -330,14 +337,21 @@ function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
 
 function renderProducts(list) {
   var grid = document.getElementById('products-grid');
-  if (!list.length) { grid.innerHTML = '<p style="color:#888;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit trouvé.</p>'; return; }
+  if (!list.length) {
+    grid.innerHTML = '<p style="color:#888;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit trouvé.</p>';
+    return;
+  }
+
   grid.innerHTML = list.map(function(p) {
-    var href = AFFILIATE + p.id + '.html';
+    // Construire l'URL AliExpress complète (non encodée), puis encoder entièrement pour ulp
+    var aliUrl = 'https://www.aliexpress.com/item/' + p.id + '.html';
+    var href = AFFILIATE + encodeURIComponent(aliUrl);
+
     return '<a class="product-card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer sponsored">' +
       '<div class="product-card-img">' +
         (p.badge ? '<span class="product-badge">' + esc(p.badge) + '</span>' : '') +
         '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" ' +
-          'onerror="this.style.display=\'none\'">' +
+          'onerror="this.style.display=\\'none\\'">' +
       '</div>' +
       '<div class="product-info">' +
         '<h3>' + esc(p.name) + '</h3>' +
