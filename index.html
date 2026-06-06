@@ -458,16 +458,62 @@ if(localStorage.getItem('sp_consent')) banner.style.display='none';
 <script src="affiliate-loader.js"></script>
 
   <script>
-// Charger la config centralisée
-fetch('affiliate-config.json')
-  .then(r => r.json())
-  .then(config => {
-    // Initialiser le loader avec la config
-    AffiliateLoader.init({
-      ADMITAD_BASE: config.admitad.baseUrl,
-      VALIDATE_ON_LOAD: config.validation.format,
-      CACHE_TTL: config.admitad.cacheTTL
+// Charger la config centralisée avec fallback robuste
+(function loadAffiliateConfigAndInit(){
+  var defaultConfig = {
+    admitad: { baseUrl: "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=", cacheTTL: 3600000 },
+    aliexpress: { baseUrl: "https://www.aliexpress.com/item/" },
+    validation: { format: true, timeout: 5000 },
+    lazyLoading: { enabled: true, rootMargin: "50px" }
+  };
+
+  function initWithConfig(cfg) {
+    try {
+      var base = (cfg && cfg.admitad && cfg.admitad.baseUrl) || defaultConfig.admitad.baseUrl;
+      // Mettre à jour la variable globale AFFILIATE (si déclarée) et window.AFFILIATE
+      try { if (typeof AFFILIATE !== 'undefined') AFFILIATE = base; } catch(e) {}
+      try { window.AFFILIATE = base; } catch(e) {}
+
+      // Initialiser le loader si présent
+      if (window.AffiliateLoader && typeof window.AffiliateLoader.init === 'function') {
+        window.AffiliateLoader.init({
+          ADMITAD_BASE: base,
+          VALIDATE_ON_LOAD: (cfg && cfg.validation && cfg.validation.format) !== false,
+          CACHE_TTL: (cfg && cfg.admitad && cfg.admitad.cacheTTL) || defaultConfig.admitad.cacheTTL
+        });
+      }
+
+      // Init SEO optimizer s'il existe
+      if (window.SEOOptimizer && typeof window.SEOOptimizer.init === 'function') {
+        try {
+          window.SEOOptimizer.init({
+            siteName: "SellerPrint",
+            siteUrl: "https://sellerprint.github.io"
+          });
+        } catch(e){ /* silent */ }
+      }
+    } catch (e) {
+      console.error('Init with config error:', e);
+    } finally {
+      // Assurer que la grille s'affiche même si config manquante
+      try { refreshGrid(); } catch(e){ console.error('refreshGrid error', e); }
+    }
+  }
+
+  // Attempt fetch; if it fails, fallback to defaultConfig
+  fetch('affiliate-config.json', {cache: "no-cache"})
+    .then(function (r) {
+      if (!r.ok) throw new Error('Config fetch failed: ' + r.status);
+      return r.json();
+    })
+    .then(function (cfg) {
+      initWithConfig(cfg);
+    })
+    .catch(function (err) {
+      console.warn('Config load error, using defaults:', err);
+      initWithConfig(defaultConfig);
     });
+})();
     
     // Initialiser SEO optimizer
     SEOOptimizer.init({
