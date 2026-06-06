@@ -458,7 +458,7 @@ if(localStorage.getItem('sp_consent')) banner.style.display='none';
 <script src="affiliate-loader.js"></script>
 
   <script>
-// Charger la config centralisée avec fallback robuste
+// Charger la config centralisée avec fallback robuste (affiche la grille immédiatement)
 (function loadAffiliateConfigAndInit(){
   var defaultConfig = {
     admitad: { baseUrl: "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=", cacheTTL: 3600000 },
@@ -467,22 +467,48 @@ if(localStorage.getItem('sp_consent')) banner.style.display='none';
     lazyLoading: { enabled: true, rootMargin: "50px" }
   };
 
+  // Afficher la grille immédiatement pour ne pas bloquer l'UX
+  try { refreshGrid(); } catch(e){ console.error('refreshGrid initial call failed', e); }
+
   function initWithConfig(cfg) {
     try {
       var base = (cfg && cfg.admitad && cfg.admitad.baseUrl) || defaultConfig.admitad.baseUrl;
-      // Mettre à jour la variable globale AFFILIATE (si déclarée) et window.AFFILIATE
-      try { if (typeof AFFILIATE !== 'undefined') AFFILIATE = base; } catch(e) {}
-      try { window.AFFILIATE = base; } catch(e) {}
+      try { if (typeof AFFILIATE !== 'undefined') AFFILIATE = base; } catch(e){}
+      try { window.AFFILIATE = base; } catch(e){}
 
-      // Initialiser le loader si présent
       if (window.AffiliateLoader && typeof window.AffiliateLoader.init === 'function') {
-        window.AffiliateLoader.init({
-          ADMITAD_BASE: base,
-          VALIDATE_ON_LOAD: (cfg && cfg.validation && cfg.validation.format) !== false,
-          CACHE_TTL: (cfg && cfg.admitad && cfg.admitad.cacheTTL) || defaultConfig.admitad.cacheTTL
-        });
+        // Init non bloquant : on initialise mais on ne bloque pas l'affichage
+        try {
+          window.AffiliateLoader.init({
+            ADMITAD_BASE: base,
+            VALIDATE_ON_LOAD: (cfg && cfg.validation && cfg.validation.format) !== false,
+            CACHE_TTL: (cfg && cfg.admitad && cfg.admitad.cacheTTL) || defaultConfig.admitad.cacheTTL
+          });
+        } catch(e){
+          console.warn('AffiliateLoader.init error', e);
+        }
       }
+    } catch (e) {
+      console.error('Init with config error:', e);
+    }
+  }
 
+  // Fetch en arrière-plan ; si fail -> fallback
+  fetch('affiliate-config.json', {cache: "no-cache"})
+    .then(function (r) {
+      if (!r.ok) throw new Error('Config fetch failed: ' + r.status);
+      return r.json();
+    })
+    .then(function (cfg) {
+      initWithConfig(cfg);
+      // Optional: re-render grid if config changes behavior
+      try { refreshGrid(); } catch(e){ /* ignore */ }
+    })
+    .catch(function (err) {
+      console.warn('Config load error, using defaults:', err);
+      initWithConfig(defaultConfig);
+    });
+})();
       // Init SEO optimizer s'il existe
       if (window.SEOOptimizer && typeof window.SEOOptimizer.init === 'function') {
         try {
