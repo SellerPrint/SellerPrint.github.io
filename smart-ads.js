@@ -19,7 +19,7 @@
    * ───────────────────────────────────────────── */
   var CONFIG = {
     AFFILIATE_BASE:
-      "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https://www.aliexpress.com/item/",
+      "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https://www.aliexpress.com/item/",
     ADS_COUNT: 4,
     CONTAINER_ID: "smart-ads-zone",
     CACHE_TTL: 900, // 15 min
