@@ -47,7 +47,7 @@
     .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     @media(max-width:768px){
       .hamburger{display:flex}
-      header nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.99);flex-direction:column;padding:1rem 2rem 1.5rem;gap:.2rem;box-shadow:0 12px 40px rgba(0,0,0,.1)}
+      header nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.99);flex-direction:column;padding:1rem 2rem 1.5rem;gap:.2rem;box-shadow:0 12px 40px rgba(0,0,0,.1);width:100%}
       header nav.open{display:flex}
       header nav a{padding:.75rem 1rem;font-size:1rem;border-radius:12px}
     }
@@ -56,7 +56,7 @@
     .hero{background:var(--gradient);min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 1.5rem}
     .hero h1{font-size:clamp(2rem,6vw,4rem);color:#fff;margin-bottom:1rem;line-height:1.15}
     .hero p{color:rgba(255,255,255,.88);font-size:1.15rem;max-width:580px;margin-bottom:2rem}
-    .hero-btn{display:inline-block;padding:1rem 2.5rem;background:#fff;color:var(--primary);font-weight:700;font-size:1.05rem;border-radius:50px;text-decoration:none;box-shadow:0 8px 30px rgba(0,0,0,.2);transition:transform .2s,box-shadow .2s}
+    .hero-btn{display:inline-block;padding:1rem 2.5rem;background:#fff;color:var(--primary);font-weight:700;font-size:1.05rem;border-radius:50px;text-decoration:none;box-shadow:0 8px 30px rgba(0,0,0,.15);transition:transform .2s,box-shadow .2s}
     .hero-btn:hover{transform:translateY(-3px);box-shadow:0 16px 45px rgba(0,0,0,.25)}
 
     /* ── Main ── */
@@ -71,7 +71,7 @@
 
     /* ── Grille produits ── */
     .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:2rem 0}
-    .product-card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+    .product-card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit;cursor:pointer}
     .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(102,126,234,.18)}
 
     /* Image : aspect-ratio fixe, chargement direct sans JS */
@@ -111,7 +111,7 @@
     .boost-badge{display:inline-block;background:#fef3c7;color:#92400e;font-size:.78rem;font-weight:700;padding:.25rem .8rem;border-radius:20px;margin-bottom:.6rem}
     .boost-banner-card h2{font-size:1.4rem;font-weight:800;margin-bottom:.3rem}
     .boost-banner-card p{font-size:.88rem;color:#777;line-height:1.55}
-    .boost-cta{padding:.85rem 2rem;background:var(--gradient);color:#fff;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .2s;flex-shrink:0}
+    .boost-cta{padding:.85rem 2rem;background:var(--gradient);color:#fff;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .2s;display:inline-block}
     .boost-cta:hover{opacity:.88;transform:translateY(-2px)}
 
     /* ── Contact ── */
@@ -129,11 +129,11 @@
     #user-country{font-size:.82rem;margin-top:.6rem;opacity:.65}
 
     /* ── Bouton retour en haut ── */
-    #back-to-top{display:none;position:fixed;bottom:2rem;right:2rem;z-index:500;width:46px;height:46px;border-radius:50%;background:var(--gradient);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 18px rgba(102,126,234,.4);transition:opacity .25s,transform .25s;align-items:center;justify-content:center}
+    #back-to-top{display:none;position:fixed;bottom:2rem;right:2rem;z-index:500;width:46px;height:46px;border-radius:50%;background:var(--gradient);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s}
     #back-to-top:hover{transform:translateY(-3px)}
 
     /* ── Cookie banner ── */
-    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,40,.97);color:#e5e7eb;padding:1.2rem 2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;backdrop-filter:blur(10px);box-shadow:0 -4px 30px rgba(0,0,0,.3);transform:translateY(0);transition:transform .4s ease}
+    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,40,.97);color:#e5e7eb;padding:1.2rem 2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;transition:transform .35s}
     #cookie-banner.hidden{transform:translateY(115%)}
     .cookie-text{flex:1 1 280px;font-size:.86rem;line-height:1.55}
     .cookie-text a{color:#a78bfa}
@@ -239,14 +239,7 @@
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4774454542744125" data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
   </div>
-<!-- Lien affilié demandé -->
-<div style="margin:1rem 0;text-align:center">
-  <a href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005010087531749.html"
-     target="_blank" rel="noopener noreferrer sponsored"
-     style="display:inline-block;padding:.6rem 1rem;border-radius:10px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-weight:700;text-decoration:none">
-    Voir l'article recommandé ↗
-  </a>
-</div>
+
   <!-- PRODUITS -->
   <section id="produits">
     <h2 class="section-title">Nos créations</h2>
@@ -319,10 +312,11 @@
 
 <button id="back-to-top" title="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<!-- ════ SCRIPTS ════ -->
 <script src="products.js"></script>
 <script>
 /* ═══════════════════════════════════════
-   CONFIG
+   CONFIG PRINCIPALE
 ═══════════════════════════════════════ */
 var AFFILIATE = 'https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=';
 var PER_PAGE = 8;
@@ -331,27 +325,27 @@ var activeFilter = 'all';
 var activeSearch = '';
 
 /* ═══════════════════════════════════════
-   RENDU — images DIRECTES, pas de fetch
+   FONCTIONS UTILITAIRES
 ═══════════════════════════════════════ */
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function esc(s){ 
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); 
+}
 
 function renderProducts(list) {
   var grid = document.getElementById('products-grid');
-  if (!list.length) {
+  if (!list || !list.length) {
     grid.innerHTML = '<p style="color:#888;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit trouvé.</p>';
     return;
   }
 
   grid.innerHTML = list.map(function(p) {
-    // Construire l'URL AliExpress complète (non encodée), puis encoder entièrement pour ulp
     var aliUrl = 'https://www.aliexpress.com/item/' + p.id + '.html';
     var href = AFFILIATE + encodeURIComponent(aliUrl);
 
     return '<a class="product-card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer sponsored">' +
       '<div class="product-card-img">' +
         (p.badge ? '<span class="product-badge">' + esc(p.badge) + '</span>' : '') +
-        '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" ' +
-          'onerror="this.style.display=\\'none\\'">' +
+        '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.style.display=\'none\'">' +
       '</div>' +
       '<div class="product-info">' +
         '<h3>' + esc(p.name) + '</h3>' +
@@ -371,11 +365,19 @@ function renderPagination(total) {
   if (tp <= 1) { pag.style.display='none'; return; }
   pag.style.display='flex';
   pag.innerHTML='';
+  
   function btn(label, page, active) {
-    var b=document.createElement('button'); b.className='page-btn'+(active?' active':''); b.textContent=label;
-    if (!active) b.addEventListener('click',function(){ currentPage=page; refreshGrid(); window.scrollTo({top:document.getElementById('produits').offsetTop-80,behavior:'smooth'}); });
+    var b=document.createElement('button'); 
+    b.className='page-btn'+(active?' active':''); 
+    b.textContent=label;
+    if (!active) b.addEventListener('click',function(){ 
+      currentPage=page; 
+      refreshGrid(); 
+      window.scrollTo({top:document.getElementById('produits').offsetTop-80,behavior:'smooth'}); 
+    });
     pag.appendChild(b);
   }
+  
   if (currentPage>1) btn('◀',currentPage-1,false);
   for(var i=1;i<=tp;i++) btn(String(i),i,i===currentPage);
   if (currentPage<tp) btn('▶',currentPage+1,false);
@@ -385,20 +387,28 @@ function renderPagination(total) {
    FILTRES & RECHERCHE
 ═══════════════════════════════════════ */
 function filterProducts(cat, btnEl) {
-  activeFilter=cat; currentPage=1;
+  activeFilter=cat; 
+  currentPage=1;
   document.querySelectorAll('#cat-filters .page-btn').forEach(function(b){ b.classList.remove('active'); });
   btnEl.classList.add('active');
   refreshGrid();
 }
-function searchProducts(val) { activeSearch=val; currentPage=1; refreshGrid(); }
+
+function searchProducts(val) { 
+  activeSearch=val; 
+  currentPage=1; 
+  refreshGrid(); 
+}
+
 function getFiltered() {
-  return products.filter(function(p){
+  return (window.products || []).filter(function(p){
     var catOk = activeFilter==='all' || p.cat===activeFilter;
     var q = activeSearch.toLowerCase();
     var searchOk = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
     return catOk && searchOk;
   });
 }
+
 function refreshGrid() {
   var f=getFiltered();
   document.getElementById('products-subtitle').textContent = f.length+' produit'+(f.length>1?'s':'')+' disponible'+(f.length>1?'s':'');
@@ -407,8 +417,12 @@ function refreshGrid() {
   renderPagination(f.length);
 }
 
-/* Affichage IMMÉDIAT, aucun délai artificiel */
-refreshGrid();
+/* Affichage IMMÉDIAT au chargement */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', refreshGrid);
+} else {
+  refreshGrid();
+}
 
 /* ═══════════════════════════════════════
    GÉOLOCALISATION
@@ -426,10 +440,16 @@ refreshGrid();
 var ham=document.getElementById('hamburger');
 var nav=document.getElementById('main-nav');
 ham.addEventListener('click',function(){
-  var o=nav.classList.toggle('open'); ham.classList.toggle('open',o); ham.setAttribute('aria-expanded',String(o));
+  var o=nav.classList.toggle('open'); 
+  ham.classList.toggle('open',o); 
+  ham.setAttribute('aria-expanded',String(o));
 });
 nav.querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(){ nav.classList.remove('open'); ham.classList.remove('open'); ham.setAttribute('aria-expanded','false'); });
+  a.addEventListener('click',function(){ 
+    nav.classList.remove('open'); 
+    ham.classList.remove('open'); 
+    ham.setAttribute('aria-expanded','false'); 
+  });
 });
 
 /* ═══════════════════════════════════════
@@ -443,128 +463,43 @@ window.addEventListener('scroll',function(){ btt.style.display=window.scrollY>40
 ═══════════════════════════════════════ */
 var banner=document.getElementById('cookie-banner');
 var modal=document.getElementById('cookie-modal');
-function hideBanner(){ banner.classList.add('hidden'); setTimeout(function(){ banner.style.display='none'; },450); }
-function acceptAllCookies(){ localStorage.setItem('sp_consent',JSON.stringify({ads:true,analytics:true,ts:Date.now()})); hideBanner(); modal.classList.remove('open'); }
-function refuseCookies(){ localStorage.setItem('sp_consent',JSON.stringify({ads:false,analytics:false,ts:Date.now()})); hideBanner(); }
-function openCookieModal(){ modal.classList.add('open'); }
-function savePreferences(){ localStorage.setItem('sp_consent',JSON.stringify({ads:document.getElementById('pref-ads').checked,analytics:document.getElementById('pref-analytics').checked,ts:Date.now()})); hideBanner(); modal.classList.remove('open'); }
-modal.addEventListener('click',function(e){ if(e.target===modal) modal.classList.remove('open'); });
+
+function hideBanner(){ 
+  banner.classList.add('hidden'); 
+  setTimeout(function(){ banner.style.display='none'; },450); 
+}
+
+function acceptAllCookies(){ 
+  localStorage.setItem('sp_consent',JSON.stringify({ads:true,analytics:true,ts:Date.now()})); 
+  hideBanner(); 
+  modal.classList.remove('open'); 
+}
+
+function refuseCookies(){ 
+  localStorage.setItem('sp_consent',JSON.stringify({ads:false,analytics:false,ts:Date.now()})); 
+  hideBanner(); 
+}
+
+function openCookieModal(){ 
+  modal.classList.add('open'); 
+}
+
+function savePreferences(){ 
+  localStorage.setItem('sp_consent',JSON.stringify({
+    ads:document.getElementById('pref-ads').checked,
+    analytics:document.getElementById('pref-analytics').checked,
+    ts:Date.now()
+  })); 
+  hideBanner(); 
+  modal.classList.remove('open');
+}
+
+modal.addEventListener('click',function(e){ 
+  if(e.target===modal) modal.classList.remove('open'); 
+});
+
 if(localStorage.getItem('sp_consent')) banner.style.display='none';
 </script>
-  <!-- Validation des URLs affiliées (AVANT le loader) -->
-<script src="affiliate-validator.js"></script>
 
-<!-- Chargement optimisé des liens affiliés -->
-<script src="affiliate-loader.js"></script>
-
- <script>
-// Charger la config centralisée avec fallback non-bloquant
-(function loadAffiliateConfigAndInit(){
-  var defaultConfig = {
-    admitad: { baseUrl: "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=", cacheTTL: 3600000 },
-    aliexpress: { baseUrl: "https://www.aliexpress.com/item/" },
-    validation: { format: true, timeout: 5000 },
-    lazyLoading: { enabled: true, rootMargin: "50px" }
-  };
-
-  // Afficher la grille immédiatement pour l'UX
-  try { refreshGrid(); } catch(e){ console.error('refreshGrid initial call failed', e); }
-
-  function initWithConfig(cfg) {
-    try {
-      var base = (cfg && cfg.admitad && cfg.admitad.baseUrl) || defaultConfig.admitad.baseUrl;
-      if (typeof AFFILIATE !== 'undefined') AFFILIATE = base;
-      window.AFFILIATE = base;
-
-      if (window.AffiliateLoader && typeof window.AffiliateLoader.init === 'function') {
-        try {
-          window.AffiliateLoader.init({
-            ADMITAD_BASE: base,
-            VALIDATE_ON_LOAD: (cfg && cfg.validation && cfg.validation.format) !== false,
-            CACHE_TTL: (cfg && cfg.admitad && cfg.admitad.cacheTTL) || defaultConfig.admitad.cacheTTL
-          });
-        } catch(e){
-          console.warn('AffiliateLoader.init error', e);
-        }
-      }
-
-      if (window.SEOOptimizer && typeof window.SEOOptimizer.init === 'function') {
-        try {
-          window.SEOOptimizer.init({ siteName: "SellerPrint", siteUrl: "https://sellerprint.github.io" });
-        } catch(e){ /* ignore */ }
-      }
-    } catch (e) {
-      console.error('Init with config error:', e);
-    }
-  }
-
-  // Fetch en arrière-plan, fallback sur defaults
-  fetch('affiliate-config.json', {cache: "no-cache"})
-    .then(function (r) {
-      if (!r.ok) throw new Error('Config fetch failed: ' + r.status);
-      return r.json();
-    })
-    .then(function (cfg) {
-      initWithConfig(cfg);
-      try { refreshGrid(); } catch(e){ /* ignore */ }
-    })
-    .catch(function (err) {
-      console.warn('Config load error, using defaults:', err);
-      initWithConfig(defaultConfig);
-    });
-})();
-</script>
-  <script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var o=window,k="cb54028fc37affda775301c29cfc6d36",e=[["siteId",639+636-245-522+5247131],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],p=["d3d3LnZpc2FyaW9tZWRpYS5jb20vdGpzbWVkaWF0YWdzLm1pbi5jc3M=","ZDEzazdwcmF4MXlpMDQuY2xvdWRmcm9udC5uZXQvdXVwZ1UvZHR5cGVkLm1pbi5qcw=="],q=-1,x,z,n=function(){clearTimeout(z);q++;if(p[q]&&!(1806751143000<(new Date).getTime()&&1<q)){x=o.document.createElement("script");x.type="text/javascript";x.async=!0;var r=o.document.getElementsByTagName("script")[0];x.src="https://"+atob(p[q]);x.crossOrigin="anonymous";x.onerror=n;x.onload=function(){clearTimeout(z);o[k.slice(0,16)+k.slice(0,16)]||n()};z=setTimeout(n,5E3);r.parentNode.insertBefore(x,r)}};if(!o[k]){try{Object.freeze(o[k]=e)}catch(e){}n()}})();
-/*]]>/* */
-  </script>
-  <script>
-      // Init SEO optimizer s'il existe
-      if (window.SEOOptimizer && typeof window.SEOOptimizer.init === 'function') {
-        try {
-          window.SEOOptimizer.init({
-            siteName: "SellerPrint",
-            siteUrl: "https://sellerprint.github.io"
-          });
-        } catch(e){ /* silent */ }
-      }
-    } catch (e) {
-      console.error('Init with config error:', e);
-    } finally {
-      // Assurer que la grille s'affiche même si config manquante
-      try { refreshGrid(); } catch(e){ console.error('refreshGrid error', e); }
-    }
-  }
-
-  // Attempt fetch; if it fails, fallback to defaultConfig
-  fetch('affiliate-config.json', {cache: "no-cache"})
-    .then(function (r) {
-      if (!r.ok) throw new Error('Config fetch failed: ' + r.status);
-      return r.json();
-    })
-    .then(function (cfg) {
-      initWithConfig(cfg);
-    })
-    .catch(function (err) {
-      console.warn('Config load error, using defaults:', err);
-      initWithConfig(defaultConfig);
-    });
-})();
-    
-    // Initialiser SEO optimizer
-    SEOOptimizer.init({
-      siteName: "SellerPrint",
-      siteUrl: "https://sellerprint.github.io"
-    });
-  })
-  .catch(err => console.error("Config load error:", err));
-</script>
-
-<!-- Optimisations SEO + hiérarchie des annonces -->
-<script src="seo-optimizer.js"></script>
-
-<!-- Existing scripts (products.js, etc.) -->
-<script src="products.js"></script>
 </body>
 </html>
