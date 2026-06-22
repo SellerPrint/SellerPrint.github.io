@@ -79,6 +79,12 @@
     .product-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;position:absolute;inset:0}
     .product-card:hover .product-card-img img{transform:scale(1.06)}
     .product-badge{position:absolute;top:10px;left:10px;background:var(--gradient);color:#fff;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:20px;z-index:2}
+    .product-badge.reco{background:linear-gradient(135deg,#11998e,#38ef7d)}
+
+    /* Fallback affiché quand l'image AliExpress ne charge pas (au lieu de disparaître silencieusement) */
+    .product-img-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.6rem;background:linear-gradient(135deg,#f0f0f5,#e4e4ee);color:#bbb}
+
+    .personalize-tag{text-align:center;font-size:.85rem;color:#7b6fd6;font-weight:600;margin-bottom:1rem}
 
     .product-info{padding:1rem 1.2rem 1.4rem;flex:1;display:flex;flex-direction:column}
     .product-info h3{font-size:.97rem;font-weight:700;margin-bottom:.3rem;color:var(--dark);line-height:1.4}
@@ -244,6 +250,7 @@
   <section id="produits">
     <h2 class="section-title">Nos créations</h2>
     <p class="section-subtitle" id="products-subtitle">Chargement…</p>
+    <p class="personalize-tag" id="personalize-tag" style="display:none"></p>
 
     <div class="filter-bar">
       <div id="cat-filters">
@@ -331,7 +338,23 @@ function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); 
 }
 
-function renderProducts(list) {
+function handleImgError(imgEl) {
+  imgEl.onerror = null;
+  var fallback = document.createElement('div');
+  fallback.className = 'product-img-fallback';
+  fallback.textContent = '🖼️';
+  imgEl.replaceWith(fallback);
+}
+
+function trackProductClick(cat) {
+  try {
+    var hist = JSON.parse(localStorage.getItem('sp_history') || '[]');
+    hist.push(cat);
+    localStorage.setItem('sp_history', JSON.stringify(hist.slice(-30)));
+  } catch (_) {}
+}
+
+function renderProducts(list, recoCategory) {
   var grid = document.getElementById('products-grid');
   if (!list || !list.length) {
     grid.innerHTML = '<p style="color:#888;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit trouvé.</p>';
@@ -341,11 +364,15 @@ function renderProducts(list) {
   grid.innerHTML = list.map(function(p) {
     var aliUrl = 'https://www.aliexpress.com/item/' + p.id + '.html';
     var href = AFFILIATE + encodeURIComponent(aliUrl);
+    var isReco = recoCategory && p.cat === recoCategory;
+    var badgeText = p.badge || (isReco ? '✨ Pour vous' : '');
+    var badgeClass = isReco && !p.badge ? ' reco' : '';
+    var revMap = { textile: 'mode', deco: 'maison', accessoire: 'impression' };
 
-    return '<a class="product-card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer sponsored">' +
+    return '<a class="product-card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick(\'' + esc(revMap[p.cat] || p.cat) + '\')">' +
       '<div class="product-card-img">' +
-        (p.badge ? '<span class="product-badge">' + esc(p.badge) + '</span>' : '') +
-        '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.style.display=\'none\'">' +
+        (badgeText ? '<span class="product-badge' + badgeClass + '">' + esc(badgeText) + '</span>' : '') +
+        '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" onerror="handleImgError(this)">' +
       '</div>' +
       '<div class="product-info">' +
         '<h3>' + esc(p.name) + '</h3>' +
@@ -384,6 +411,46 @@ function renderPagination(total) {
 }
 
 /* ═══════════════════════════════════════
+   PERSONNALISATION (sans compte, sans API)
+   Réutilise "sp_history" déjà écrit par smart-ads.js
+   pour que les deux widgets s'accordent.
+═══════════════════════════════════════ */
+var CAT_LABELS_FR = { textile: 'Textile', deco: 'Déco', accessoire: 'Accessoires' };
+
+function getCategoryScores() {
+  var scores = { textile: 3, deco: 3, accessoire: 3 };
+
+  var ref = (document.referrer || '').toLowerCase();
+  if (ref.includes('tiktok') || ref.includes('instagram')) { scores.textile += 2; scores.accessoire += 1; }
+  if (ref.includes('pinterest')) { scores.deco += 3; }
+  if (ref.includes('google'))    { scores.deco += 1; scores.accessoire += 1; }
+
+  var h = new Date().getHours();
+  if (h >= 18 && h < 23) scores.textile += 1;
+  if (h >= 9 && h < 18) scores.accessoire += 1;
+  if (h >= 23 || h < 7) scores.deco += 1;
+
+  var mobile = /Mobi|Android/i.test(navigator.userAgent);
+  if (mobile) scores.textile += 1; else scores.deco += 1;
+
+  // Historique de clics partagé avec smart-ads.js (catégories différentes -> mappées)
+  try {
+    var hist = JSON.parse(localStorage.getItem('sp_history') || '[]');
+    var map = { impression: 'accessoire', mode: 'textile', tech: 'accessoire', maison: 'deco', sport: 'accessoire', beaute: 'textile' };
+    hist.forEach(function (c) {
+      var mapped = map[c] || c;
+      if (scores[mapped] !== undefined) scores[mapped] += 2;
+    });
+  } catch (_) {}
+
+  return scores;
+}
+
+function topCategory(scores) {
+  return Object.keys(scores).sort(function (a, b) { return scores[b] - scores[a]; })[0];
+}
+
+/* ═══════════════════════════════════════
    FILTRES & RECHERCHE
 ═══════════════════════════════════════ */
 function filterProducts(cat, btnEl) {
@@ -401,19 +468,36 @@ function searchProducts(val) {
 }
 
 function getFiltered() {
-  return (window.products || []).filter(function(p){
+  var scores = getCategoryScores();
+  var list = (window.products || []).filter(function(p){
     var catOk = activeFilter==='all' || p.cat===activeFilter;
     var q = activeSearch.toLowerCase();
     var searchOk = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
     return catOk && searchOk;
   });
+  // Tri stable par pertinence de catégorie (personnalisation), uniquement en vue "Tous"
+  if (activeFilter === 'all') {
+    list = list.slice().sort(function(a, b){ return (scores[b.cat]||0) - (scores[a.cat]||0); });
+  }
+  return list;
 }
 
 function refreshGrid() {
   var f=getFiltered();
   document.getElementById('products-subtitle').textContent = f.length+' produit'+(f.length>1?'s':'')+' disponible'+(f.length>1?'s':'');
-  var s=(currentPage-1)*PER_PAGE;
-  renderProducts(f.slice(s,s+PER_PAGE));
+
+  var tag = document.getElementById('personalize-tag');
+  if (activeFilter === 'all' && !activeSearch) {
+    var top = topCategory(getCategoryScores());
+    tag.textContent = '✨ Basé sur vos habitudes, on vous propose en priorité : ' + CAT_LABELS_FR[top];
+    tag.style.display = 'block';
+    var s=(currentPage-1)*PER_PAGE;
+    renderProducts(f.slice(s,s+PER_PAGE), top);
+  } else {
+    tag.style.display = 'none';
+    var s=(currentPage-1)*PER_PAGE;
+    renderProducts(f.slice(s,s+PER_PAGE), null);
+  }
   renderPagination(f.length);
 }
 
