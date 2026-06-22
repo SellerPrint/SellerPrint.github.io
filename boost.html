@@ -236,6 +236,32 @@
         .form-input.error { border-color: var(--tiktok); }
         .form-hint { font-size: 0.75rem; color: #555; margin-top: 5px; }
 
+        /* ── AI RESULTS ── */
+        .ai-results-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.7rem; }
+        .hashtag-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.4rem; }
+        .hashtag-chip {
+            background: rgba(254,44,85,0.1);
+            border: 1px solid rgba(254,44,85,0.3);
+            color: var(--tiktok2);
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 100px;
+            cursor: pointer;
+            user-select: all;
+        }
+        .ai-tips-list { font-size: 0.85rem; color: var(--muted); line-height: 1.8; padding-left: 1.1rem; margin-bottom: 1rem; }
+        .ai-besttime { font-size: 0.82rem; color: var(--text); background: rgba(37,244,238,0.08); border: 1px solid rgba(37,244,238,0.2); border-radius: var(--radius); padding: 10px 14px; }
+        .copy-all-btn {
+            font-size: 0.78rem;
+            color: var(--tiktok2);
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 6px 12px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
         /* Honeypot – hidden from users */
         .honeypot { display: none !important; }
 
@@ -404,41 +430,78 @@
 <div class="content-section">
     <h2 class="content-title">Comment fonctionne le service</h2>
     <p class="content-lead">
-        Notre équipe examine manuellement chaque profil soumis pour identifier les leviers de croissance
-        les plus pertinents (créneaux de publication, hashtags, format de contenu) avant de mettre en
-        place un accompagnement personnalisé. Aucune méthode ne garantit de résultats chiffrés précis :
-        la croissance dépend avant tout de la qualité et de la régularité de votre contenu.
+        Décrivez votre niche (et ajoutez un extrait vidéo si vous voulez une analyse plus précise) :
+        notre outil IA génère instantanément des hashtags pertinents et des conseils, gratuitement.
+        Aucune méthode ne garantit de résultats chiffrés précis : la croissance dépend avant tout de
+        la qualité et de la régularité de votre contenu.
     </p>
     <div class="steps-grid">
         <div class="step">
             <div class="step-num">1</div>
-            <div class="step-title">Soumission</div>
-            <div class="step-text">Vous partagez le lien de votre profil ou d'une vidéo via le formulaire ci-dessous.</div>
+            <div class="step-title">Votre niche</div>
+            <div class="step-text">Choisissez votre catégorie de contenu, avec ou sans extrait vidéo/photo.</div>
         </div>
         <div class="step">
             <div class="step-num">2</div>
-            <div class="step-title">Analyse</div>
-            <div class="step-text">Notre équipe évalue votre contenu et identifie des axes d'amélioration concrets.</div>
+            <div class="step-title">Analyse IA</div>
+            <div class="step-text">Gemini (Google) analyse votre niche/contenu et génère des hashtags adaptés.</div>
         </div>
         <div class="step">
             <div class="step-num">3</div>
-            <div class="step-title">Retour sous 48h</div>
-            <div class="step-text">Vous recevez nos recommandations et, selon votre profil, une proposition d'accompagnement.</div>
+            <div class="step-title">Résultat immédiat</div>
+            <div class="step-text">Hashtags et conseils s'affichent directement sur cette page, en quelques secondes.</div>
         </div>
     </div>
 
     <h2 class="content-title">Questions fréquentes</h2>
     <div class="faq-item">
-        <div class="faq-q">Le service est-il gratuit ?</div>
-        <div class="faq-a">L'analyse initiale de votre profil est gratuite. Un accompagnement plus poussé peut vous être proposé ensuite, sans obligation d'achat.</div>
+        <div class="faq-q">L'outil IA est-il vraiment gratuit ?</div>
+        <div class="faq-a">Oui, sans inscription ni paiement. Utilisation raisonnable demandée (quelques analyses par visiteur) pour que l'outil reste disponible pour tout le monde.</div>
     </div>
     <div class="faq-item">
         <div class="faq-q">Mes données sont-elles partagées ?</div>
-        <div class="faq-a">Les informations soumises via ce formulaire servent uniquement à vous recontacter et ne sont transmises à aucun tiers à des fins publicitaires.</div>
+        <div class="faq-a">Votre niche et, si fourni, votre extrait vidéo/photo sont envoyés à l'API Google Gemini pour générer l'analyse, et ne sont pas conservés sur nos serveurs ni transmis à d'autres tiers.</div>
     </div>
     <div class="faq-item">
-        <div class="faq-q">Pourquoi mon profil doit-il être public ?</div>
-        <div class="faq-a">Pour pouvoir analyser votre contenu existant (vidéos, hashtags, fréquence de publication), notre équipe a besoin d'y accéder librement.</div>
+        <div class="faq-q">Dois-je fournir une vidéo ?</div>
+        <div class="faq-a">Non, c'est optionnel. Sans vidéo, l'IA génère des hashtags basés sur votre niche. Avec un court extrait, l'analyse est plus précise et personnalisée.</div>
+    </div>
+</div>
+
+<!-- AI TOOL CARD -->
+<div class="main">
+    <div class="card" id="ai-card">
+        <div class="card-title">🤖 Analyse IA gratuite</div>
+        <div class="card-subtitle">Choisissez votre niche, ajoutez un extrait si vous voulez — résultat en quelques secondes.</div>
+
+        <div class="form-group">
+            <label class="form-label" for="ai-niche">Votre niche</label>
+            <select class="form-input" id="ai-niche">
+                <option value="mode">Mode &amp; style</option>
+                <option value="beaute">Beauté</option>
+                <option value="fitness">Fitness &amp; sport</option>
+                <option value="cuisine">Cuisine</option>
+                <option value="humour">Humour</option>
+                <option value="gaming">Gaming</option>
+                <option value="tech">Tech</option>
+                <option value="voyage">Voyage</option>
+                <option value="musique">Musique</option>
+                <option value="autre">Autre</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="ai-file">Extrait vidéo ou photo (optionnel)</label>
+            <input class="form-input" type="file" id="ai-file" accept="video/*,image/*">
+            <p class="form-hint">Max ~15 Mo, idéalement un clip court. Sans fichier, l'analyse se base sur votre niche.</p>
+        </div>
+
+        <button class="btn-submit" type="button" id="aiBtn">
+            <span id="aiBtnText">✨ Analyser avec l'IA</span>
+            <div class="spinner" id="aiSpinner"></div>
+        </button>
+
+        <div id="ai-results" style="display:none;margin-top:1.5rem"></div>
     </div>
 </div>
 
@@ -600,6 +663,136 @@
             spinner.style.display = 'none';
         }
     });
+
+    /* ═══════════════════════════════════════════════════════════
+       OUTIL IA — ANALYSE TIK TOK (Gemini Flash gratuit)
+
+       SÉCURITÉ : La clé ci-dessous est publiquement visible dans
+       le code source.  Protégez-la dans la Google Cloud Console :
+       APIs & Services > Credentials > [votre clé]
+       Application restrictions → Websites → sellerprint.github.io/*
+       API restrictions → Restrict to "Generative Language API" only.
+    ═══════════════════════════════════════════════════════════ */
+    const GEMINI_API_KEY = 'REMPLACE_PAR_TA_CLE_GEMINI';
+    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+    document.getElementById('aiBtn').addEventListener('click', async function () {
+        const btn     = document.getElementById('aiBtn');
+        const btnTxt  = document.getElementById('aiBtnText');
+        const spinner = document.getElementById('aiSpinner');
+        const results = document.getElementById('ai-results');
+        const niche   = document.getElementById('ai-niche').value;
+        const file    = document.getElementById('ai-file').files[0];
+
+        btn.disabled    = true;
+        btnTxt.textContent = 'Analyse en cours…';
+        spinner.style.display = 'block';
+        results.style.display = 'none';
+
+        try {
+            let parts = [];
+
+            // Si un fichier est fourni, on l'encode en base64 et on l'envoie
+            if (file) {
+                const b64 = await new Promise((res, rej) => {
+                    const r = new FileReader();
+                    r.onload = () => res(r.result.split(',')[1]);
+                    r.onerror = () => rej(new Error('Lecture échouée'));
+                    r.readAsDataURL(file);
+                });
+                parts.push({ inline_data: { mime_type: file.type, data: b64 } });
+            }
+
+            parts.push({ text:
+`Tu es un expert TikTok growth.
+Niche du créateur : ${niche}${file ? ' (extrait fourni en pièce jointe)' : ''}.
+
+Réponds UNIQUEMENT en JSON valide (pas de markdown, pas de backticks).
+Format attendu :
+{
+  "hashtags": ["#tag1","#tag2",...],
+  "conseils": ["conseil 1","conseil 2","conseil 3"],
+  "meilleure_heure": "XX h – XX h",
+  "resume": "une phrase sur la stratégie globale"
+}
+
+Règles :
+- 15 à 20 hashtags (mélange large + niche)
+- 3 conseils concrets actionnables immédiatement
+- meilleure_heure : plage idéale de publication (heure locale)` });
+
+            const body = { contents: [{ role: 'user', parts }] };
+
+            const resp = await fetch(GEMINI_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            if (!resp.ok) {
+                const err = await resp.json();
+                throw new Error(err.error?.message || `Erreur ${resp.status}`);
+            }
+
+            const data = await resp.json();
+            const raw  = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+            const clean = raw.replace(/```json|```/gi, '').trim();
+            let ai;
+            try { ai = JSON.parse(clean); }
+            catch (_) { throw new Error('Réponse IA illisible — réessaie.'); }
+
+            // Affichage
+            const tags  = (ai.hashtags  || []).filter(Boolean);
+            const tips  = (ai.conseils  || []).filter(Boolean);
+            const heure = ai.meilleure_heure || '';
+            const resume= ai.resume || '';
+
+            results.innerHTML = `
+                <div class="ai-results-title">📌 Hashtags recommandés</div>
+                <div class="hashtag-chips">${tags.map(t =>
+                    `<span class="hashtag-chip" title="Cliquer pour copier">${esc(t)}</span>`
+                ).join('')}</div>
+                <button class="copy-all-btn" id="copyAllBtn">📋 Copier tous les hashtags</button>
+
+                ${tips.length ? `<div class="ai-results-title">💡 Conseils</div>
+                <ul class="ai-tips-list">${tips.map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
+
+                ${heure ? `<div class="ai-besttime">⏰ Meilleure heure de publication : <strong>${esc(heure)}</strong></div>` : ''}
+                ${resume ? `<p style="font-size:.82rem;color:var(--muted);margin-top:.8rem;font-style:italic">${esc(resume)}</p>` : ''}
+            `;
+
+            results.style.display = 'block';
+
+            // Copie d'un tag individuel au clic
+            results.querySelectorAll('.hashtag-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    navigator.clipboard.writeText(chip.textContent.trim())
+                        .then(() => showToast('✅ ' + chip.textContent + ' copié !', 'success', 2000))
+                        .catch(() => showToast('Copie impossible sur ce navigateur.', 'warn'));
+                });
+            });
+
+            // Copier tous
+            document.getElementById('copyAllBtn').addEventListener('click', () => {
+                const all = tags.join(' ');
+                navigator.clipboard.writeText(all)
+                    .then(() => showToast('✅ Tous les hashtags copiés !', 'success', 2500))
+                    .catch(() => showToast('Copie impossible sur ce navigateur.', 'warn'));
+            });
+
+        } catch (err) {
+            showToast('❌ ' + (err.message || 'Erreur inconnue.'), 'error', 5000);
+            console.error('[AI Tool]', err);
+        } finally {
+            btn.disabled = false;
+            btnTxt.textContent = '✨ Analyser avec l\'IA';
+            spinner.style.display = 'none';
+        }
+    });
+
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
 
 </script>
 </body>
