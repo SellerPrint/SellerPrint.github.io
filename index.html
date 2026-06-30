@@ -20,14 +20,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4774454542744125" crossorigin="anonymous"></script>
-  <script>
-  window.addEventListener('load', function() {
-    [{z:'10034222',d:'al5sm.com'},{z:'10034706',d:'al5sm.com'},{z:'10034439',d:'al5sm.com'},{z:'10034252',d:'forfrogadiertor.com'}].forEach(function(zone){
-      var s=document.createElement('script'); s.dataset.zone=zone.z; s.src='https://'+zone.d+'/tag.min.js'; s.async=true; document.head.appendChild(s);
-    });
-    var sp=document.createElement('script'); sp.src='https://3nbf4.com/act/files/tag.min.js?z=10034184'; sp.dataset.cfasync='false'; sp.async=true; document.head.appendChild(sp);
-  });
-  </script>
+  <!-- SUPPRIMÉ : injection des tags al5sm.com / forfrogadiertor.com / 3nbf4.com.
+       Ces réseaux (push-ads) enregistrent un service worker (sw.js) qui
+       intercepte TOUTES les pages du site et y injecte des murs "ad-blocker détecté"
+       et des popups de notification — c'est ce qui causait le mur anti-adblock
+       sur boost.html alors que son code source n'en contient aucune trace. -->
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{--primary:#667eea;--secondary:#764ba2;--gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);--dark:#1a1a2e;--bg:#f8f9ff;--shadow:0 8px 30px rgba(102,126,234,.1);--r:16px}
@@ -180,7 +177,7 @@
 <!-- ════ COOKIE BANNER ════ -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
   <div class="cookie-text">
-    <strong>SellerPrint utilise des cookies</strong> pour afficher des publicités (Google AdSense, Monetag), mesurer l'audience et améliorer votre expérience.
+    <strong>SellerPrint utilise des cookies</strong> pour afficher des publicités (Google AdSense), mesurer l'audience et améliorer votre expérience.
     <a href="privacy.html">En savoir plus</a>
   </div>
   <div class="cookie-buttons">
@@ -199,7 +196,7 @@
       <label class="toggle"><input type="checkbox" checked disabled><span class="toggle-slider"></span></label>
     </div>
     <div class="pref-row">
-      <div><div class="pref-label">Publicités (AdSense &amp; Monetag)</div><div class="pref-sub">Affichage de publicités adaptées</div></div>
+      <div><div class="pref-label">Publicités (Google AdSense)</div><div class="pref-sub">Affichage de publicités adaptées</div></div>
       <label class="toggle"><input type="checkbox" id="pref-ads" checked><span class="toggle-slider"></span></label>
     </div>
     <div class="pref-row">
@@ -249,7 +246,7 @@
   <!-- PRODUITS -->
   <section id="produits">
     <h2 class="section-title">Nos créations</h2>
-    <p class="section-subtitle" id="products-subtitle">Chargement…</p>
+    <p class="section-subtitle" id="products-subtitle">12 produits disponibles : textile, déco et accessoires personnalisables, imprimés à la demande et expédiés sous 2-3 jours ouvrés.</p>
     <p class="personalize-tag" id="personalize-tag" style="display:none"></p>
 
     <div class="filter-bar">
@@ -262,7 +259,60 @@
       <input id="product-search" type="search" placeholder="🔍 Rechercher…" oninput="searchProducts(this.value)">
     </div>
 
-    <div class="products-grid" id="products-grid"></div>
+    <!-- Rendu statique : ces 12 cartes existent dans le HTML brut, sans JS.
+         refreshGrid() les remplace dynamiquement pour les filtres/tri/recherche,
+         mais un crawler qui n'exécute pas le JS (cas du bot AdSense) voit déjà
+         du contenu réel ici au lieu d'un div vide + "Chargement…". -->
+    <div class="products-grid" id="products-grid">
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007708806246.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('mode')">
+        <div class="product-card-img"><span class="product-badge">Bestseller</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/S63e9ee3c3f594b77a1d3c972a9d85c33B.jpg" alt="T-shirt custom all-over print" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>T-shirt custom all-over print</h3><p>Impression totale HD, 100% coton, unisexe. Envoyez votre design.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008084751945.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('mode')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7935b82d01ea42b7a2219f9a7a131f3a8.jpg" alt="Hoodie oversize personnalisable" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Hoodie oversize personnalisable</h3><p>Sweat à capuche unisexe, impression DTG haute définition.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005006266462340.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('mode')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5dea27d68d5042d58562a2f120531d88U.jpg" alt="Casquette snapback brodée" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Casquette snapback brodée</h3><p>Broderie 3D personnalisée, réglable, 6 coloris disponibles.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009499378197.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('maison')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S59c5e2b5ca0e47a0a011e633eb7afcdaD.jpg" alt="Coussin photo personnalisé" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Coussin photo personnalisé</h3><p>Housse lavable 45×45 cm, impression HD sur tissu doux.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009553808835.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('maison')">
+        <div class="product-card-img"><span class="product-badge">Nouveau</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/S8555512a36a64d50b0dc6b65e09e8f98R.jpg" alt="Tableau Diamond Art mural" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Tableau Diamond Art mural</h3><p>Kit diamond painting 30×30 cm, effet mosaïque brillante.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008882491044.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('maison')">
+        <div class="product-card-img"><span class="product-badge">Bestseller</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/S845d3b5d74bd45c1b2b84ab6a890c184b.jpg" alt="Lampe LED photo gravée" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Lampe LED photo gravée</h3><p>Veilleuse acrylique gravure photo, 3 températures de lumière.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008063787016.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('impression')">
+        <div class="product-card-img"><span class="product-badge">Nouveau</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5c395693e7ca49a9b14d390594ab4b111.jpg" alt="Tote bag canvas personnalisé" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Tote bag canvas personnalisé</h3><p>Coton naturel robuste, impression ou broderie prénom/logo.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008246951274.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('impression')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S9a7df571e6124cb59ae5fe86f2704a5bb.jpg" alt="Stickers vinyle waterproof" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Stickers vinyle waterproof</h3><p>Vinyle imprimé UV, résistant eau &amp; soleil, livré par lot.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005616306760.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('impression')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sef23dadd2d0d4019a1a1529e1feaf9edT.jpg" alt="Porte-clés gravé laser" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Porte-clés gravé laser</h3><p>Inox brossé premium, gravure laser prénom/photo.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005006817254451.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('impression')">
+        <div class="product-card-img"><span class="product-badge">Nouveau</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se9639795351a4c3d815327e6db81bc04g.jpg" alt="Carnet photo personnalisé" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Carnet photo personnalisé</h3><p>Couverture rigide imprimée, format A5, idéal cadeau.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005006283748095.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('maison')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S81a52be01d3b48f397beabd9d6dc45d4B.jpg" alt="Puzzle photo acrylique" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Puzzle photo acrylique</h3><p>Cadre acrylique transparent avec photo insérée, format cœur.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009842192249.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('maison')">
+        <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sd0c6ef2c6dce411db87d764e16c177abB.jpg" alt="Plaid photo personnalisé" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-info"><h3>Plaid photo personnalisé</h3><p>Couverture polaire HD avec ta photo, 130×150 cm.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
+      </a>
+    </div>
     <div class="pagination" id="pagination" style="display:none"></div>
   </section>
 
@@ -312,7 +362,7 @@
   <div id="user-country"></div>
   <div style="margin-top:1rem">
     <a href="#contact">Contact</a>
-    <a href="privacy-policy-updated.html">Confidentialité</a>
+    <a href="privacy.html">Confidentialité</a>
     <a href="terms.html">Conditions</a>
   </div>
 </footer>
