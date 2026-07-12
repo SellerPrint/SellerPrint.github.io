@@ -105,8 +105,10 @@ const products = [
 // Expose globally so other scripts (index.html) can read window.products.
 // (top-level `const` does NOT attach to window like `var` does — without
 // this line the homepage product grid stays empty for every visitor.)
-window.products = products;
+if (typeof window !== "undefined") {
+  window.products = products;
+}
 
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
   module.exports = products;
 }

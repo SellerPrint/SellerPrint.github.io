@@ -1,0 +1,14 @@
+{
+  "name": "sellerprint",
+  "private": true,
+  "description": "SellerPrint — site d'affiliation AliExpress (GitHub Pages)",
+  "scripts": {
+    "validate:products": "node scripts/validate-products.js",
+    "validate:products:fix": "node scripts/validate-products.js --fix",
+    "add:product": "node scripts/add-product.js",
+    "test:scripts": "node scripts/__test__/run-tests.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

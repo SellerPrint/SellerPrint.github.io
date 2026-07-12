@@ -1,9 +1,31 @@
 /**
  * affiliate-loader.js
  * SellerPrint — Chargement optimisé des liens affiliés
- * 
+ *
+ * ⚠️ STATUT (voir audit du projet) : ce fichier n'est actuellement chargé
+ * sur AUCUNE page du site, et le HTML généré (statique ou via
+ * renderProducts() dans index.html) n'utilise pas l'attribut
+ * `data-affiliate-id` que ce module s'attend à trouver — donc même
+ * chargé, il ne trouverait aucun élément à traiter.
+ *
+ * La protection contre les liens/images cassés en production passe
+ * aujourd'hui par deux mécanismes actifs :
+ *   1. handleImgError() dans index.html, qui retire la carte entière
+ *      dès qu'une image ne charge plus (signal fiable, contrairement à
+ *      une vérification de lien).
+ *   2. scripts/validate-products.js (Node), qui vérifie réellement
+ *      chaque produit/image/lien affilié côté serveur — seul endroit où
+ *      CORS ne bloque pas la lecture du vrai code HTTP.
+ *
+ * Ce fichier reste disponible pour une future intégration (ajouter
+ * data-affiliate-id + data-category sur les cartes, puis charger ce
+ * script) si un chargement paresseux par IntersectionObserver devient
+ * utile, mais son garde-fou "existence produit" hérite des limites de
+ * AffiliateValidator.checkProductExists (non fiable côté navigateur,
+ * voir affiliate-validator.js) : il ne peut réagir qu'à un format d'URL
+ * invalide, pas à un produit réellement supprimé.
+ *
  * ✓ Lazy loading des liens
- * ✓ Validation avant affichage
  * ✓ Compression & minification des URLs
  * ✓ Performance: Intersection Observer
  * ✓ Fallback gracieux si produit indisponible
@@ -12,10 +34,14 @@
 (function () {
   "use strict";
 
+  // Source unique de vérité (affiliate-config.js) — évite que ce fichier
+  // ne diverge à nouveau des vraies URLs utilisées par le site.
+  var SHARED = window.SP_AFFILIATE_CONFIG || {};
+
   var LOADER = {
     config: {
-      ADMITAD_BASE: "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=",
-      ALIEXPRESS_BASE: "https://www.aliexpress.com/item/",
+      ADMITAD_BASE: SHARED.admitadBase || "https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=",
+      ALIEXPRESS_BASE: SHARED.aliexpressBase || "https://www.aliexpress.com/item/",
       VALIDATE_ON_LOAD: true,
       CACHE_TTL: 3600000, // 1h
       BATCH_SIZE: 10, // Valider par batch de 10

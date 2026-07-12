@@ -373,12 +373,18 @@
 <button id="back-to-top" title="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- ════ SCRIPTS ════ -->
+<script src="affiliate-config.js"></script>
 <script src="products.js"></script>
 <script>
 /* ═══════════════════════════════════════
    CONFIG PRINCIPALE
 ═══════════════════════════════════════ */
-var AFFILIATE = 'https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=';
+// Source unique de vérité (affiliate-config.js) — voir aussi
+// affiliate-config.json (scripts Node) et scripts/lib/config.js.
+// Fallback identique si le fichier n'est pas chargé, pour ne jamais casser
+// la page.
+var AFFILIATE = (window.SP_AFFILIATE_CONFIG && window.SP_AFFILIATE_CONFIG.admitadBase)
+  || 'https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=';
 var PER_PAGE = 8;
 var currentPage = 1;
 var activeFilter = 'all';
@@ -393,10 +399,20 @@ function esc(s){
 
 function handleImgError(imgEl) {
   imgEl.onerror = null;
-  var fallback = document.createElement('div');
-  fallback.className = 'product-img-fallback';
-  fallback.textContent = '🖼️';
-  imgEl.replaceWith(fallback);
+  // Une image cassée est un signal fiable que la fiche produit est
+  // périmée (produit retiré, CDN changé...). On masque la carte entière
+  // plutôt que de remplacer juste l'image : une carte avec une icône
+  // 🖼️ mais un lien "Voir sur AliExpress" toujours cliquable envoyait
+  // les visiteurs vers des liens morts.
+  var card = imgEl.closest('.product-card');
+  if (card) {
+    card.remove();
+  } else {
+    var fallback = document.createElement('div');
+    fallback.className = 'product-img-fallback';
+    fallback.textContent = '🖼️';
+    imgEl.replaceWith(fallback);
+  }
 }
 
 function trackProductClick(cat) {
