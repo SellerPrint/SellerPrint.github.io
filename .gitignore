@@ -1,0 +1,5 @@
+node_modules/
+
+# Artefacts générés par scripts/validate-products.js et scripts/discover-products.js
+products.audit.json
+products.js.bak
