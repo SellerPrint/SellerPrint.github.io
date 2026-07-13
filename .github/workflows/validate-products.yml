@@ -1,0 +1,80 @@
+name: Maintain affiliate products catalog
+
+on:
+  push:
+    paths:
+      - "products.js"
+      - "affiliate-config.json"
+      - "scripts/discovery-sources.json"
+  schedule:
+    # Tous les jours : AliExpress + image seulement (--skip-affiliate).
+    # Ne touche PAS le lien de tracking Admitad -> pas de risque de
+    # ressembler à du trafic de clics automatisé pour leur anti-fraude.
+    - cron: "0 6 * * *"
+    # Une fois par semaine : vérification COMPLÈTE incluant le lien
+    # affilié rzekl.com/Admitad (volume largement réduit vs. quotidien).
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      full_check:
+        description: "Inclure la vérification du lien affilié Admitad"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  maintain-catalog:
+    runs-on: ubuntu-latest
+    env:
+      # Optionnel — voir scripts/lib/proxy.js. Tant que ce secret n'existe
+      # pas dans les Settings > Secrets du dépôt, cette variable est vide
+      # et tout fonctionne exactement comme avant (requêtes directes).
+      # À définir seulement si le scraping/la validation se retrouvent
+      # bloqués depuis les IPs de datacenter des runners GitHub.
+      SCRAPER_PROXY_URL: ${{ secrets.SCRAPER_PROXY_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Déterminer si c'est le run hebdomadaire complet
+        id: mode
+        run: |
+          # Le cron du lundi 7h ("0 7 * * 1") ou un déclenchement manuel
+          # explicite font une vérification complète (avec le lien Admitad).
+          # Tout le reste (cron quotidien, push) reste léger.
+          if [ "${{ github.event.schedule }}" = "0 7 * * 1" ] || [ "${{ inputs.full_check }}" = "true" ]; then
+            echo "flag=" >> "$GITHUB_OUTPUT"
+          else
+            echo "flag=--skip-affiliate" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Vérifier chaque produit existant (retire les cassés)
+        run: node scripts/validate-products.js --fix ${{ steps.mode.outputs.flag }}
+
+      - name: Compléter le catalogue vers la cible (scraping + validation)
+        run: node scripts/discover-products.js
+
+      - name: Publier le rapport d'audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: products-audit
+          path: |
+            products.audit.json
+            products.quarantine.json
+
+      - name: Commit les changements si le catalogue a bougé
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add products.js products.quarantine.json products.discovery-seen.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "chore: maintenance auto du catalogue produits [skip ci]"
+          git push
