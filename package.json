@@ -6,9 +6,15 @@
     "validate:products": "node scripts/validate-products.js",
     "validate:products:fix": "node scripts/validate-products.js --fix",
     "add:product": "node scripts/add-product.js",
-    "test:scripts": "node scripts/__test__/run-tests.js"
+    "discover:products": "node scripts/discover-products.js",
+    "discover:products:dry-run": "node scripts/discover-products.js --dry-run",
+    "test:scripts": "node scripts/__test__/run-tests.js",
+    "test:proxy": "node scripts/__test__/proxy-test.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "undici": "^8.7.0"
   }
 }

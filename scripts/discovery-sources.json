@@ -1,0 +1,14 @@
+{
+  "targetCount": 100,
+  "maxNewPerRun": 15,
+  "sources": [
+    { "cat": "textile", "url": "https://www.aliexpress.com/w/wholesale-custom-t-shirt.html" },
+    { "cat": "textile", "url": "https://www.aliexpress.com/w/wholesale-custom-hoodie.html" },
+    { "cat": "textile", "url": "https://www.aliexpress.com/w/wholesale-tote-bag-custom.html" },
+    { "cat": "deco", "url": "https://www.aliexpress.com/w/wholesale-custom-photo-frame.html" },
+    { "cat": "deco", "url": "https://www.aliexpress.com/w/wholesale-led-photo-lamp.html" },
+    { "cat": "deco", "url": "https://www.aliexpress.com/w/wholesale-custom-photo-pillow.html" },
+    { "cat": "accessoire", "url": "https://www.aliexpress.com/w/wholesale-engraved-keychain.html" },
+    { "cat": "accessoire", "url": "https://www.aliexpress.com/w/wholesale-custom-phone-case.html" }
+  ]
+}

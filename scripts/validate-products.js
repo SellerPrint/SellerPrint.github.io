@@ -18,6 +18,14 @@
  *                                                    et les met de côté dans
  *                                                    products.quarantine.json
  *   node scripts/validate-products.js --json      → sortie JSON pure (CI)
+ *   node scripts/validate-products.js --skip-affiliate
+ *       → ne vérifie PAS le lien affilié rzekl.com/Admitad (seulement
+ *         AliExpress + image). À utiliser pour les runs automatisés
+ *         fréquents : le check du lien affilié tape sur le vrai système
+ *         de tracking Admitad, et le refaire chaque jour pour tout le
+ *         catalogue peut ressembler à du trafic de clics automatisé aux
+ *         yeux de leurs systèmes anti-fraude. Réserve le check complet
+ *         à un run manuel ou hebdomadaire (voir le workflow CI).
  *
  * Code de sortie : 1 si au moins un produit est CONFIRMÉ cassé (BROKEN),
  * 0 sinon (un statut UNCERTAIN — ex: AliExpress a répondu par un captcha —
@@ -28,6 +36,7 @@ const fs = require("fs");
 const path = require("path");
 const config = require("./lib/config");
 const productsStore = require("./lib/products-store");
+const { mapWithConcurrency } = require("./lib/concurrency");
 const {
   checkAliExpressProductLive,
   checkImageReachable,
@@ -42,6 +51,7 @@ const CONCURRENCY = 3; // reste courtois envers AliExpress/rzekl.com
 const args = process.argv.slice(2);
 const FIX = args.includes("--fix");
 const JSON_OUTPUT = args.includes("--json");
+const SKIP_AFFILIATE = args.includes("--skip-affiliate");
 
 const C = {
   green: (s) => `\x1b[32m${s}\x1b[0m`,
@@ -50,19 +60,6 @@ const C = {
   bold: (s) => `\x1b[1m${s}\x1b[0m`,
   dim: (s) => `\x1b[2m${s}\x1b[0m`,
 };
-
-async function mapWithConcurrency(items, limit, fn) {
-  const results = new Array(items.length);
-  let next = 0;
-  async function worker() {
-    while (next < items.length) {
-      const i = next++;
-      results[i] = await fn(items[i], i);
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
-  return results;
-}
 
 function worstStatus(statuses) {
   if (statuses.includes("BROKEN")) return "BROKEN";
@@ -74,7 +71,9 @@ async function validateProduct(p) {
   const [aliexpress, image, affiliate] = await Promise.all([
     checkAliExpressProductLive(p.id, config),
     checkImageReachable(p.img),
-    checkAffiliateLinkResolves(p.id, config),
+    SKIP_AFFILIATE
+      ? Promise.resolve({ status: "OK", detail: "Non vérifié (--skip-affiliate)" })
+      : checkAffiliateLinkResolves(p.id, config),
   ]);
   const overall = worstStatus([aliexpress.status, image.status, affiliate.status]);
   return { id: p.id, name: p.name, overall, aliexpress, image, affiliate };

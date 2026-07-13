@@ -15,6 +15,30 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (url.pathname === "/category-listing") {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(
+      "<html><body>" +
+        '<a href="/item/9990000001.html">Produit A</a>' +
+        '<a href="/item/9990000002.html">Produit B</a>' +
+        '<a href="/item/9990000099.html">Produit mort</a>' +
+        "</body></html>"
+    );
+    return;
+  }
+
+  if (url.pathname === "/category-listing-empty") {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end("<html><body>Aucun produit ici (page vide ou anti-bot)</body></html>");
+    return;
+  }
+
+  if (url.pathname === "/category-listing-broken-source") {
+    res.writeHead(500, { "Content-Type": "text/html" });
+    res.end("erreur serveur");
+    return;
+  }
+
   if (url.pathname === "/item/DEAD.html" || url.pathname === "/item/9990000099.html") {
     res.writeHead(404, { "Content-Type": "text/html" });
     res.end("<html><body>Not found</body></html>");

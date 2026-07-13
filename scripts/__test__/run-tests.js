@@ -72,8 +72,8 @@ async function main() {
   assertStatus("Image 403", (await checkImageReachable(base + "/img-403.jpg")).status, "UNCERTAIN");
 
   const noRedirectCleanConfig = { ...config, buildAffiliateUrl(id) { return base + "/affiliate-no-redirect-clean?ulp=" + encodeURIComponent(this.buildAliUrl(id)); } };
-  console.log("\n10) Lien affilié qui répond 200 SANS jamais rediriger -> vrai signal cassé");
-  assertStatus("Affiliate no-redirect clean", (await checkAffiliateLinkResolves("GOOD", noRedirectCleanConfig)).status, "BROKEN");
+  console.log("\n10) Lien affilié qui répond 200 SANS jamais rediriger -> incertain (peut être anti-bot), jamais cassé à tort");
+  assertStatus("Affiliate no-redirect clean", (await checkAffiliateLinkResolves("GOOD", noRedirectCleanConfig)).status, "UNCERTAIN");
 
   const blockedConfig = { ...config, buildAffiliateUrl(id) { return base + "/affiliate-blocked?ulp=" + encodeURIComponent(this.buildAliUrl(id)); } };
   console.log("\n11) Lien affilié bloqué de façon ambiguë (403, proxy/anti-bot) -> incertain, pas cassé à tort");

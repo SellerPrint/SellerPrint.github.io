@@ -24,13 +24,17 @@ const UA =
 
 const TIMEOUT_MS = 12000;
 
+const { getFetchImpl } = require("./proxy");
+
 async function fetchWithTimeout(url, options = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  const { fetchFn, dispatcher } = getFetchImpl();
   try {
-    return await fetch(url, {
+    return await fetchFn(url, {
       redirect: "follow",
       signal: controller.signal,
+      dispatcher,
       headers: { "User-Agent": UA, "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8" },
       ...options,
     });
@@ -45,7 +49,16 @@ function looksLikeAntiBot(bodyLower) {
     bodyLower.includes("verify you") ||
     bodyLower.includes("punish") ||
     bodyLower.includes("access denied") ||
-    bodyLower.includes("unusual traffic")
+    bodyLower.includes("unusual traffic") ||
+    bodyLower.includes("just a moment") || // Cloudflare
+    bodyLower.includes("checking your browser") ||
+    bodyLower.includes("checking if the site connection is secure") ||
+    bodyLower.includes("enable javascript and cookies") ||
+    bodyLower.includes("ddos protection") ||
+    bodyLower.includes("cf-browser-verification") || // Cloudflare
+    bodyLower.includes("perimeterx") ||
+    bodyLower.includes("datadome") ||
+    bodyLower.includes("please wait while we verify")
   );
 }
 
@@ -153,23 +166,17 @@ async function checkAffiliateLinkResolves(productId, config) {
     }
 
     // Un lien affilié valide DOIT effectivement rediriger (Location suivie).
-    // Si ce n'est pas le cas, il faut distinguer deux situations :
-    //  - le service a répondu PROPREMENT (2xx) sans rediriger nulle part
-    //    -> signal fiable d'un lien mal formé ou d'un programme qui ne
-    //       reconnaît plus le produit.
-    //  - la réponse est ambiguë (403, 5xx...) qui peut venir d'un blocage
-    //    anti-bot ou réseau (proxy, géo-restriction...) et ne prouve rien
-    //    sur la validité réelle du lien.
+    // Si ce n'est pas le cas, on reste TOUJOURS incertain plutôt que de
+    // conclure "cassé" — de nombreux systèmes anti-bot (Cloudflare,
+    // PerimeterX, DataDome...) répondent avec un code 200 "vérification en
+    // cours" au lieu d'un 403 franc, précisément pour ne pas se trahir.
+    // Un tel blocage n'a RIEN à voir avec la validité réelle du lien, et le
+    // classer "cassé" à tort revenait à rejeter systématiquement de bons
+    // candidats dès qu'un run automatisé se heurtait à ce genre de page.
     if (!res.redirected) {
-      if (res.status >= 200 && res.status < 300) {
-        return {
-          status: "BROKEN",
-          detail: `Le lien affilié a répondu (HTTP ${res.status}) sans rediriger vers un produit — format de lien probablement invalide`,
-        };
-      }
       return {
         status: "UNCERTAIN",
-        detail: `Le lien affilié n'a pas pu être vérifié (HTTP ${res.status}, aucune redirection observée — possible blocage réseau/anti-bot)`,
+        detail: `Le lien affilié n'a pas redirigé (HTTP ${res.status}) — à vérifier manuellement, peut être un blocage anti-bot plutôt qu'un vrai problème`,
       };
     }
 
