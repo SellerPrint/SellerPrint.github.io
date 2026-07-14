@@ -15,6 +15,31 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (url.pathname === "/category-listing-with-hints") {
+    const host = req.headers.host;
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(
+      "<html><body>" +
+        '<a href="/item/9990000201.html">Voir</a>' +
+        '<a href="/item/9990000203.html">Voir</a>' +
+        '<script>window.runParams = {"data":{"root":{"fields":{"mods":{"itemList":{"content":[' +
+        `{"productId": 9990000201, "title": "Produit trouvé via hint catégorie", "image": "http://${host}/img-ok.jpg"},` +
+        `{"productId": 9990000203, "title": "Second produit via hint", "image": "http://${host}/img-ok.jpg"}` +
+        "]}}}}}};</script>" +
+        "</body></html>"
+    );
+    return;
+  }
+
+  // Simule le VRAI scénario rencontré : la fiche produit individuelle est
+  // bloquée par anti-bot, même pour un produit dont l'ID a été trouvé via
+  // la page catégorie avec hints ci-dessus.
+  if (url.pathname === "/item/9990000201.html" || url.pathname === "/item/9990000203.html") {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end("<html><body>Please verify you are human - captcha challenge</body></html>");
+    return;
+  }
+
   if (url.pathname === "/category-listing") {
     res.writeHead(200, { "Content-Type": "text/html" });
     res.end(

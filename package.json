@@ -9,7 +9,8 @@
     "discover:products": "node scripts/discover-products.js",
     "discover:products:dry-run": "node scripts/discover-products.js --dry-run",
     "test:scripts": "node scripts/__test__/run-tests.js",
-    "test:proxy": "node scripts/__test__/proxy-test.js"
+    "test:proxy": "node scripts/__test__/proxy-test.js",
+    "test:listing-extractor": "node scripts/__test__/listing-extractor-test.js"
   },
   "engines": {
     "node": ">=18"

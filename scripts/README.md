@@ -41,11 +41,34 @@ seulement (voir `.github/workflows/validate-products.yml`).
 
 Les runners GitHub Actions partagés utilisent des IPs de datacenter (Azure)
 largement connues et bloquées par les systèmes anti-bot — c'est un risque
-réel, pas juste théorique, et différent de ce qui se passe en local.
+réel, confirmé en pratique : les fiches produit individuelles AliExpress
+(`/item/ID.html`) sont bloquées par anti-bot depuis GitHub Actions, alors
+que les pages de catégorie (`/w/wholesale-*.html`) ne le sont pas.
 
-Si tu vois des avertissements `⚠️ Aucun lien produit trouvé` de façon
-persistante, ou beaucoup de statuts INCERTAIN qui ne se résolvent jamais,
-la solution qui évite de changer d'hébergement est un proxy résidentiel/
+**Contournement déjà en place** (`scripts/lib/listing-extractor.js`) :
+`discover-products.js` tente d'abord d'extraire nom+image directement
+depuis le JSON embarqué dans la page de catégorie elle-même — quand ça
+réussit, la fiche produit individuelle bloquée n'est jamais interrogée
+pour le nom/l'image. Le diagnostic affiché pour chaque source (balises
+`<script>` trouvées, combien contiennent un ID candidat, combien de hints
+obtenus) permet de voir immédiatement si ça fonctionne :
+
+```
+http://.../wholesale-custom-t-shirt.html → 24 lien(s) trouvé(s), 24 nouveau(x)
+  ↳ diagnostic extraction: 3 balise(s) <script>, 1 contenant un ID candidat, 1 blob(s) JSON parsé(s), 24 hint(s) trouvé(s)
+```
+
+Si `hint(s) trouvé(s)` reste à 0 alors que des candidats sont trouvés, la
+structure JSON réelle d'AliExpress ne correspond pas à ce que l'extracteur
+cherche (pattern générique, pas garanti — voir les commentaires du
+fichier) : partage-moi les chiffres de diagnostic (scriptCount,
+scriptsWithCandidateId) et j'ajusterai l'extraction en conséquence.
+
+```bash
+npm run test:listing-extractor    # vérifie la logique d'extraction (échantillon simulé)
+```
+
+**Si même ça ne suffit pas**, la solution qui reste est un proxy résidentiel/
 rotatif (Bright Data, Smartproxy, ScraperAPI...) :
 
 ```bash

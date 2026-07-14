@@ -9,19 +9,29 @@
  * la même vérification que scripts/add-product.js (scripts/lib/resolve-candidate.js)
  * avant d'être ajouté — aucun produit non vérifié n'entre dans le catalogue.
  *
- * ⚠️ Limite honnête : ce script scrape le HTML brut renvoyé par un simple
- * fetch() Node (pas de navigateur headless, pas d'exécution JS). Les pages
- * `/w/wholesale-*.html` d'AliExpress semblent conçues pour être indexées
- * par les moteurs de recherche (meta description, robots:index) et j'ai
- * confirmé qu'un contenu exploitable (liens /item/ID.html) en est
- * extractible via un fetch — mais si AliExpress sert un contenu différent
- * à ce script (détection anti-bot, A/B test, changement de structure), le
- * nombre de candidats trouvés tombera à zéro pour cette source : le
- * script le signale clairement plutôt que d'échouer silencieusement.
- * Si ça devient systématique, la vraie solution robuste est l'API
+ * ⚠️ Contexte (confirmé par des runs réels sur GitHub Actions) : les fiches
+ * produit individuelles AliExpress (/item/ID.html) sont bloquées par
+ * anti-bot depuis les IPs GitHub Actions, mais PAS les pages de catégorie
+ * (/w/wholesale-*.html) — le scraping y trouve bien de vrais liens produit.
+ * Pour éviter de dépendre de la fiche bloquée, ce script tente D'ABORD
+ * d'extraire nom+image directement depuis le JSON embarqué dans la page
+ * de catégorie elle-même (scripts/lib/listing-extractor.js). Quand ça
+ * réussit, la fiche produit individuelle n'est jamais interrogée pour le
+ * nom/l'image — seulement l'existence produit et le lien affilié le sont
+ * encore, en mode non strict (un statut incertain sur ces deux points
+ * n'empêche pas l'ajout, voir resolve-candidate.js).
+ *
+ * Cette extraction est un pari éclairé sur un pattern courant (blob JSON
+ * de listing dans une balise <script>), pas une certitude vérifiée sur du
+ * vrai HTML AliExpress (domaine bloqué aussi depuis mon environnement de
+ * dev). Le diagnostic affiché pour chaque source (balises <script>
+ * trouvées, combien contiennent un ID candidat, combien de hints
+ * obtenus) permet d'ajuster rapidement si ça ne matche pas du premier
+ * coup, plutôt que de deviner à l'aveugle.
+ *
+ * Si ça ne suffit toujours pas, la vraie solution robuste est l'API
  * officielle d'affiliation (Admitad product feed ou AliExpress Open
- * Platform), qui demande tes propres identifiants API — dis-le moi si tu
- * veux qu'on branche ça à la place.
+ * Platform), ou un proxy résidentiel (scripts/lib/proxy.js, déjà prêt).
  *
  * Usage :
  *   node scripts/discover-products.js
@@ -37,6 +47,7 @@ const { resolveCandidate } = require("./lib/resolve-candidate");
 const { mapWithConcurrency } = require("./lib/concurrency");
 const { getFetchImpl } = require("./lib/proxy");
 const { browserHeaders } = require("./lib/http-headers");
+const { extractListingHints } = require("./lib/listing-extractor");
 
 const SOURCES_PATH = path.join(__dirname, "discovery-sources.json");
 const CONCURRENCY = 2; // scraping + validation : reste discret
@@ -75,9 +86,10 @@ async function scrapeSource(source) {
     const res = await fetchFn(source.url, { headers: browserHeaders(), dispatcher });
     const body = await res.text();
     const ids = extractCandidateIds(body);
-    return { source, ids, error: null };
+    const { hints, stats } = extractListingHints(body, ids);
+    return { source, ids, hints, stats, error: null };
   } catch (err) {
-    return { source, ids: [], error: err.message };
+    return { source, ids: [], hints: new Map(), stats: null, error: err.message };
   }
 }
 
@@ -108,7 +120,7 @@ async function main() {
   let totalCandidatesFound = 0;
   let candidatesToTry = [];
 
-  for (const { source, ids, error } of scraped) {
+  for (const { source, ids, hints, stats, error } of scraped) {
     if (error) {
       console.log(C.yellow(`? ${source.url} — erreur réseau (${error}), source ignorée`));
       continue;
@@ -116,7 +128,17 @@ async function main() {
     totalCandidatesFound += ids.length;
     const fresh = ids.filter((id) => !existingIds.has(id) && !discoveryStore.shouldSkip(seen, id));
     console.log(C.dim(`  ${source.url} → ${ids.length} lien(s) produit trouvé(s), ${fresh.length} nouveau(x) à vérifier`));
-    fresh.forEach((id) => candidatesToTry.push({ id, cat: source.cat, sourceUrl: source.url }));
+    if (stats) {
+      console.log(
+        C.dim(
+          `    ↳ diagnostic extraction: ${stats.scriptCount} balise(s) <script>, ${stats.scriptsWithCandidateId} contenant un ID candidat, ` +
+            `${stats.jsonBlobsParsed} blob(s) JSON parsé(s), ${hints.size} hint(s) nom+image trouvé(s)`
+        )
+      );
+    }
+    fresh.forEach((id) =>
+      candidatesToTry.push({ id, cat: source.cat, sourceUrl: source.url, hint: hints.get(id) || null })
+    );
   }
 
   if (totalCandidatesFound === 0) {
@@ -145,13 +167,19 @@ async function main() {
   for (let i = 0; i < candidatesToTry.length && added.length < toFind; i += CONCURRENCY) {
     const batch = candidatesToTry.slice(i, i + CONCURRENCY);
     const results = await mapWithConcurrency(batch, CONCURRENCY, async (c) => {
-      const result = await resolveCandidate(c.id, { cat: c.cat }, { strict: false, referer: c.sourceUrl });
+      const overrides = { cat: c.cat };
+      if (c.hint) {
+        overrides.name = c.hint.name;
+        overrides.img = c.hint.img;
+      }
+      const result = await resolveCandidate(c.id, overrides, { strict: false, referer: c.sourceUrl });
       return { c, result };
     });
 
     for (const { c, result } of results) {
       if (result.ok) {
-        console.log(C.green(`  ✓ ${c.id} — ${result.product.name}`));
+        const via = c.hint ? C.dim(" (via page catégorie, fiche produit non requise)") : "";
+        console.log(C.green(`  ✓ ${c.id} — ${result.product.name}`) + via);
         added.push(result.product);
         discoveryStore.markSeen(seen, c.id, "added");
       } else {
