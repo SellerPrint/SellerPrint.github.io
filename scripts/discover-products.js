@@ -36,13 +36,10 @@ const discoveryStore = require("./lib/discovery-store");
 const { resolveCandidate } = require("./lib/resolve-candidate");
 const { mapWithConcurrency } = require("./lib/concurrency");
 const { getFetchImpl } = require("./lib/proxy");
+const { browserHeaders } = require("./lib/http-headers");
 
 const SOURCES_PATH = path.join(__dirname, "discovery-sources.json");
 const CONCURRENCY = 2; // scraping + validation : reste discret
-
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
 const C = {
   green: (s) => `\x1b[32m${s}\x1b[0m`,
@@ -75,7 +72,7 @@ function extractCandidateIds(html) {
 async function scrapeSource(source) {
   try {
     const { fetchFn, dispatcher } = getFetchImpl();
-    const res = await fetchFn(source.url, { headers: { "User-Agent": UA }, dispatcher });
+    const res = await fetchFn(source.url, { headers: browserHeaders(), dispatcher });
     const body = await res.text();
     const ids = extractCandidateIds(body);
     return { source, ids, error: null };
@@ -119,7 +116,7 @@ async function main() {
     totalCandidatesFound += ids.length;
     const fresh = ids.filter((id) => !existingIds.has(id) && !discoveryStore.shouldSkip(seen, id));
     console.log(C.dim(`  ${source.url} → ${ids.length} lien(s) produit trouvé(s), ${fresh.length} nouveau(x) à vérifier`));
-    fresh.forEach((id) => candidatesToTry.push({ id, cat: source.cat }));
+    fresh.forEach((id) => candidatesToTry.push({ id, cat: source.cat, sourceUrl: source.url }));
   }
 
   if (totalCandidatesFound === 0) {
@@ -148,7 +145,7 @@ async function main() {
   for (let i = 0; i < candidatesToTry.length && added.length < toFind; i += CONCURRENCY) {
     const batch = candidatesToTry.slice(i, i + CONCURRENCY);
     const results = await mapWithConcurrency(batch, CONCURRENCY, async (c) => {
-      const result = await resolveCandidate(c.id, { cat: c.cat }, { strict: false });
+      const result = await resolveCandidate(c.id, { cat: c.cat }, { strict: false, referer: c.sourceUrl });
       return { c, result };
     });
 
