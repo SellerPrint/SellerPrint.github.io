@@ -18,9 +18,7 @@
  *                faux positifs (un produit valide supprimé par erreur).
  */
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const { browserHeaders } = require("./http-headers");
 
 const TIMEOUT_MS = 12000;
 
@@ -30,13 +28,14 @@ async function fetchWithTimeout(url, options = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   const { fetchFn, dispatcher } = getFetchImpl();
+  const { headers: extraHeaders, ...restOptions } = options;
   try {
     return await fetchFn(url, {
       redirect: "follow",
       signal: controller.signal,
       dispatcher,
-      headers: { "User-Agent": UA, "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8" },
-      ...options,
+      ...restOptions,
+      headers: browserHeaders(extraHeaders),
     });
   } finally {
     clearTimeout(timer);
@@ -209,4 +208,5 @@ module.exports = {
   checkAliExpressProductLive,
   checkImageReachable,
   checkAffiliateLinkResolves,
+  looksLikeAntiBot,
 };

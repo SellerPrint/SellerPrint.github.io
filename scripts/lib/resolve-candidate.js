@@ -16,15 +16,13 @@
  */
 const config = require("./config");
 const { getFetchImpl } = require("./proxy");
+const { browserHeaders } = require("./http-headers");
 const {
   checkAliExpressProductLive,
   checkImageReachable,
   checkAffiliateLinkResolves,
+  looksLikeAntiBot,
 } = require("./checks");
-
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
 function extractMeta(html, property) {
   const re = new RegExp(`<meta[^>]+property=["']${property}["'][^>]+content=["']([^"']*)["']`, "i");
@@ -35,9 +33,12 @@ function extractMeta(html, property) {
   return m2 ? m2[1] : null;
 }
 
-async function fetchProductPage(url) {
+async function fetchProductPage(url, referer) {
   const { fetchFn, dispatcher } = getFetchImpl();
-  const res = await fetchFn(url, { headers: { "User-Agent": UA }, dispatcher });
+  const res = await fetchFn(url, {
+    headers: browserHeaders(referer ? { Referer: referer } : {}),
+    dispatcher,
+  });
   return { status: res.status, body: await res.text() };
 }
 
@@ -61,17 +62,25 @@ async function resolveCandidate(productId, overrides = {}, opts = {}) {
 
   let name = overrides.name;
   let img = overrides.img;
+  let productPageBlocked = false;
   if (!name || !img) {
     try {
-      const { body } = await fetchProductPage(config.buildAliUrl(productId));
-      if (!name) name = extractMeta(body, "og:title");
-      if (!img) img = extractMeta(body, "og:image");
+      const { body } = await fetchProductPage(config.buildAliUrl(productId), opts.referer);
+      if (looksLikeAntiBot(body.toLowerCase())) {
+        productPageBlocked = true;
+      } else {
+        if (!name) name = extractMeta(body, "og:title");
+        if (!img) img = extractMeta(body, "og:image");
+      }
     } catch (_) {
       // laisse name/img tels quels ; erreurs gérées ci-dessous
     }
   }
   if (!name || !img) {
-    return { ok: false, reason: "Nom ou image introuvable (og:title/og:image absents)", checks };
+    const reason = productPageBlocked
+      ? "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)"
+      : "Nom ou image introuvable (og:title/og:image absents)";
+    return { ok: false, reason, checks };
   }
 
   checks.image = await checkImageReachable(img);
