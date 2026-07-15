@@ -92,6 +92,37 @@ async function main() {
   const uncertain = results.filter((r) => r.overall === "UNCERTAIN");
   const ok = results.filter((r) => r.overall === "OK");
 
+  // ── Circuit breaker ──────────────────────────────────────────────────────
+  // Si >50 % des produits sont UNCERTAIN (anti-bot/captcha/fetch failed),
+  // c'est l'IP du runner entier qui est bloquée — pas les produits qui sont
+  // cassés. Dans ce cas on refuse de supprimer quoi que ce soit : on écrit
+  // le rapport pour analyse, on affiche un warning clair, et on sort proprement
+  // avec code 0 (pas d'échec du workflow, pas de commit inutile).
+  const uncertainRatio = results.length > 0 ? uncertain.length / results.length : 0;
+  if (uncertainRatio > 0.5) {
+    const pct = Math.round(uncertainRatio * 100);
+    if (!JSON_OUTPUT) {
+      console.log("");
+      console.log(C.yellow(`⚠️  Circuit breaker déclenché : ${pct}% des produits sont UNCERTAIN.`));
+      console.log(C.yellow(`   Cause probable : IP du runner GitHub Actions bloquée par l'anti-bot AliExpress.`));
+      console.log(C.yellow(`   Aucune modification appliquée à products.js — catalogue intact.`));
+      console.log(C.dim(`   Rapport écrit dans ${path.relative(process.cwd(), AUDIT_PATH)} pour analyse.`));
+    } else {
+      console.log(JSON.stringify({ circuitBreaker: true, uncertainRatio, message: "Run abandonné : trop d'incertains, IP probablement bloquée" }));
+    }
+
+    fs.writeFileSync(
+      AUDIT_PATH,
+      JSON.stringify(
+        { checkedAt: new Date().toISOString(), circuitBreaker: true, uncertainRatio, total: products.length, ok: ok.length, broken: broken.length, uncertain: uncertain.length, results },
+        null,
+        2
+      )
+    );
+    process.exit(0);
+  }
+  // ────────────────────────────────────────────────────────────────────────
+
   fs.writeFileSync(
     AUDIT_PATH,
     JSON.stringify(
