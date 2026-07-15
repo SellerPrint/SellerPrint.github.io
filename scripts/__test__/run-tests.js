@@ -71,6 +71,12 @@ async function main() {
   console.log("\n9) Image qui renvoie 403 (protection anti-hotlink) -> incertain, pas cassé à tort");
   assertStatus("Image 403", (await checkImageReachable(base + "/img-403.jpg")).status, "UNCERTAIN");
 
+  console.log("\n9bis) Image protégée anti-hotlink, vérifiée SANS Referer (ancien comportement) -> ne détecte rien, faux OK");
+  assertStatus("Hotlink image without Referer", (await checkImageReachable(base + "/img-hotlink-protected.jpg")).status, "OK");
+
+  console.log("\n9ter) Même image, vérifiée AVEC le Referer du site (correctif) -> détecte le vrai blocage");
+  assertStatus("Hotlink image with Referer", (await checkImageReachable(base + "/img-hotlink-protected.jpg", base + "/")).status, "BROKEN");
+
   const noRedirectCleanConfig = { ...config, buildAffiliateUrl(id) { return base + "/affiliate-no-redirect-clean?ulp=" + encodeURIComponent(this.buildAliUrl(id)); } };
   console.log("\n10) Lien affilié qui répond 200 SANS jamais rediriger -> incertain (peut être anti-bot), jamais cassé à tort");
   assertStatus("Affiliate no-redirect clean", (await checkAffiliateLinkResolves("GOOD", noRedirectCleanConfig)).status, "UNCERTAIN");

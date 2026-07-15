@@ -99,6 +99,22 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (url.pathname === "/img-hotlink-protected.jpg") {
+    // Simule le VRAI comportement du CDN AliExpress rencontré en prod :
+    // laisse passer une requête sans Referer (ex: script Node "nu"), mais
+    // bloque quand un Referer tiers est présent (ex: <img> chargée depuis
+    // sellerprint.github.io) -> exactement ce qui rendait le catalogue
+    // affiché "12 produits annoncés, 2 visibles".
+    if (req.headers.referer) {
+      res.writeHead(403, { "Content-Type": "text/html" });
+      res.end("Forbidden - hotlink protection");
+      return;
+    }
+    res.writeHead(200, { "Content-Type": "image/jpeg" });
+    res.end(Buffer.from([0xff, 0xd8, 0xff, 0xd9]));
+    return;
+  }
+
   if (url.pathname === "/affiliate-no-redirect-clean") {
     // Simule un service qui répond normalement (200) sans jamais rediriger
     // -> vrai signal de lien mal formé
