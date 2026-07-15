@@ -117,15 +117,31 @@ async function checkAliExpressProductLive(productId, config) {
 
 /**
  * Vérifie qu'une image produit est bien accessible et est une vraie image.
+ *
+ * CORRECTIF (issue "12 produits annoncés, 2 affichés") : ce check envoyait
+ * la requête SANS en-tête Referer, alors qu'un vrai navigateur qui charge
+ * une balise <img> sur une page du site envoie automatiquement
+ * `Referer: https://sellerprint.github.io/`. Résultat : le CDN AliExpress
+ * (protection anti-hotlink basée sur le Referer) laissait passer la
+ * requête "nue" du script — donc statut OK — alors que la même image était
+ * bloquée pour absolument tous les vrais visiteurs du site. Le check
+ * validait des images qui étaient en réalité cassées en production.
+ *
+ * En envoyant maintenant le même Referer qu'un vrai visiteur, un 403 ici
+ * reproduit fidèlement ce qui se passe réellement dans le navigateur : ce
+ * n'est plus un faux positif d'anti-bot générique mais un vrai signal de
+ * rupture, donc traité comme BROKEN et non plus UNCERTAIN.
  */
-async function checkImageReachable(imgUrl) {
+async function checkImageReachable(imgUrl, siteOrigin) {
+  const referer = siteOrigin ? siteOrigin.replace(/\/?$/, "/") : undefined;
+  const refererHeader = referer ? { Referer: referer } : {};
   try {
-    let res = await fetchWithTimeout(imgUrl, { method: "HEAD" });
+    let res = await fetchWithTimeout(imgUrl, { method: "HEAD", headers: refererHeader });
     // Certains CDN refusent HEAD (405) : on retente en GET minimal (Range).
     if (res.status === 405 || res.status === 501) {
       res = await fetchWithTimeout(imgUrl, {
         method: "GET",
-        headers: { Range: "bytes=0-1024" },
+        headers: { Range: "bytes=0-1024", ...refererHeader },
       });
     }
     const contentType = res.headers.get("content-type") || "";
@@ -135,11 +151,18 @@ async function checkImageReachable(imgUrl) {
     if (res.status === 404) {
       return { status: "BROKEN", detail: `HTTP ${res.status}` };
     }
-    // 403 notamment est ambigu : de nombreux CDN (dont celui d'AliExpress)
-    // renvoient 403 à une requête automatisée sans les en-têtes d'un vrai
-    // navigateur (protection anti-hotlink), alors que l'image se charge
-    // très bien pour un vrai visiteur. On ne peut pas conclure "cassée"
-    // sur ce seul signal — seul un 404 franc l'est de manière fiable.
+    if (res.status === 403 && referer) {
+      // On a envoyé le Referer réel du site : ce 403 EST ce qu'un vrai
+      // visiteur reçoit. Signal fiable, pas ambigu.
+      return {
+        status: "BROKEN",
+        detail: `HTTP 403 avec Referer=${referer} — protection anti-hotlink confirmée, cassé pour un vrai visiteur`,
+      };
+    }
+    // Sans Referer connu (appel legacy) un 403 reste ambigu comme avant :
+    // de nombreux CDN bloquent une requête automatisée sans en-têtes de
+    // navigateur même quand l'image se charge très bien pour un vrai
+    // visiteur. On ne peut pas conclure "cassée" sur ce seul signal.
     return { status: "UNCERTAIN", detail: `HTTP ${res.status}, content-type: ${contentType || "inconnu"}` };
   } catch (err) {
     return { status: "UNCERTAIN", detail: `Erreur réseau: ${err.message}` };

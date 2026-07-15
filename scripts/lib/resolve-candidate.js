@@ -83,7 +83,7 @@ async function resolveCandidate(productId, overrides = {}, opts = {}) {
     return { ok: false, reason, checks };
   }
 
-  checks.image = await checkImageReachable(img);
+  checks.image = await checkImageReachable(img, config.siteOrigin);
   if (checks.image.status === "BROKEN") {
     return { ok: false, reason: `Image: ${checks.image.detail}`, checks };
   }

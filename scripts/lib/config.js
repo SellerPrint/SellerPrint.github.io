@@ -29,6 +29,12 @@ const raw = loadRawConfig();
 const config = {
   admitadBase: raw.admitad.baseUrl,
   aliexpressBase: raw.aliexpress.baseUrl,
+  // Origine réelle du site déployé. Utilisée comme Referer lors de la
+  // vérification des images (voir checks.js) pour reproduire fidèlement
+  // ce qu'un vrai navigateur envoie en chargeant une balise <img> sur une
+  // page du site — c'est justement ce Referer tiers qui déclenche la
+  // protection anti-hotlink de certains CDN.
+  siteOrigin: raw.site.origin,
 
   /** URL AliExpress "brute" du produit (sans wrapper affilié) */
   buildAliUrl(productId) {
