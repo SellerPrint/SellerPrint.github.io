@@ -70,7 +70,7 @@ function worstStatus(statuses) {
 async function validateProduct(p) {
   const [aliexpress, image, affiliate] = await Promise.all([
     checkAliExpressProductLive(p.id, config),
-    checkImageReachable(p.img),
+    checkImageReachable(p.img, config.siteOrigin),
     SKIP_AFFILIATE
       ? Promise.resolve({ status: "OK", detail: "Non vérifié (--skip-affiliate)" })
       : checkAffiliateLinkResolves(p.id, config),
