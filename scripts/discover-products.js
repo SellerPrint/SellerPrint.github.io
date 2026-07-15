@@ -197,6 +197,26 @@ async function main() {
   console.log("");
   console.log(C.bold(`Résumé : ${C.green(added.length + " ajoutés")} · ${rejected.length} rejetés · ${candidatesToTry.length - added.length - rejected.length} non essayés`));
 
+  // ── Circuit breaker discovery ────────────────────────────────────────────
+  // Si tous les candidats ont été rejetés pour cause d'anti-bot (et aucun
+  // pour une vraie raison produit), c'est l'IP du runner qui est bloquée,
+  // pas les produits qui sont mauvais. On avertit clairement mais on ne
+  // fait pas échouer le workflow (exit 0).
+  if (added.length === 0 && rejected.length > 0) {
+    const antiBotCount = rejected.filter((r) =>
+      r.reason && r.reason.toLowerCase().includes("anti-bot")
+    ).length;
+    const antiBotRatio = antiBotCount / rejected.length;
+    if (antiBotRatio > 0.8) {
+      console.log(C.yellow(`\n⚠️  Circuit breaker discovery : ${Math.round(antiBotRatio * 100)}% des rejets sont dus à l'anti-bot AliExpress.`));
+      console.log(C.yellow(`   L'IP du runner GitHub Actions est probablement bloquée.`));
+      console.log(C.yellow(`   Le catalogue existant n'a PAS été modifié.`));
+      console.log(C.dim(`   Solution durable : définir le secret SCRAPER_PROXY_URL dans les Settings du dépôt.`));
+      process.exit(0);
+    }
+  }
+  // ────────────────────────────────────────────────────────────────────────
+
   if (added.length > 0) {
     if (args.dryRun) {
       console.log(C.yellow("\n--dry-run : rien n'a été écrit dans products.js. Produits qui auraient été ajoutés :"));
