@@ -57,7 +57,23 @@ jobs:
           fi
 
       - name: Vérifier chaque produit existant (retire les cassés)
+        id: validate
         run: node scripts/validate-products.js --fix ${{ steps.mode.outputs.flag }}
+
+      # Si validate a écrit un .bak (= il a supprimé des produits) mais que
+      # le circuit breaker aurait dû bloquer (sécurité supplémentaire), ou si
+      # la suite du workflow plante, on peut restaurer manuellement depuis le .bak.
+      # Ici on s'assure que le .bak est uploadé avec le rapport pour pouvoir le
+      # récupérer facilement depuis l'interface GitHub Actions.
+      - name: Sauvegarder le backup catalogue si présent
+        if: always()
+        run: |
+          if [ -f products.js.bak ]; then
+            cp products.js.bak products.js.bak.upload
+            echo "Backup products.js.bak trouvé et copié pour l'artifact."
+          else
+            echo "Pas de backup products.js.bak (circuit breaker probablement déclenché, aucune suppression)."
+          fi
 
       - name: Compléter le catalogue vers la cible (scraping + validation)
         run: node scripts/discover-products.js
@@ -70,6 +86,7 @@ jobs:
           path: |
             products.audit.json
             products.quarantine.json
+            products.js.bak.upload
 
       - name: Commit les changements si le catalogue a bougé
         run: |
