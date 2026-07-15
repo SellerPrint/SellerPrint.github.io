@@ -1,4 +1,9 @@
 {
+  "1929887967": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.070Z"
+  },
   "3256808772813795": {
     "status": "rejected",
     "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
@@ -223,5 +228,225 @@
     "status": "rejected",
     "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
     "checkedAt": "2026-07-15T21:06:12.932Z"
+  },
+  "3256808773363271": {
+    "status": "rejected",
+    "reason": "Nom ou image introuvable (og:title/og:image absents)",
+    "checkedAt": "2026-07-15T21:44:08.841Z"
+  },
+  "3256812446004795": {
+    "status": "rejected",
+    "reason": "Nom ou image introuvable (og:title/og:image absents)",
+    "checkedAt": "2026-07-15T21:44:08.841Z"
+  },
+  "3256804102489290": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:09.812Z"
+  },
+  "3256810268472317": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:09.812Z"
+  },
+  "3256808648350839": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.091Z"
+  },
+  "3256809957891855": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.091Z"
+  },
+  "3256808570005878": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.336Z"
+  },
+  "3256810497930472": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.336Z"
+  },
+  "3256808475465094": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.545Z"
+  },
+  "3256805009921002": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.545Z"
+  },
+  "3256812317528844": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.798Z"
+  },
+  "3256811727678699": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:10.798Z"
+  },
+  "1005003387965663": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.070Z"
+  },
+  "1005005726254030": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.383Z"
+  },
+  "2255800743207263": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.384Z"
+  },
+  "3256812064037797": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.685Z"
+  },
+  "3256803212893994": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.685Z"
+  },
+  "3256804051227471": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.929Z"
+  },
+  "3256812147252043": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:11.929Z"
+  },
+  "3256807677384996": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.191Z"
+  },
+  "3256812408586090": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.191Z"
+  },
+  "3256812472396394": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.463Z"
+  },
+  "3256809957226013": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.463Z"
+  },
+  "3256811676411298": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.763Z"
+  },
+  "3256808736044799": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.763Z"
+  },
+  "3256808898739455": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.967Z"
+  },
+  "3256809966831891": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:12.967Z"
+  },
+  "3256806838778291": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:13.208Z"
+  },
+  "3256811790556319": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:13.208Z"
+  },
+  "3256812054263430": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:13.567Z"
+  },
+  "3256806838423636": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:13.567Z"
+  },
+  "3256812332568149": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:13.883Z"
+  },
+  "3256811878094558": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:13.883Z"
+  },
+  "3256812491079936": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.159Z"
+  },
+  "3256808023103989": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.159Z"
+  },
+  "3256809684181800": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.380Z"
+  },
+  "3256808854104477": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.380Z"
+  },
+  "3256812184444616": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.598Z"
+  },
+  "3256806773876315": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.598Z"
+  },
+  "3256812344636113": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.789Z"
+  },
+  "3256810409123359": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:14.789Z"
+  },
+  "3256809352807158": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:15.007Z"
+  },
+  "3256806810245441": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:15.007Z"
+  },
+  "3256810008641809": {
+    "status": "rejected",
+    "reason": "Page produit bloquée par anti-bot (og:title/og:image inaccessibles, pas forcément un vrai problème produit)",
+    "checkedAt": "2026-07-15T21:44:15.214Z"
   }
 }
