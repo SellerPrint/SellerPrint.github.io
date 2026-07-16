@@ -93,28 +93,51 @@ async function main() {
   const ok = results.filter((r) => r.overall === "OK");
 
   // ── Circuit breaker ──────────────────────────────────────────────────────
-  // Si >50 % des produits sont UNCERTAIN (anti-bot/captcha/fetch failed),
-  // c'est l'IP du runner entier qui est bloquée — pas les produits qui sont
-  // cassés. Dans ce cas on refuse de supprimer quoi que ce soit : on écrit
-  // le rapport pour analyse, on affiche un warning clair, et on sort proprement
-  // avec code 0 (pas d'échec du workflow, pas de commit inutile).
-  const uncertainRatio = results.length > 0 ? uncertain.length / results.length : 0;
-  if (uncertainRatio > 0.5) {
-    const pct = Math.round(uncertainRatio * 100);
+  // IMPORTANT : on ne peut PAS se fier au statut global `overall` pour
+  // détecter un blocage anti-bot systémique. worstStatus() fait remonter
+  // BROKEN dès qu'UN SEUL sous-check échoue confirmé — donc un produit dont
+  // AliExpress dit UNCERTAIN (fetch failed) mais dont l'image dit BROKEN
+  // (403 anti-hotlink) se retrouve avec overall = BROKEN, jamais UNCERTAIN.
+  // C'est exactement ce qui s'est produit : 12/12 produits en overall BROKEN,
+  // 0 en UNCERTAIN, alors qu'il s'agissait bien d'un blocage IP du runner.
+  //
+  // On détecte donc le blocage systémique en cherchant les signatures de
+  // blocage directement dans le texte des sous-checks (aliexpress/image/
+  // affiliate), peu importe le statut global du produit.
+  const SYSTEMIC_SIGNALS = ["anti-bot", "captcha", "fetch failed", "erreur réseau", "econnreset", "etimedout", "403"];
+
+  function hasSystemicSignal(r) {
+    const texts = [r.aliexpress?.detail, r.image?.detail, r.affiliate?.detail]
+      .filter(Boolean)
+      .map((s) => String(s).toLowerCase());
+    return texts.some((t) => SYSTEMIC_SIGNALS.some((sig) => t.includes(sig)));
+  }
+
+  const suspicious = results.filter(hasSystemicSignal);
+  const suspiciousRatio = results.length > 0 ? suspicious.length / results.length : 0;
+  // Filet de sécurité indépendant du texte : la disparition simultanée de
+  // 100 % du catalogue en un seul run est en soi quasi impossible de façon
+  // organique, quel que soit le libellé des erreurs.
+  const totalWipeout = results.length > 0 && ok.length === 0;
+
+  const circuitBreakerTriggered = suspiciousRatio > 0.4 || totalWipeout;
+
+  if (circuitBreakerTriggered) {
+    const pct = Math.round(suspiciousRatio * 100);
     if (!JSON_OUTPUT) {
       console.log("");
-      console.log(C.yellow(`⚠️  Circuit breaker déclenché : ${pct}% des produits sont UNCERTAIN.`));
+      console.log(C.yellow(`⚠️  Circuit breaker déclenché : ${pct}% des produits portent une signature de blocage (anti-bot/captcha/403/réseau)${totalWipeout ? ", et 0 produit OK" : ""}.`));
       console.log(C.yellow(`   Cause probable : IP du runner GitHub Actions bloquée par l'anti-bot AliExpress.`));
       console.log(C.yellow(`   Aucune modification appliquée à products.js — catalogue intact.`));
       console.log(C.dim(`   Rapport écrit dans ${path.relative(process.cwd(), AUDIT_PATH)} pour analyse.`));
     } else {
-      console.log(JSON.stringify({ circuitBreaker: true, uncertainRatio, message: "Run abandonné : trop d'incertains, IP probablement bloquée" }));
+      console.log(JSON.stringify({ circuitBreaker: true, suspiciousRatio, totalWipeout, message: "Run abandonné : signatures de blocage détectées, IP probablement bloquée" }));
     }
 
     fs.writeFileSync(
       AUDIT_PATH,
       JSON.stringify(
-        { checkedAt: new Date().toISOString(), circuitBreaker: true, uncertainRatio, total: products.length, ok: ok.length, broken: broken.length, uncertain: uncertain.length, results },
+        { checkedAt: new Date().toISOString(), circuitBreaker: true, suspiciousRatio, totalWipeout, total: products.length, ok: ok.length, broken: broken.length, uncertain: uncertain.length, results },
         null,
         2
       )
