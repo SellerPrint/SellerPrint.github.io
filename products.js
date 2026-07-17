@@ -106,10 +106,10 @@ const products = [
   },
   {
     id: "1005012328446845",
-    name: "1 Custom Acrylic Plaque – Customizable with Photos; Birthday Gift for Friends, Women, Mothers, and Grandmothers; Tabletop Orname",
-    desc: "Description à compléter.",
-    badge: "",
-    cat: "accessoire",
+    name: "Plaque acrylique photo personnalisée",
+    desc: "Plaque décorative en acrylique transparent avec ta photo imprimée, à poser sur un meuble ou une étagère. Idéale en cadeau pour un anniversaire, une maman ou une grand-mère.",
+    badge: "Nouveau",
+    cat: "deco",
     img: "https://ae01.alicdn.com/kf/Aeb35f92aa6b949d29bcadb4ff120cbe16.jpg"
   }
 ];

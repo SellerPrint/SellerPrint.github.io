@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>http://sellerprint.github.io/</loc>
-      <priority>1.0</priority>
-   </url>
+   <url><loc>https://sellerprint.github.io/</loc><priority>1.0</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/index.html</loc><priority>0.8</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/choisir-visuel-impression-all-over.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/entretien-vetement-imprime.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/taille-photo-diamond-art-plaque.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/idees-cadeaux-personnalises-petit-budget.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/lampe-led-vs-cadre-photo.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/entretien-tote-bag-personnalise.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/gravure-porte-cles-durabilite.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/idees-gravure-par-occasion.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/delais-livraison-aliexpress.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/blog/lire-fiche-produit-personnalisable.html</loc><priority>0.7</priority></url>
+   <url><loc>https://sellerprint.github.io/about.html</loc><priority>0.5</priority></url>
+   <url><loc>https://sellerprint.github.io/contact.html</loc><priority>0.4</priority></url>
+   <url><loc>https://sellerprint.github.io/privacy.html</loc><priority>0.3</priority></url>
+   <url><loc>https://sellerprint.github.io/terms.html</loc><priority>0.3</priority></url>
+   <url><loc>https://sellerprint.github.io/dmca.html</loc><priority>0.3</priority></url>
 </urlset>

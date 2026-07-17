@@ -1,0 +1,43 @@
+SellerPrint — Paquet de mise à jour
+=====================================
+
+CONTENU DE CE ZIP :
+
+1. index.html
+   - Suppression complète de boost.html (nav + bannière + CSS)
+   - Ajout de referrerpolicy="no-referrer" sur les images (fix anti-hotlink)
+   - Ajout du lien "Blog" dans la navigation
+
+2. products.js
+   - Les 13 produits actuels, avec le nom/description du 13e
+     (plaque acrylique) nettoyés en français (catégorie corrigée : deco)
+
+3. sitemap.xml
+   - Toutes les pages du site + les 10 nouveaux articles de blog (17 URLs
+     au lieu d'1 seule)
+
+4. blog/ (dossier complet, à uploader tel quel à la racine du repo)
+   - index.html            -> page de listing du blog
+   - blog.css               -> feuille de style partagée
+   - 10 articles .html
+
+À FAIRE SUR GITHUB (dans cet ordre) :
+
+1. Supprime boost.html (icône corbeille sur sa page)
+2. Supprime privacy-policy-updated.html (icône corbeille)
+3. Remplace index.html par celui de ce zip (crayon Edit this file)
+4. Remplace products.js par celui de ce zip (crayon Edit this file)
+5. Remplace sitemap.xml par celui de ce zip (crayon Edit this file)
+6. Crée le dossier blog/ : "Add file" > "Upload files" > glisse tout le
+   contenu du dossier blog/ de ce zip (les 12 fichiers) en une fois,
+   dans un nouveau dossier nommé "blog"
+7. Commit tout, avec un message du style :
+   "feat: ajout du blog (10 articles) + nettoyage boost.html + fix images"
+
+APRÈS LE PUSH :
+- Attends 1-2 minutes que GitHub Pages redéploie
+- Vérifie que sellerprint.github.io/blog/index.html s'affiche bien
+- Va sur Google Search Console > Sitemaps > soumets à nouveau sitemap.xml
+- Va sur Google Search Console > Inspection d'URL, colle l'URL d'un
+  article de blog, clique "Demander une indexation" (répète pour les
+  10 articles + la page blog/index.html, ça accélère la découverte)
