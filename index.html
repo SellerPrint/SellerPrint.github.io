@@ -20,11 +20,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4774454542744125" crossorigin="anonymous"></script>
-  <!-- SUPPRIMÉ : injection des tags al5sm.com / forfrogadiertor.com / 3nbf4.com.
-       Ces réseaux (push-ads) enregistrent un service worker (sw.js) qui
-       intercepte TOUTES les pages du site et y injecte des murs "ad-blocker détecté"
-       et des popups de notification — c'est ce qui causait le mur anti-adblock
-       sur boost.html alors que son code source n'en contient aucune trace. -->
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{--primary:#667eea;--secondary:#764ba2;--gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);--dark:#1a1a2e;--bg:#f8f9ff;--shadow:0 8px 30px rgba(102,126,234,.1);--r:16px}
@@ -32,7 +27,7 @@
     body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
 
     /* ── Header ── */
-    header{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);padding:.85rem 2rem;position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(102,126,234,.12);display:flex;justify-content:space-between;align-items:center}
+    header{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);padding:.85rem 2rem;position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(102,126,234,.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
     .logo{font-size:1.75rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     header nav{display:flex;align-items:center;gap:.1rem}
     header nav a{padding:.4rem .85rem;color:var(--dark);text-decoration:none;font-weight:600;font-size:.9rem;border-radius:10px;transition:background .2s,color .2s}
@@ -44,7 +39,7 @@
     .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     @media(max-width:768px){
       .hamburger{display:flex}
-      header nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.99);flex-direction:column;padding:1rem 2rem 1.5rem;gap:.2rem;box-shadow:0 12px 40px rgba(0,0,0,.1);width:100%}
+      header nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.99);flex-direction:column;padding:1rem 2rem 1.5rem;gap:.2rem;box-shadow:0 12px 40px rgba(0,0,0,.15)}
       header nav.open{display:flex}
       header nav a{padding:.75rem 1rem;font-size:1rem;border-radius:12px}
     }
@@ -68,7 +63,7 @@
 
     /* ── Grille produits ── */
     .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:2rem 0}
-    .product-card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit;cursor:pointer}
+    .product-card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
     .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(102,126,234,.18)}
 
     /* Image : aspect-ratio fixe, chargement direct sans JS */
@@ -92,8 +87,10 @@
     /* ── Filtres & Recherche ── */
     .filter-bar{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1.5rem;justify-content:space-between}
     #cat-filters{display:flex;gap:.5rem;flex-wrap:wrap}
-    .page-btn{padding:.55rem 1rem;border-radius:10px;border:2px solid #e5e7eb;background:#fff;color:var(--dark);font-weight:600;font-size:.88rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
+    .page-btn{padding:.55rem 1rem;border-radius:10px;border:2px solid #e5e7eb;background:#fff;color:var(--dark);font-weight:600;font-size:.88rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:background .2s,border-color .2s}
     .page-btn:hover,.page-btn.active{background:var(--gradient);color:#fff;border-color:transparent}
+    .page-btn.ellipsis{cursor:default;border:none;background:none;color:#999;font-weight:400}
+    .page-btn.ellipsis:hover{background:none;color:#999}
     #product-search{padding:.55rem 1rem;border-radius:10px;border:2px solid #e5e7eb;font-family:'Poppins',sans-serif;font-size:.85rem;outline:none;min-width:200px;transition:border-color .2s}
     #product-search:focus{border-color:var(--primary)}
 
@@ -123,11 +120,11 @@
     #user-country{font-size:.82rem;margin-top:.6rem;opacity:.65}
 
     /* ── Bouton retour en haut ── */
-    #back-to-top{display:none;position:fixed;bottom:2rem;right:2rem;z-index:500;width:46px;height:46px;border-radius:50%;background:var(--gradient);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s}
+    #back-to-top{display:none;position:fixed;bottom:2rem;right:2rem;z-index:500;width:46px;height:46px;border-radius:50%;background:var(--gradient);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 20px rgba(102,126,234,.3);transition:transform .2s}
     #back-to-top:hover{transform:translateY(-3px)}
 
     /* ── Cookie banner ── */
-    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,40,.97);color:#e5e7eb;padding:1.2rem 2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;transition:transform .35s}
+    #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,40,.97);color:#e5e7eb;padding:1.2rem 2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;transition:transform .4s ease-out}
     #cookie-banner.hidden{transform:translateY(115%)}
     .cookie-text{flex:1 1 280px;font-size:.86rem;line-height:1.55}
     .cookie-text a{color:#a78bfa}
@@ -257,14 +254,14 @@
          du contenu réel ici au lieu d'un div vide + "Chargement…". -->
     <div class="products-grid" id="products-grid">
       <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007708806246.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('mode')">
-        <div class="product-card-img"><span class="product-badge">Bestseller</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/S63e9ee3c3f594b77a1d3c972a9d85c33B.jpg" alt="T-shirt custom all-over print" loading="lazy" onerror="handleImgError(this)"></div>
+        <div class="product-card-img"><span class="product-badge">Bestseller</span><img src="https://ae-pic-a1.aliexpress-media.com/kf/S63e9ee3c3f594b77a1d3c972a9d85c33B.jpg" alt="T-shirt custom all-over print" loading="lazy" referrerpolicy="no-referrer" onerror="handleImgError(this)"></div>
         <div class="product-info"><h3>T-shirt custom all-over print</h3><p>Impression totale HD, 100% coton, unisexe. Envoyez votre design.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
       </a>
       <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008084751945.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('mode')">
         <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7935b82d01ea42b7a2219f9a7a131f3a8.jpg" alt="Hoodie oversize personnalisable" loading="lazy" onerror="handleImgError(this)"></div>
         <div class="product-info"><h3>Hoodie oversize personnalisable</h3><p>Sweat à capuche unisexe, impression DTG haute définition.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
       </a>
-      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005006266462340.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('mode')">
+      <a class="product-card" href="https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005006266462340.html" target="_blank" rel="noopener noreferrer sponsored" onclick="trackProductClick('impression')">
         <div class="product-card-img"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5dea27d68d5042d58562a2f120531d88U.jpg" alt="Casquette snapback brodée" loading="lazy" onerror="handleImgError(this)"></div>
         <div class="product-info"><h3>Casquette snapback brodée</h3><p>Broderie 3D personnalisée, réglable, 6 coloris disponibles.</p><div class="product-footer"><span class="product-btn">Voir sur AliExpress ↗</span></div></div>
       </a>
@@ -333,16 +330,16 @@
     <p>Nos vendeurs partenaires proposent des dizaines de variantes pour chaque article. Quelques repères pour éviter les mauvaises surprises à la réception.</p>
 
     <h4 style="margin-top:1.2rem;font-size:1rem">Textile (t-shirts, hoodies, casquettes)</h4>
-    <p>Les tailles AliExpress suivent souvent une coupe asiatique, plus ajustée qu'une taille européenne équivalente. Vérifiez toujours le tableau des mesures (tour de poitrine en cm) donné sur la fiche du vendeur plutôt que le S/M/L affiché, et prenez une taille au-dessus en cas de doute. L'impression DTG ou sublimation tient mieux dans le temps si le vêtement est lavé à l'envers, à froid.</p>
+    <p>Les tailles AliExpress suivent souvent une coupe asiatique, plus ajustée qu'une taille européenne équivalente. Vérifiez toujours le tableau des mesures (tour de poitrine en cm) donné dans la fiche produit, pas juste la "taille" affichée (S/M/L) — c'est souvent la source principale de déceptions à la livraison.</p>
 
     <h4 style="margin-top:1.2rem;font-size:1rem">Déco (coussins, lampes, plaids, tableaux)</h4>
-    <p>Pour un rendu net, privilégiez une photo lumineuse et nette, prise en haute résolution — un visuel flou ou trop sombre reste flou une fois imprimé ou gravé, l'impression n'améliore pas la qualité d'origine. Les kits diamond painting indiquent leur niveau de difficulté (nombre de couleurs) sur la fiche produit : utile si c'est votre première toile.</p>
+    <p>Pour un rendu net, privilégiez une photo lumineuse et nette, prise en haute résolution — un visuel flou ou trop sombre reste flou une fois imprimé ou gravé, l'impression n'améliore pas la qualité de la source.</p>
 
     <h4 style="margin-top:1.2rem;font-size:1rem">Accessoires (tote bags, stickers, porte-clés, carnets)</h4>
-    <p>Les objets gravés au laser (porte-clés, inox) sont plus durables dans le temps qu'une impression ou un autocollant, mais offrent moins d'options de couleur. Pour les stickers waterproof, vérifiez la mention "résistant UV" si l'usage est extérieur (gourde, voiture) — un vinyle standard peut se décolorer au soleil en quelques mois.</p>
+    <p>Les objets gravés au laser (porte-clés, inox) sont plus durables dans le temps qu'une impression ou un autocollant, mais offrent moins d'options de couleur. Pour les stickers waterproof, testez d'abord sur une petite surface exposée (fenêtre, voiture) avant de les coller définitivement.</p>
 
     <h4 style="margin-top:1.2rem;font-size:1rem">Délais et suivi</h4>
-    <p>La fabrication (impression, broderie, gravure) et l'expédition sont gérées entièrement par le vendeur partenaire chez qui vous commandez, avec un numéro de suivi transmis après achat. SellerPrint n'intervient pas dans la commande elle-même : notre rôle s'arrête à la sélection des produits présentés sur cette page.</p>
+    <p>La fabrication (impression, broderie, gravure) et l'expédition sont gérées entièrement par le vendeur partenaire chez qui vous commandez, avec un numéro de suivi transmis après achat. Consultez les avis et la note du vendeur avant de commander, ce sont les meilleurs indicateurs de délai et de qualité réels.</p>
   </section>
 
   <!-- CONTACT -->
@@ -378,10 +375,6 @@
 /* ═══════════════════════════════════════
    CONFIG PRINCIPALE
 ═══════════════════════════════════════ */
-// Source unique de vérité (affiliate-config.js) — voir aussi
-// affiliate-config.json (scripts Node) et scripts/lib/config.js.
-// Fallback identique si le fichier n'est pas chargé, pour ne jamais casser
-// la page.
 var AFFILIATE = (window.SP_AFFILIATE_CONFIG && window.SP_AFFILIATE_CONFIG.admitadBase)
   || 'https://rzekl.com/c/1e8d114494ffc29cecab16525dc3e8/?ulp=';
 var PER_PAGE = 8;
@@ -398,19 +391,6 @@ function esc(s){
 
 function handleImgError(imgEl) {
   imgEl.onerror = null;
-  // CORRECTIF : une image cassée ne veut PAS forcément dire que le
-  // produit est périmé. En pratique, les images sont hotlinkées
-  // directement depuis le CDN AliExpress (ae-pic-a1.aliexpress-media.com),
-  // qui applique une protection anti-hotlink basée sur le referrer et
-  // fait tourner ses URLs — un lien qui fonctionne aujourd'hui peut
-  // renvoyer une erreur demain sans que le produit ait réellement
-  // disparu. L'ancienne version supprimait toute la carte dans ce cas,
-  // ce qui a fait chuter le catalogue affiché de 12 à 2 produits alors
-  // que le texte "12 produits disponibles" restait affiché — trompeur
-  // pour le visiteur ET pour une revue AdSense.
-  // On garde donc la carte, le nom, la description et le lien
-  // d'affiliation intacts, et on remplace juste la zone image par un
-  // aperçu neutre.
   var fallback = document.createElement('div');
   fallback.className = 'product-img-fallback';
   fallback.textContent = '🖼️';
@@ -456,7 +436,7 @@ function renderProducts(list, recoCategory) {
 }
 
 /* ═══════════════════════════════════════
-   PAGINATION
+   PAGINATION INTELLIGENTE (MAX 9 PAGES)
 ═══════════════════════════════════════ */
 function renderPagination(total) {
   var pag = document.getElementById('pagination');
@@ -465,11 +445,12 @@ function renderPagination(total) {
   pag.style.display='flex';
   pag.innerHTML='';
   
-  function btn(label, page, active) {
+  function btn(label, page, active, isEllipsis) {
     var b=document.createElement('button'); 
-    b.className='page-btn'+(active?' active':''); 
+    b.className='page-btn'+(active?' active':'')+(isEllipsis?' ellipsis':'');
     b.textContent=label;
-    if (!active) b.addEventListener('click',function(){ 
+    b.disabled=isEllipsis;
+    if (!active && !isEllipsis) b.addEventListener('click',function(){ 
       currentPage=page; 
       refreshGrid(); 
       window.scrollTo({top:document.getElementById('produits').offsetTop-80,behavior:'smooth'}); 
@@ -477,15 +458,36 @@ function renderPagination(total) {
     pag.appendChild(b);
   }
   
-  if (currentPage>1) btn('◀',currentPage-1,false);
-  for(var i=1;i<=tp;i++) btn(String(i),i,i===currentPage);
-  if (currentPage<tp) btn('▶',currentPage+1,false);
+  // Navigation : max 9 pages visibles
+  var maxVisible = 9;
+  var start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  var end = Math.min(tp, start + maxVisible - 1);
+  if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
+  
+  // Flèche précédent
+  if (currentPage > 1) btn('◀', currentPage - 1, false, false);
+  
+  // Pages de début si nécessaire
+  if (start > 1) {
+    btn('1', 1, currentPage === 1, false);
+    if (start > 2) btn('…', null, false, true);
+  }
+  
+  // Pages visibles
+  for (var i = start; i <= end; i++) btn(String(i), i, i === currentPage, false);
+  
+  // Pages de fin si nécessaire
+  if (end < tp) {
+    if (end < tp - 1) btn('…', null, false, true);
+    btn(String(tp), tp, currentPage === tp, false);
+  }
+  
+  // Flèche suivant
+  if (currentPage < tp) btn('▶', currentPage + 1, false, false);
 }
 
 /* ═══════════════════════════════════════
    PERSONNALISATION (sans compte, sans API)
-   Réutilise "sp_history" déjà écrit par smart-ads.js
-   pour que les deux widgets s'accordent.
 ═══════════════════════════════════════ */
 var CAT_LABELS_FR = { textile: 'Textile', deco: 'Déco', accessoire: 'Accessoires' };
 
@@ -505,7 +507,6 @@ function getCategoryScores() {
   var mobile = /Mobi|Android/i.test(navigator.userAgent);
   if (mobile) scores.textile += 1; else scores.deco += 1;
 
-  // Historique de clics partagé avec smart-ads.js (catégories différentes -> mappées)
   try {
     var hist = JSON.parse(localStorage.getItem('sp_history') || '[]');
     var map = { impression: 'accessoire', mode: 'textile', tech: 'accessoire', maison: 'deco', sport: 'accessoire', beaute: 'textile' };
@@ -547,7 +548,6 @@ function getFiltered() {
     var searchOk = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
     return catOk && searchOk;
   });
-  // Tri stable par pertinence de catégorie (personnalisation), uniquement en vue "Tous"
   if (activeFilter === 'all') {
     list = list.slice().sort(function(a, b){ return (scores[b.cat]||0) - (scores[a.cat]||0); });
   }
@@ -573,7 +573,6 @@ function refreshGrid() {
   renderPagination(f.length);
 }
 
-/* Affichage IMMÉDIAT au chargement */
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', refreshGrid);
 } else {
