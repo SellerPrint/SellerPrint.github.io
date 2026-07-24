@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "timestamp": "2026-07-24T22:39:56Z",
+    "reason": "Adult content - 18+ restriction",
+    "totalAnalyzed": 7022,
+    "adultProductsRemoved": 43,
+    "criteria": [
+      "Keyword detection: alcohol, tobacco, erotic content, weapons, drugs, gambling",
+      "Image URL analysis",
+      "Product name and description analysis",
+      "Dangerous categories detection"
+    ]
+  },
+  "products": [
+    {
+      "id": "1005012419145435",
+      "name": "【CHIMU HOME】 Dice Cup for Poker Games Custom Leather Shaker Cup with Dice Set Factory Wholesale Personalized Logo Plastic and",
+      "desc": "",
+      "cat": "202216602",
+      "score": 4,
+      "reasons": ["Nom: poker, dice", "Catégorie dangereuse: 202216602"]
+    },
+    {
+      "id": "1005010518794226",
+      "name": "100% Fairy Dust Diy Diamond Painting Cross Stitch Cartoon Animals Fish 5D Embroidery Square Mosaic Home Decor Needlework Crystal",
+      "desc": "",
+      "cat": "200003937",
+      "score": 0,
+      "reasons": []
+    }
+  ],
+  "notes": "Les produits avec un score >= 3 ont été supprimés du catalogue principal. Ceux-ci contiennent des indicateurs clairs de contenu interdit aux mineurs (jeux de hasard, alcool, etc.)"
+}
