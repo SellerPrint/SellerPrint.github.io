@@ -175,8 +175,3 @@ const products = [
     age_rating: "all"
   }
 ];
-
-// Export pour compatibilité
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { products };
-}
