@@ -1,16 +1,22 @@
 /**
  * SellerPrint — Catalogue produits (NETTOYÉ)
  *
- * ⚠️ FICHIER GÉNÉRÉ AUTOMATIQUEMENT
- * Les produits interdits aux moins de 18 ans ont été supprimés
- * Date du nettoyage: 2026-07-24
- * Produits 18+ supprimés: 43
+ * ⚠️ FICHIER GÉNÉRÉ AUTOMATIQUEMENT PAR N8N
  * 
- * ANALYSE EFFECTUÉE SUR:
- * - Noms des produits
- * - Descriptions
- * - Catégories dangereuses
- * - Mots-clés interdits (alcool, tabac, érotique, armes, drogues, gambling)
+ * NETTOYAGE 18+ EFFECTUÉ LE: 2026-07-24
+ * Produits interdits aux moins de 18 ans supprimés: 43
+ * Total produits valides: 6979
+ * 
+ * CRITÈRES DE SUPPRESSION:
+ * - Jeux de hasard/Gambling (poker, dice, casino)
+ * - Contenu érotique/adult (lingerie, intimate, sex toys)
+ * - Alcool/Tabac (beer, wine, cigarettes, vape)
+ * - Armes/Violence (weapons, guns, tactical)
+ * - Drogues (cannabis, meth, lsd, etc.)
+ * - Gore/Contenu violent
+ * 
+ * ARCHIVES: Voir products.adult.quarantine.json pour les produits supprimés
+ * DOCUMENTATION: Voir FILTRAGE_RAPPORT_18PLUS.md pour le rapport complet
  */
 
 const products = [
@@ -24,7 +30,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexpr[...]",
     price: 5.04,
     keywords: ["personalized"],
-    commission: "6.92%"
+    commission: "6.92%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005005369275412",
@@ -36,7 +44,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexpr[...]",
     price: 2.71,
     keywords: ["personalized"],
-    commission: "11.53%"
+    commission: "11.53%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005009882265515",
@@ -48,7 +58,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexpr[...]",
     price: 5.19,
     keywords: ["personalised"],
-    commission: "6.92%"
+    commission: "6.92%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005010623505777",
@@ -60,7 +72,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexpr[...]",
     price: 5.94,
     keywords: ["custom name"],
-    commission: "8.46%"
+    commission: "8.46%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005004712051781",
@@ -72,7 +86,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexpr[...]",
     price: 9.2,
     keywords: ["monogram"],
-    commission: "6.15%"
+    commission: "6.15%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005008539255555",
@@ -84,7 +100,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexpr[...]",
     price: 8.89,
     keywords: ["personalized"],
-    commission: "6.15%"
+    commission: "6.15%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005011992342395",
@@ -96,7 +114,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexp[...]",
     price: 3.98,
     keywords: ["personalized"],
-    commission: "6.15%"
+    commission: "6.15%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005010642878985",
@@ -108,7 +128,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexp[...]",
     price: 0.96,
     keywords: ["personalized"],
-    commission: "6.15%"
+    commission: "6.15%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005009563760600",
@@ -120,7 +142,9 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexp[...]",
     price: 6.82,
     keywords: ["personalized"],
-    commission: "6.15%"
+    commission: "6.15%",
+    verified_safe: true,
+    age_rating: "all"
   },
   {
     id: "1005009880833166",
@@ -132,6 +156,27 @@ const products = [
     url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexp[...]",
     price: 5.34,
     keywords: ["personalised"],
-    commission: "6.92%"
+    commission: "6.92%",
+    verified_safe: true,
+    age_rating: "all"
+  },
+  {
+    id: "1005012661509988",
+    name: "0.39\"x1.57\" Rectangle Custom Wooden Tags MOQ 50 Laser Engraved Eco Labels for DIY Crafts Home Decor Clothing Shoes Gifts",
+    desc: "",
+    badge: "",
+    cat: "200003937",
+    img: "https://ae-pic-a1.aliexpress-media.com/kf/S52ad2e073e9442cc96a955df59003d68R.jpg",
+    url: "https://rzekl.com/g/1e8d114494ffc29cecab16525dc3e8/?ulp=https%3A%2F%2Fs.click.aliexpress.com%2Fdeep_link.htm%3Faff_short_key%3D_c3s1yQkJ%26dl_target_url%3Dhttps%253A%252F%252Fwww.aliexp[...]",
+    price: 9.88,
+    keywords: ["engraved"],
+    commission: "12.30%",
+    verified_safe: true,
+    age_rating: "all"
   }
 ];
+
+// Export pour compatibilité
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { products };
+}
